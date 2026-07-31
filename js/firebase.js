@@ -1,12 +1,5 @@
-import {
-  db,
-  ref,
-  onValue
-} from "./firebase.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-const messagesRoot = ref(db, "messages");
-
-console.log("Kulzzy Radio Live Community Started");
 import {
   getDatabase,
   ref,
@@ -31,10 +24,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getDatabase(app);
 
-// Export everything
 export {
   db,
   ref,
