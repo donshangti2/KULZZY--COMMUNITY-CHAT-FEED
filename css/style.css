@@ -6,91 +6,62 @@ box-sizing:border-box;
 
 body{
 font-family:Arial,sans-serif;
-background:#f5f7fb;
-color:#222;
+background:#08131f;
+color:#fff;
 }
 
 .header{
-background:#0b2347;
-color:#fff;
+background:#b30000;
+padding:25px;
 text-align:center;
-padding:25px 15px;
-box-shadow:0 2px 8px rgba(0,0,0,.2);
 }
 
 .header h1{
-font-size:30px;
-margin-bottom:8px;
+font-size:32px;
+color:#FFD700;
 }
 
 .header p{
-font-size:17px;
-color:#ffd700;
+margin-top:10px;
+font-size:18px;
 }
 
 main{
-max-width:900px;
-margin:20px auto;
-padding:15px;
-}
-
-.hero,
-.announcement,
-.celebrants,
-.community{
-background:#fff;
-border-radius:15px;
+max-width:1100px;
+margin:auto;
 padding:20px;
-margin-bottom:20px;
-box-shadow:0 4px 12px rgba(0,0,0,.1);
 }
 
-.hero h2,
-.announcement h2,
-.celebrants h2,
-.community h2{
-color:#0b2347;
-margin-bottom:12px;
+section{
+background:#122236;
+padding:20px;
+margin:20px 0;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,0,0,.3);
 }
 
-.hero p{
-line-height:1.6;
-margin-bottom:20px;
+h2{
+color:#FFD700;
+margin-bottom:15px;
 }
 
-#listenBtn{
+button{
 background:#FFD700;
-color:#0b2347;
+color:#000;
 border:none;
-padding:15px 30px;
+padding:14px 25px;
 font-size:18px;
 font-weight:bold;
-border-radius:10px;
+border-radius:8px;
 cursor:pointer;
-width:100%;
 }
 
-#listenBtn:hover{
+button:hover{
 background:#ffcc00;
 }
 
 #announcement,
 #celebrants{
-font-size:17px;
-line-height:1.6;
-}
-
-@media(max-width:700px){
-
-.header h1{
-font-size:24px;
-}
-
-.hero,
-.announcement,
-.celebrants,
-.community{
-padding:15px;
-}
-
+font-size:18px;
+line-height:1.7;
 }
