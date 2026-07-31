@@ -1,23 +1,69 @@
-// ==========================================
-// Kulzzy Radio Live Community
-// Main App
-// Version 2.5.0
-// ==========================================
+import {
+  db,
+  ref,
+  onValue
+} from "./firebase.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+// ==============================
+// USER
+// ==============================
 
-    console.log("Kulzzy Radio Live Community Started");
+const nameInput = document.getElementById("name");
+const welcomeName = document.getElementById("welcomeName");
 
-    const listenBtn = document.getElementById("listenBtn");
+let savedName = localStorage.getItem("krName");
 
-    if(listenBtn){
+if (!savedName) {
 
-        listenBtn.addEventListener("click", () => {
+    savedName = "Listener " + Math.floor(Math.random() * 900 + 100);
 
-            alert("🎧 Live radio player will be connected in the next milestone.");
+    localStorage.setItem("krName", savedName);
 
-        });
+}
 
-    }
+if(nameInput){
 
-});
+    nameInput.value = savedName;
+
+}
+
+if(welcomeName){
+
+    welcomeName.textContent = "Welcome, " + savedName + "!";
+
+}
+
+if(nameInput){
+
+    nameInput.addEventListener("input", ()=>{
+
+        localStorage.setItem("krName", nameInput.value);
+
+        if(welcomeName){
+
+            welcomeName.textContent =
+            "Welcome, " + nameInput.value + "!";
+
+        }
+
+    });
+
+}
+
+// ==============================
+// SEND BUTTON
+// ==============================
+
+const sendBtn = document.getElementById("send");
+
+if(sendBtn){
+
+    sendBtn.addEventListener("click", sendMessage);
+
+}
+
+function sendMessage(){
+
+    console.log("Send Message - next step");
+
+        }
