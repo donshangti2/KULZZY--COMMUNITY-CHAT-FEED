@@ -1,35 +1,105 @@
-function sendMessage() {
+// ==========================================
+// Kulzzy Radio Live Community
+// app.js
+// Version 2.5.0
+// ==========================================
 
-    const name = nameInput.value.trim();
+import {
+    db,
+    ref,
+    onValue
+} from "./firebase.js";
 
-    const messageBox = document.getElementById("message");
+// ==============================
+// USER
+// ==============================
 
-    const message = messageBox.value.trim();
+const nameInput = document.getElementById("name");
+const welcomeName = document.getElementById("welcomeName");
 
-    if (name === "" || message === "") {
+let savedName = localStorage.getItem("krName");
 
-        alert("Please enter your name and message.");
+if (!savedName) {
+    savedName = "Listener " + Math.floor(Math.random() * 900 + 100);
+    localStorage.setItem("krName", savedName);
+}
 
-        return;
+if (nameInput) {
+    nameInput.value = savedName;
 
-    }
+    nameInput.addEventListener("input", () => {
+        localStorage.setItem("krName", nameInput.value);
 
-    push(messagesRoot, {
+        if (welcomeName) {
+            welcomeName.textContent =
+                "Welcome, " + nameInput.value + "!";
+        }
+    });
+}
 
-        userId: localStorage.getItem("krUserId") || "guest",
+if (welcomeName) {
+    welcomeName.textContent =
+        "Welcome, " + savedName + "!";
+}
 
-        name: name,
+// ==============================
+// LISTEN LIVE BUTTON
+// ==============================
 
-        photo: localStorage.getItem("krProfilePhoto") || "",
+const listenBtn = document.getElementById("listenBtn");
 
-        message: message,
+if (listenBtn) {
 
-        time: Date.now()
+    listenBtn.addEventListener("click", () => {
+
+        alert("🎧 Live Stream will be connected in the next milestone.");
 
     });
 
-    messageBox.value = "";
+}
 
-    messageBox.focus();
+// ==============================
+// ANNOUNCEMENT
+// ==============================
+
+const announcementElement =
+    document.getElementById("announcement");
+
+if (announcementElement) {
+
+    const announcementRef =
+        ref(db, "announcement");
+
+    onValue(announcementRef, (snapshot) => {
+
+        announcementElement.textContent =
+            snapshot.val() ||
+            "No announcement available.";
+
+    });
 
 }
+
+// ==============================
+// CELEBRANTS
+// ==============================
+
+const celebrantsElement =
+    document.getElementById("celebrants");
+
+if (celebrantsElement) {
+
+    const celebrantsRef =
+        ref(db, "celebrants");
+
+    onValue(celebrantsRef, (snapshot) => {
+
+        celebrantsElement.textContent =
+            snapshot.val() ||
+            "No celebrants available.";
+
+    });
+
+}
+
+console.log("Kulzzy Radio Live Community Loaded");
