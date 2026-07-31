@@ -1,11 +1,12 @@
-// ==========================================
-// Kulzzy Radio Live Community
-// Firebase Configuration
-// Version 2.5.0
-// ==========================================
+import {
+  db,
+  ref,
+  onValue
+} from "./firebase.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+const messagesRoot = ref(db, "messages");
 
+console.log("Kulzzy Radio Live Community Started");
 import {
   getDatabase,
   ref,
