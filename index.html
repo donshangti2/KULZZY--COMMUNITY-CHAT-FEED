@@ -7,16 +7,20 @@
 <title>Kulzzy Radio Live Community</title>
 
 <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
 <header class="header">
 
+<div class="logoArea">
 <h1>📻 Kulzzy Radio Network</h1>
-
 <p>Celebrating Lives Everyday</p>
+</div>
+
+<button id="listenBtn">
+🎧 Listen Live
+</button>
 
 </header>
 
@@ -27,49 +31,101 @@
 <h2>Welcome to Kulzzy Radio Live Community</h2>
 
 <p>
-Meet listeners from around the world, celebrate lives, chat live and enjoy our radio programs.
+Meet listeners from around the world, celebrate lives,
+share announcements and enjoy live radio together.
 </p>
-
-<button id="listenBtn">
-▶ Listen Live
-</button>
 
 </section>
 
-<section class="announcement">
+<section class="card">
 
 <h2>📢 Today's Announcement</h2>
 
 <p id="announcement">
-Loading...
+Loading announcement...
 </p>
 
 </section>
 
-<section class="celebrants">
+<section class="card">
+  <section class="card">
 
-<h2>🎂 Today's Celebrants</h2>
+<h2>👤 Your Profile</h2>
 
-<p id="celebrants">
-Loading...
-</p>
+<div class="profileArea">
+
+<img
+id="profilePreview"
+src="assets/images/default-avatar.png"
+class="profileImage">
+
+<input
+type="file"
+id="profileImage"
+accept="image/*">
+
+<input
+type="text"
+id="name"
+placeholder="Enter your name">
+
+<h3 id="welcomeName">
+Welcome!
+</h3>
+
+</div>
 
 </section>
 
-<section class="community">
+<section class="card">
 
 <h2>💬 Community Chat</h2>
 
-<p>
-Coming in the next milestone...
-</p>
+<div id="messages" class="messages"></div>
+
+<div class="emojiBar">
+
+<span class="emoji">😀</span>
+<span class="emoji">😂</span>
+<span class="emoji">❤️</span>
+<span class="emoji">🔥</span>
+<span class="emoji">🎉</span>
+<span class="emoji">🙏</span>
+<span class="emoji">👍</span>
+
+</div>
+
+<textarea
+id="message"
+placeholder="Type your message..."></textarea>
+
+<button id="send">
+Send Message
+</button>
 
 </section>
 
 </main>
 
+<footer>
+
+<p>
+© 2026 Kulzzy Radio Network • Celebrating Lives Everyday
+</p>
+
+</footer>
+
 <script type="module" src="js/firebase.js"></script>
 <script type="module" src="js/app.js"></script>
+<script type="module" src="js/chat.js"></script>
 
 </body>
-</html>
+  </html>
+
+<h2>🎂 Today's Celebrants</h2>
+
+<p id="celebrants">
+Loading celebrants...
+</p>
+
+</section>
