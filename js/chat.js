@@ -1,18 +1,48 @@
-// ==========================================
-// Kulzzy Radio Live Community
-// Chat Engine
-// Version 2.5.0
-// ==========================================
-
 import {
-    db,
-    ref,
-    push,
-    onChildAdded
-} from "./firebase.js";
+  getDatabase,
+  ref,
+  push,
+  onChildAdded
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const messagesRef = ref(db, "messages");
+import { app } from "./firebase.js";
 
-console.log("Chat Engine Ready");
+const db = getDatabase(app);
 
-// More chat functions will be added next.
+const sendBtn = document.getElementById("send");
+const messageBox = document.getElementById("message");
+const messages = document.getElementById("messages");
+
+sendBtn.onclick = () => {
+
+  const name =
+    localStorage.getItem("listenerName") || "Anonymous";
+
+  const text = messageBox.value.trim();
+
+  if (!text) return;
+
+  push(ref(db, "chat"), {
+    name,
+    text,
+    time: Date.now()
+  });
+
+  messageBox.value = "";
+
+};
+
+onChildAdded(ref(db, "chat"), (snapshot) => {
+
+  const data = snapshot.val();
+
+  const msg = document.createElement("p");
+
+  msg.innerHTML =
+    `<strong>${data.name}:</strong> ${data.text}`;
+
+  messages.appendChild(msg);
+
+  messages.scrollTop = messages.scrollHeight;
+
+});
