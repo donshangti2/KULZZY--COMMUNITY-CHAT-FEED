@@ -100,7 +100,34 @@ if (celebrantsElement) {
             "No celebrants available.";
 
     });
+// ==============================
+// ACTIVE LISTENERS COUNT
+// ==============================
 
+const activeListeners =
+    document.getElementById("activeListeners");
+
+if (activeListeners) {
+
+    onValue(ref(db, "online"), (snapshot) => {
+
+        const data = snapshot.val();
+
+        if (!data) {
+            activeListeners.textContent =
+                "0 Listeners Online";
+            return;
+        }
+
+        const total =
+            Object.keys(data).length;
+
+        activeListeners.textContent =
+            total + " Listeners Online";
+
+    });
+
+}
 }
 
 console.log("Kulzzy Radio Live Community Loaded");
