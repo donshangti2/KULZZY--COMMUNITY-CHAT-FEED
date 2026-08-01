@@ -146,3 +146,97 @@ font-weight:bold;
 color:#ffffff;
 margin-top:15px;
 }
+/* ==========================
+   COMMUNITY CHAT
+========================== */
+
+.messages{
+background:#071827;
+border:2px solid #1b3f63;
+border-radius:15px;
+padding:20px;
+height:250px;
+overflow-y:auto;
+margin-bottom:20px;
+}
+
+.systemMessage{
+color:#ffffff;
+font-size:20px;
+line-height:1.7;
+}
+
+.chatBox{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.chatBox textarea{
+width:100%;
+height:120px;
+padding:15px;
+font-size:20px;
+background:#ffffff;
+color:#000;
+border:none;
+border-radius:12px;
+resize:none;
+outline:none;
+}
+
+.chatActions{
+display:flex;
+gap:15px;
+}
+
+.chatActions button{
+flex:1;
+padding:18px;
+border:none;
+border-radius:12px;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+#emojiBtn{
+background:#FFD700;
+color:#000;
+}
+
+#emojiBtn:hover{
+background:#ffea61;
+transform:translateY(-2px);
+}
+
+#send{
+background:#00b894;
+color:#fff;
+}
+
+#send:hover{
+background:#009874;
+transform:translateY(-2px);
+}
+
+.chat-messages{
+margin-top:20px;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.chatMessage{
+background:#12395d;
+padding:15px;
+border-radius:12px;
+font-size:18px;
+line-height:1.6;
+word-wrap:break-word;
+}
+
+.chatMessage strong{
+color:#FFD700;
+   }
