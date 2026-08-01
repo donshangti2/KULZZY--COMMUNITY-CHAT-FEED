@@ -104,3 +104,21 @@ if (celebrantsElement) {
 }
 
 console.log("Kulzzy Radio Live Community Loaded");
+
+// ==============================
+// ACTIVE LISTENERS
+// ==============================
+
+const listenerId =
+    localStorage.getItem("listenerId") ||
+    ("listener_" + Date.now());
+
+localStorage.setItem("listenerId", listenerId);
+
+set(
+    ref(db, "online/" + listenerId),
+    {
+        name: savedName,
+        time: Date.now()
+    }
+);
