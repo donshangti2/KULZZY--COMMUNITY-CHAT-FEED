@@ -1,48 +1,51 @@
 import {
-  getDatabase,
+  db,
   ref,
   push,
   onChildAdded
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-import { app } from "./firebase.js";
-
-const db = getDatabase(app);
+} from "./firebase.js";
 
 const sendBtn = document.getElementById("send");
 const messageBox = document.getElementById("message");
 const messages = document.getElementById("messages");
+const nameInput = document.getElementById("name");
 
-sendBtn.onclick = () => {
+sendBtn.addEventListener("click", () => {
 
-  const name =
-    localStorage.getItem("listenerName") || "Anonymous";
+    const name =
+        nameInput.value.trim() || "Anonymous";
 
-  const text = messageBox.value.trim();
+    const text =
+        messageBox.value.trim();
 
-  if (!text) return;
+    if (text === "") return;
 
-  push(ref(db, "chat"), {
-    name,
-    text,
-    time: Date.now()
-  });
+    push(ref(db, "chat"), {
 
-  messageBox.value = "";
+        name: name,
+        text: text,
+        time: Date.now()
 
-};
+    });
+
+    messageBox.value = "";
+
+});
 
 onChildAdded(ref(db, "chat"), (snapshot) => {
 
-  const data = snapshot.val();
+    const data = snapshot.val();
 
-  const msg = document.createElement("p");
+    const message = document.createElement("div");
 
-  msg.innerHTML =
-    `<strong>${data.name}:</strong> ${data.text}`;
+    message.className = "chatMessage";
 
-  messages.appendChild(msg);
+    message.innerHTML =
+        `<strong>${data.name}</strong><br>${data.text}`;
 
-  messages.scrollTop = messages.scrollHeight;
+    messages.appendChild(message);
+
+    messages.scrollTop =
+        messages.scrollHeight;
 
 });
