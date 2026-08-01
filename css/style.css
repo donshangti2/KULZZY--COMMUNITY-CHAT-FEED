@@ -240,3 +240,94 @@ word-wrap:break-word;
 .chatMessage strong{
 color:#FFD700;
    }
+/* ==========================
+   PROFILE
+========================== */
+
+.profileCard{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:20px;
+}
+
+.profileImage{
+width:150px;
+height:150px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #FFD700;
+background:#ffffff;
+}
+
+#profileImage{
+width:100%;
+padding:12px;
+background:#12395d;
+border-radius:10px;
+color:#ffffff;
+cursor:pointer;
+}
+
+#name{
+width:100%;
+padding:16px;
+font-size:20px;
+border:none;
+border-radius:12px;
+outline:none;
+background:#ffffff;
+color:#000;
+}
+
+#welcomeName{
+font-size:30px;
+color:#FFD700;
+text-align:center;
+margin-top:10px;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+.footer{
+margin-top:40px;
+background:#020b14;
+padding:40px 20px;
+text-align:center;
+border-top:3px solid #FFD700;
+}
+
+.footerContent h3{
+font-size:34px;
+color:#FFD700;
+margin-bottom:15px;
+}
+
+.footerContent p{
+font-size:20px;
+color:#dddddd;
+margin:10px 0;
+}
+
+/* ==========================
+   SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-track{
+background:#071827;
+}
+
+::-webkit-scrollbar-thumb{
+background:#FFD700;
+border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+background:#ffcc00;
+}
