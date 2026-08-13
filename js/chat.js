@@ -1,32 +1,40 @@
 // ==========================================
 // KULZZY RADIO LIVE COMMUNITY
 // chat.js
-// Text Chat + Picture Posts + Follow + Views
+// VERSION 4.0
 // ==========================================
-
 
 import {
 
     db,
-    storage,
+
     ref,
     push,
     set,
     update,
     get,
+
     onValue,
-    onChildAdded
+    onChildAdded,
+
+    onDisconnect,
+    serverTimestamp
 
 } from "./firebase.js";
 
 
-import {
+// ==========================================
+// CLOUDINARY
+// ==========================================
 
-    ref as storageRef,
-    uploadBytes,
-    getDownloadURL
+const CLOUDINARY_CLOUD_NAME =
+    "s4j0x7dk";
 
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+const CLOUDINARY_UPLOAD_PRESET =
+    "Community Chat";
+
+const CLOUDINARY_UPLOAD_URL =
+    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
 
 // ==========================================
@@ -47,11 +55,13 @@ const emojiBtn =
 
 
 // ==========================================
-// LISTENER ID
+// CURRENT LISTENER
 // ==========================================
 
 let listenerId =
-    localStorage.getItem("kulzzyListenerId");
+    localStorage.getItem(
+        "kulzzyListenerId"
+    );
 
 
 if (!listenerId) {
@@ -71,10 +81,10 @@ if (!listenerId) {
 
 
 // ==========================================
-// GET NAME
+// NAME
 // ==========================================
 
-function getListenerName() {
+function getName() {
 
     return (
 
@@ -90,7 +100,7 @@ function getListenerName() {
 
 
 // ==========================================
-// ESCAPE TEXT
+// ESCAPE HTML
 // ==========================================
 
 function escapeHTML(text) {
@@ -98,7 +108,8 @@ function escapeHTML(text) {
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+    div.textContent =
+        text || "";
 
     return div.innerHTML;
 
@@ -106,7 +117,112 @@ function escapeHTML(text) {
 
 
 // ==========================================
-// SEND TEXT MESSAGE
+// PRESENCE
+// ==========================================
+
+function setupPresence() {
+
+    const connectedRef =
+        ref(
+            db,
+            ".info/connected"
+        );
+
+    const connectionRef =
+        ref(
+            db,
+            "presence/" +
+            listenerId
+        );
+
+    onValue(
+        connectedRef,
+        (snapshot) => {
+
+            if (
+                snapshot.val() !== true
+            ) {
+                return;
+            }
+
+
+            onDisconnect(
+                connectionRef
+            ).remove();
+
+
+            set(
+                connectionRef,
+                {
+
+                    name:
+                        getName(),
+
+                    online:
+                        true,
+
+                    lastSeen:
+                        serverTimestamp()
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+setupPresence();
+
+
+// ==========================================
+// ACTIVE LISTENERS
+// ==========================================
+
+const activeListeners =
+    document.getElementById(
+        "activeListeners"
+    );
+
+
+if (activeListeners) {
+
+    onValue(
+        ref(db, "presence"),
+        (snapshot) => {
+
+            const data =
+                snapshot.val() || {};
+
+            const count =
+                Object.keys(data).length;
+
+
+            activeListeners.innerHTML = `
+
+                <div class="listenerIcon">
+                    👥
+                </div>
+
+                <span>
+                    ${count} ${
+                        count === 1
+                        ? "Listener"
+                        : "Listeners"
+                    } Online
+                </span>
+
+            `;
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// SEND MESSAGE
 // ==========================================
 
 if (sendBtn) {
@@ -151,21 +267,20 @@ async function sendMessage() {
     if (!text) return;
 
 
-    const name =
-        getListenerName();
-
-
     try {
 
         await push(
             ref(db, "chat"),
             {
 
+                type:
+                    "text",
+
                 listenerId:
                     listenerId,
 
                 name:
-                    name,
+                    getName(),
 
                 text:
                     text,
@@ -183,13 +298,10 @@ async function sendMessage() {
 
     catch (error) {
 
-        console.error(
-            "Message error:",
-            error
-        );
+        console.error(error);
 
         alert(
-            "Message could not be sent. Please try again."
+            "Message could not be sent."
         );
 
     }
@@ -198,7 +310,7 @@ async function sendMessage() {
 
 
 // ==========================================
-// DISPLAY TEXT MESSAGES
+// DISPLAY TEXT CHAT
 // ==========================================
 
 onChildAdded(
@@ -208,151 +320,66 @@ onChildAdded(
         const data =
             snapshot.val();
 
-
         if (!data) return;
 
 
-        const msg =
-            document.createElement("div");
-
-
-        msg.className =
-            "communityMessage";
-
-
-        msg.innerHTML = `
-
-            <div class="messageName">
-                ${escapeHTML(
-                    data.name || "Listener"
-                )}
-            </div>
-
-            <div class="messageText">
-                ${escapeHTML(
-                    data.text || ""
-                )}
-            </div>
-
-            <div class="listenerActions">
-
-                <button
-                    class="postBtn"
-                    data-user="${escapeHTML(
-                        data.listenerId || ""
-                    )}">
-                    📷 Post
-                </button>
-
-                <button
-                    class="followBtn"
-                    data-user="${escapeHTML(
-                        data.listenerId || ""
-                    )}"
-                    data-name="${escapeHTML(
-                        data.name || "Listener"
-                    )}">
-                    👤 Follow
-                </button>
-
-                <span
-                    class="viewCounter"
-                    data-user="${escapeHTML(
-                        data.listenerId || ""
-                    )}">
-                    👁️ 0
-                </span>
-
-            </div>
-
-        `;
-
-
-        messages.appendChild(msg);
-
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-
-        setupListenerButtons(msg);
+        displayTextMessage(
+            data
+        );
 
     }
 );
 
 
-// ==========================================
-// SETUP LISTENER BUTTONS
-// ==========================================
+function displayTextMessage(data) {
 
-function setupListenerButtons(container) {
-
-
-    const postBtn =
-        container.querySelector(".postBtn");
+    const msg =
+        document.createElement("div");
 
 
-    const followBtn =
-        container.querySelector(".followBtn");
+    msg.className =
+        "communityMessage";
 
 
-    if (postBtn) {
+    msg.innerHTML = `
 
-        postBtn.addEventListener(
-            "click",
-            () => {
+        <div class="messageName">
 
-                openPostPicker();
+            ${escapeHTML(
+                data.name ||
+                "Listener"
+            )}
 
-            }
-        );
+        </div>
 
-    }
+        <div class="messageText">
 
+            ${escapeHTML(
+                data.text ||
+                ""
+            )}
 
-    if (followBtn) {
+        </div>
 
-        const targetId =
-            followBtn.dataset.user;
-
-        const targetName =
-            followBtn.dataset.name;
-
-
-        if (
-            targetId === listenerId
-        ) {
-
-            followBtn.style.display =
-                "none";
-
-        }
+    `;
 
 
-        followBtn.addEventListener(
-            "click",
-            () => {
+    messages.appendChild(
+        msg
+    );
 
-                followListener(
-                    targetId,
-                    targetName,
-                    followBtn
-                );
 
-            }
-        );
-
-    }
+    messages.scrollTop =
+        messages.scrollHeight;
 
 }
 
 
 // ==========================================
-// PICTURE POST PICKER
+// CREATE POST BUTTON
 // ==========================================
 
-function openPostPicker() {
-
+function createPostPicker() {
 
     let picker =
         document.getElementById(
@@ -374,7 +401,7 @@ function openPostPicker() {
             "picturePostPicker";
 
         picker.accept =
-            "image/jpeg,image/png,image/webp,image/gif";
+            "image/jpeg,image/png,image/webp";
 
         picker.style.display =
             "none";
@@ -386,7 +413,7 @@ function openPostPicker() {
 
         picker.addEventListener(
             "change",
-            handlePicturePost
+            handlePictureUpload
         );
 
     }
@@ -400,11 +427,10 @@ function openPostPicker() {
 
 
 // ==========================================
-// HANDLE PICTURE POST
+// CLOUDINARY IMAGE UPLOAD
 // ==========================================
 
-async function handlePicturePost(event) {
-
+async function handlePictureUpload(event) {
 
     const file =
         event.target.files[0];
@@ -413,7 +439,7 @@ async function handlePicturePost(event) {
     if (!file) return;
 
 
-    // ONLY IMAGE FILES
+    // IMAGE ONLY
 
     if (
         !file.type.startsWith(
@@ -422,7 +448,7 @@ async function handlePicturePost(event) {
     ) {
 
         alert(
-            "Only pictures are allowed. Audio and video cannot be posted."
+            "Only pictures are allowed."
         );
 
         return;
@@ -430,7 +456,33 @@ async function handlePicturePost(event) {
     }
 
 
-    // MAX 5MB
+    // EXTRA PROTECTION
+
+    const allowedTypes = [
+
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+
+    ];
+
+
+    if (
+        !allowedTypes.includes(
+            file.type
+        )
+    ) {
+
+        alert(
+            "Only JPG, PNG and WEBP pictures are allowed."
+        );
+
+        return;
+
+    }
+
+
+    // 5MB MAXIMUM
 
     if (
         file.size >
@@ -438,7 +490,7 @@ async function handlePicturePost(event) {
     ) {
 
         alert(
-            "Picture must not be larger than 5MB."
+            "Picture must be 5MB or smaller."
         );
 
         return;
@@ -446,49 +498,65 @@ async function handlePicturePost(event) {
     }
 
 
-    const name =
-        getListenerName();
-
-
     try {
 
-
         alert(
-            "📷 Uploading your picture..."
+            "📸 Uploading picture..."
         );
 
 
-        const fileName =
-            Date.now() +
-            "_" +
-            file.name.replace(
-                /[^a-zA-Z0-9._-]/g,
-                "_"
+        const formData =
+            new FormData();
+
+
+        formData.append(
+            "file",
+            file
+        );
+
+
+        formData.append(
+            "upload_preset",
+            CLOUDINARY_UPLOAD_PRESET
+        );
+
+
+        const response =
+            await fetch(
+                CLOUDINARY_UPLOAD_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    body:
+                        formData
+
+                }
             );
 
 
-        const imageRef =
-            storageRef(
-                storage,
-                "communityPosts/" +
-                listenerId +
-                "/" +
-                fileName
+        const result =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !result.secure_url
+        ) {
+
+            console.error(
+                result
             );
 
-
-        const uploadResult =
-            await uploadBytes(
-                imageRef,
-                file
+            throw new Error(
+                "Cloudinary upload failed"
             );
 
+        }
 
-        const imageURL =
-            await getDownloadURL(
-                uploadResult.ref
-            );
 
+        // SAVE POST IN FIREBASE
 
         await push(
             ref(db, "posts"),
@@ -498,12 +566,18 @@ async function handlePicturePost(event) {
                     listenerId,
 
                 name:
-                    name,
+                    getName(),
 
                 imageURL:
-                    imageURL,
+                    result.secure_url,
+
+                likes:
+                    0,
 
                 views:
+                    0,
+
+                comments:
                     0,
 
                 time:
@@ -514,22 +588,20 @@ async function handlePicturePost(event) {
 
 
         alert(
-            "✅ Picture posted successfully!"
+            "✅ Picture posted!"
         );
-
 
     }
 
     catch (error) {
 
         console.error(
-            "Picture upload error:",
+            "Upload error:",
             error
         );
 
-
         alert(
-            "Picture could not be posted. Please try again."
+            "Picture upload failed. Check your Cloudinary upload preset."
         );
 
     }
@@ -538,26 +610,726 @@ async function handlePicturePost(event) {
 
 
 // ==========================================
-// FOLLOW LISTENER
+// DISPLAY POSTS
 // ==========================================
 
-async function followListener(
+onChildAdded(
+    ref(db, "posts"),
+    (snapshot) => {
+
+        const data =
+            snapshot.val();
+
+        if (!data) return;
+
+
+        displayPost(
+            snapshot.key,
+            data
+        );
+
+    }
+);
+
+
+// ==========================================
+// DISPLAY POST
+// ==========================================
+
+function displayPost(
+    postId,
+    data
+) {
+
+    const post =
+        document.createElement(
+            "div"
+        );
+
+
+    post.className =
+        "picturePost";
+
+
+    post.dataset.postId =
+        postId;
+
+
+    post.innerHTML = `
+
+        <div class="postHeader">
+
+            <div class="postAvatar">
+                👤
+            </div>
+
+            <div class="postUser">
+
+                <strong>
+                    ${escapeHTML(
+                        data.name ||
+                        "Listener"
+                    )}
+                </strong>
+
+                <small>
+                    Picture Post
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <img
+
+            src="${data.imageURL}"
+
+            class="postImage"
+
+            alt="Community Post"
+
+            loading="lazy"
+
+        >
+
+
+        <div class="postActions">
+
+            <button
+                class="likeButton">
+
+                ❤️
+                <span class="likeCount">
+                    ${data.likes || 0}
+                </span>
+
+            </button>
+
+
+            <button
+                class="commentButton">
+
+                💬
+                <span>
+                    Comment
+                </span>
+
+            </button>
+
+
+            <span class="postViewCount">
+
+                👁️
+                ${data.views || 0}
+
+            </span>
+
+        </div>
+
+
+        <div class="commentArea">
+
+            <div
+                class="comments"
+                id="comments-${postId}">
+            </div>
+
+
+            <div class="commentInputRow">
+
+                <input
+                    class="commentInput"
+                    placeholder="Write a comment...">
+
+                <button
+                    class="commentSend">
+
+                    ➤
+
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    messages.appendChild(
+        post
+    );
+
+
+    setupPostEvents(
+        post,
+        postId,
+        data
+    );
+
+
+    loadComments(
+        postId,
+        post
+    );
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+// ==========================================
+// POST EVENTS
+// ==========================================
+
+function setupPostEvents(
+    post,
+    postId,
+    data
+) {
+
+    const likeButton =
+        post.querySelector(
+            ".likeButton"
+        );
+
+
+    const commentInput =
+        post.querySelector(
+            ".commentInput"
+        );
+
+
+    const commentSend =
+        post.querySelector(
+            ".commentSend"
+        );
+
+
+    const image =
+        post.querySelector(
+            ".postImage"
+        );
+
+
+    likeButton.addEventListener(
+        "click",
+        () => {
+
+            toggleLike(
+                postId,
+                data,
+                likeButton
+            );
+
+        }
+    );
+
+
+    commentSend.addEventListener(
+        "click",
+        () => {
+
+            addComment(
+                postId,
+                data,
+                commentInput,
+                post
+            );
+
+        }
+    );
+
+
+    commentInput.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                addComment(
+                    postId,
+                    data,
+                    commentInput,
+                    post
+                );
+
+            }
+
+        }
+    );
+
+
+    image.addEventListener(
+        "click",
+        () => {
+
+            registerView(
+                postId
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// LIKE
+// ==========================================
+
+async function toggleLike(
+    postId,
+    postData,
+    button
+) {
+
+    const likeRef =
+        ref(
+            db,
+            "postLikes/" +
+            postId +
+            "/" +
+            listenerId
+        );
+
+
+    const postRef =
+        ref(
+            db,
+            "posts/" +
+            postId
+        );
+
+
+    try {
+
+        const existing =
+            await get(
+                likeRef
+            );
+
+
+        const postSnapshot =
+            await get(
+                postRef
+            );
+
+
+        if (
+            !postSnapshot.exists()
+        ) return;
+
+
+        const current =
+            postSnapshot.val();
+
+
+        let count =
+            Number(
+                current.likes || 0
+            );
+
+
+        if (
+            existing.exists()
+        ) {
+
+            await set(
+                likeRef,
+                null
+            );
+
+            count =
+                Math.max(
+                    0,
+                    count - 1
+                );
+
+            button.classList.remove(
+                "liked"
+            );
+
+        }
+
+        else {
+
+            await set(
+                likeRef,
+                {
+
+                    name:
+                        getName(),
+
+                    time:
+                        Date.now()
+
+                }
+            );
+
+            count++;
+
+            button.classList.add(
+                "liked"
+            );
+
+
+            // NOTIFICATION
+
+            if (
+                current.listenerId &&
+                current.listenerId !==
+                listenerId
+            ) {
+
+                await createNotification(
+                    current.listenerId,
+                    "like",
+                    getName(),
+                    postId
+                );
+
+            }
+
+        }
+
+
+        await update(
+            postRef,
+            {
+
+                likes:
+                    count
+
+            }
+        );
+
+
+        const countElement =
+            button.querySelector(
+                ".likeCount"
+            );
+
+
+        if (countElement) {
+
+            countElement.textContent =
+                count;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Like error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// COMMENTS
+// ==========================================
+
+async function addComment(
+    postId,
+    postData,
+    input,
+    post
+) {
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) return;
+
+
+    try {
+
+        await push(
+            ref(
+                db,
+                "comments/" +
+                postId
+            ),
+            {
+
+                listenerId:
+                    listenerId,
+
+                name:
+                    getName(),
+
+                text:
+                    text,
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+
+        input.value = "";
+
+
+        const postRef =
+            ref(
+                db,
+                "posts/" +
+                postId
+            );
+
+
+        const snapshot =
+            await get(
+                postRef
+            );
+
+
+        if (
+            snapshot.exists()
+        ) {
+
+            const data =
+                snapshot.val();
+
+
+            await update(
+                postRef,
+                {
+
+                    comments:
+                        Number(
+                            data.comments ||
+                            0
+                        ) + 1
+
+                }
+            );
+
+
+            if (
+                data.listenerId &&
+                data.listenerId !==
+                listenerId
+            ) {
+
+                await createNotification(
+                    data.listenerId,
+                    "comment",
+                    getName(),
+                    postId
+                );
+
+            }
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Comment error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// LOAD COMMENTS
+// ==========================================
+
+function loadComments(
+    postId,
+    post
+) {
+
+    const commentsBox =
+        post.querySelector(
+            ".comments"
+        );
+
+
+    onChildAdded(
+        ref(
+            db,
+            "comments/" +
+            postId
+        ),
+        (snapshot) => {
+
+            const data =
+                snapshot.val();
+
+
+            if (!data) return;
+
+
+            const comment =
+                document.createElement(
+                    "div"
+                );
+
+
+            comment.className =
+                "commentBubble";
+
+
+            comment.innerHTML = `
+
+                <strong>
+                    ${escapeHTML(
+                        data.name ||
+                        "Listener"
+                    )}
+                </strong>
+
+                <span>
+                    ${escapeHTML(
+                        data.text ||
+                        ""
+                    )}
+                </span>
+
+            `;
+
+
+            commentsBox.appendChild(
+                comment
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// VIEWS
+// ==========================================
+
+async function registerView(
+    postId
+) {
+
+    const viewRef =
+        ref(
+            db,
+            "postViews/" +
+            postId +
+            "/" +
+            listenerId
+        );
+
+
+    const postRef =
+        ref(
+            db,
+            "posts/" +
+            postId
+        );
+
+
+    try {
+
+        const existing =
+            await get(
+                viewRef
+            );
+
+
+        if (
+            existing.exists()
+        ) return;
+
+
+        await set(
+            viewRef,
+            {
+
+                name:
+                    getName(),
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+
+        const snapshot =
+            await get(
+                postRef
+            );
+
+
+        if (
+            !snapshot.exists()
+        ) return;
+
+
+        const data =
+            snapshot.val();
+
+
+        await update(
+            postRef,
+            {
+
+                views:
+                    Number(
+                        data.views ||
+                        0
+                    ) + 1
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "View error:",
+            error
+        );
+
+    }
+
+}
+
+
+// ==========================================
+// FOLLOW
+// ==========================================
+
+async function followUser(
     targetId,
     targetName,
     button
 ) {
 
-
-    if (!targetId) return;
-
-
     if (
+        !targetId ||
         targetId === listenerId
-    ) {
-
-        return;
-
-    }
+    ) return;
 
 
     const followRef =
@@ -573,10 +1345,14 @@ async function followListener(
     try {
 
         const existing =
-            await get(followRef);
+            await get(
+                followRef
+            );
 
 
-        if (existing.exists()) {
+        if (
+            existing.exists()
+        ) {
 
             await set(
                 followRef,
@@ -585,7 +1361,8 @@ async function followListener(
 
 
             button.textContent =
-                "👤 Follow";
+                "Follow";
+
 
             button.classList.remove(
                 "following"
@@ -600,10 +1377,7 @@ async function followListener(
                 {
 
                     name:
-                        getListenerName(),
-
-                    followedName:
-                        targetName,
+                        getName(),
 
                     time:
                         Date.now()
@@ -615,8 +1389,17 @@ async function followListener(
             button.textContent =
                 "✓ Following";
 
+
             button.classList.add(
                 "following"
+            );
+
+
+            await createNotification(
+                targetId,
+                "follow",
+                getName(),
+                ""
             );
 
         }
@@ -636,304 +1419,147 @@ async function followListener(
 
 
 // ==========================================
-// LOAD PICTURE POSTS
+// NOTIFICATIONS
 // ==========================================
 
-onChildAdded(
-    ref(db, "posts"),
-    (snapshot) => {
+async function createNotification(
+    targetUser,
+    type,
+    fromName,
+    postId
+) {
 
-        const data =
-            snapshot.val();
+    if (
+        !targetUser ||
+        targetUser === listenerId
+    ) return;
 
 
-        if (!data) return;
+    await push(
+        ref(
+            db,
+            "notifications/" +
+            targetUser
+        ),
+        {
+
+            type:
+                type,
+
+            fromName:
+                fromName,
+
+            postId:
+                postId || "",
+
+            read:
+                false,
+
+            time:
+                Date.now()
+
+        }
+    );
+
+}
 
 
-        displayPicturePost(
-            snapshot.key,
-            data
-        );
+// ==========================================
+// NOTIFICATION COUNTER
+// ==========================================
+
+const notificationBadge =
+    document.getElementById(
+        "notificationBadge"
+    );
+
+
+if (notificationBadge) {
+
+    onValue(
+        ref(
+            db,
+            "notifications/" +
+            listenerId
+        ),
+        (snapshot) => {
+
+            const data =
+                snapshot.val() || {};
+
+
+            const unread =
+                Object.values(data)
+                    .filter(
+                        item =>
+                            item &&
+                            item.read === false
+                    )
+                    .length;
+
+
+            notificationBadge.textContent =
+                unread;
+
+
+            notificationBadge.style.display =
+                unread > 0
+                ? "flex"
+                : "none";
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// POST BUTTON
+// ==========================================
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        const button =
+            event.target.closest(
+                ".postButton"
+            );
+
+
+        if (button) {
+
+            createPostPicker();
+
+        }
+
+
+        const followButton =
+            event.target.closest(
+                ".followButton"
+            );
+
+
+        if (followButton) {
+
+            followUser(
+
+                followButton.dataset.user,
+
+                followButton.dataset.name,
+
+                followButton
+
+            );
+
+        }
 
     }
 );
 
 
 // ==========================================
-// DISPLAY PICTURE POST
-// ==========================================
-
-function displayPicturePost(
-    postId,
-    data
-) {
-
-
-    const post =
-        document.createElement("div");
-
-
-    post.className =
-        "picturePost";
-
-
-    post.innerHTML = `
-
-        <div class="postHeader">
-
-            <div class="postAvatar">
-                👤
-            </div>
-
-            <div>
-
-                <strong>
-                    ${escapeHTML(
-                        data.name ||
-                        "Listener"
-                    )}
-                </strong>
-
-                <small>
-                    Picture Post
-                </small>
-
-            </div>
-
-        </div>
-
-
-        <img
-            src="${data.imageURL}"
-            class="postImage"
-            alt="Community picture"
-            loading="lazy"
-        >
-
-
-        <div class="postFooter">
-
-            <button
-                class="followPostBtn"
-                data-user="${
-                    data.listenerId || ""
-                }"
-                data-name="${
-                    escapeHTML(
-                        data.name ||
-                        "Listener"
-                    )
-                }">
-
-                👤 Follow
-
-            </button>
-
-
-            <span
-                class="postViews"
-                id="views-${postId}">
-
-                👁️ ${
-                    Number(
-                        data.views || 0
-                    )
-                }
-
-            </span>
-
-        </div>
-
-    `;
-
-
-    messages.appendChild(
-        post
-    );
-
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-
-    const image =
-        post.querySelector(
-            ".postImage"
-        );
-
-
-    image.addEventListener(
-        "click",
-        () => {
-
-            registerPostView(
-                postId,
-                data
-            );
-
-        }
-    );
-
-
-    const followBtn =
-        post.querySelector(
-            ".followPostBtn"
-        );
-
-
-    if (
-        data.listenerId ===
-        listenerId
-    ) {
-
-        followBtn.style.display =
-            "none";
-
-    }
-
-
-    followBtn.addEventListener(
-        "click",
-        () => {
-
-            followListener(
-                data.listenerId,
-                data.name,
-                followBtn
-            );
-
-        }
-    );
-
-}
-
-
-// ==========================================
-// REGISTER POST VIEW
-// ==========================================
-
-async function registerPostView(
-    postId,
-    data
-) {
-
-
-    const viewKey =
-        listenerId;
-
-
-    const viewRef =
-        ref(
-            db,
-            "postViews/" +
-            postId +
-            "/" +
-            viewKey
-        );
-
-
-    try {
-
-        const alreadyViewed =
-            await get(viewRef);
-
-
-        if (
-            alreadyViewed.exists()
-        ) {
-
-            return;
-
-        }
-
-
-        await set(
-            viewRef,
-            {
-
-                listenerId:
-                    listenerId,
-
-                name:
-                    getListenerName(),
-
-                time:
-                    Date.now()
-
-            }
-        );
-
-
-        const postRef =
-            ref(
-                db,
-                "posts/" +
-                postId
-            );
-
-
-        const postSnapshot =
-            await get(postRef);
-
-
-        if (
-            postSnapshot.exists()
-        ) {
-
-            const postData =
-                postSnapshot.val();
-
-
-            const newViews =
-                Number(
-                    postData.views || 0
-                ) + 1;
-
-
-            await update(
-                postRef,
-                {
-
-                    views:
-                        newViews
-
-                }
-            );
-
-
-            const counter =
-                document.getElementById(
-                    "views-" +
-                    postId
-                );
-
-
-            if (counter) {
-
-                counter.textContent =
-                    "👁️ " +
-                    newViews;
-
-            }
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "View error:",
-            error
-        );
-
-    }
-
-}
-
-
-// ==========================================
-// EMOJI BUTTON
+// EMOJI
 // ==========================================
 
 if (emojiBtn) {
@@ -954,5 +1580,5 @@ if (emojiBtn) {
 
 
 console.log(
-    "Kulzzy Radio Community Chat loaded."
+    "Kulzzy Radio Community v4 loaded."
 );
