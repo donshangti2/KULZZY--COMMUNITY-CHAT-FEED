@@ -5,71 +5,416 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kulzzy Radio Network | Live Community</title>
+<title>Kulzzy Radio | Live Community</title>
 
-<meta name="theme-color" content="#b30000">
+<meta name="theme-color" content="#0b141a">
 
 <link rel="stylesheet" href="css/style.css">
 
-<!-- WhatsApp-style wide chat layout -->
 <style>
+
+/* ==========================================
+   KULZZY RADIO WHATSAPP-STYLE COMMUNITY
+========================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    background:#0b141a;
+}
+
+/* ==========================================
+   MAIN PAGE
+========================================== */
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:#ffffff;
+    overflow-x:hidden;
+}
+
+.card{
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+    background:#111b21;
+    border:0;
+    box-shadow:none;
+}
+
+/* ==========================================
+   ACTIVE LISTENERS
+========================================== */
+
+#activeListenersCard{
+    padding:14px 18px;
+    border-bottom:1px solid #26343b;
+    background:#111b21;
+}
+
+#activeListenersCard h2{
+    margin:0 0 10px 0;
+    font-size:18px;
+    font-weight:600;
+    color:#e9edef;
+}
+
+#activeListeners{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:16px;
+    color:#aebac1;
+}
+
+.listenerIcon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#202c33;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+/* ==========================================
+   PROFILE
+========================================== */
+
+#profileCard{
+    padding:12px 18px;
+    border-bottom:1px solid #26343b;
+    background:#111b21;
+}
+
+#profileCard h2{
+    display:none;
+}
+
+.profileRow{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+/* SMALL PROFILE IMAGE */
+
+.profileImage{
+    width:58px !important;
+    height:58px !important;
+    min-width:58px;
+    border-radius:50% !important;
+    object-fit:cover;
+    border:2px solid #00a884 !important;
+    background:#202c33;
+}
+
+/* PROFILE DETAILS */
+
+.profileDetails{
+    flex:1;
+    min-width:0;
+}
+
+.profileDetails input[type="text"]{
+    width:100%;
+    max-width:400px;
+    background:transparent;
+    color:#e9edef;
+    border:0;
+    border-bottom:1px solid #39464d;
+    padding:7px 2px;
+    font-size:17px;
+    outline:none;
+}
+
+.profileDetails input[type="text"]:focus{
+    border-bottom:2px solid #00a884;
+}
+
+.profileDetails h3{
+    margin:6px 0 0;
+    font-size:14px;
+    font-weight:400;
+    color:#8696a0;
+}
+
+/* FILE BUTTON */
+
+.profileFile{
+    margin-top:7px;
+}
+
+.profileFile input{
+    color:#8696a0;
+    font-size:12px;
+}
+
+/* ==========================================
+   COMMUNITY CHAT
+========================================== */
 
 .chatCard{
     width:100%;
-    margin:25px 0 !important;
-    border-radius:0 !important;
+    max-width:900px;
+    margin:0 auto;
+    background:#0b141a;
+    border:0;
+    border-radius:0;
+    padding:0;
 }
+
+/* CHAT TITLE */
+
+.chatTitle{
+    padding:16px 18px;
+    background:#202c33;
+    border-bottom:1px solid #39464d;
+}
+
+.chatTitle h2{
+    margin:0;
+    font-size:20px;
+    font-weight:600;
+    color:#e9edef;
+}
+
+/* MESSAGE AREA */
 
 .chatCard .messages{
     width:100%;
+    height:55vh;
     min-height:350px;
-    max-height:550px;
+    max-height:650px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    padding:18px 12px 25px;
+    background:#0b141a;
+    border:0;
     border-radius:0;
-    padding:20px;
 }
 
-.chatCard .chatBox{
-    width:100%;
-}
+/* SYSTEM MESSAGE */
 
-.chatCard .chatBox textarea{
-    width:100%;
-    min-height:100px;
-}
-
-.chatCard .chatActions{
-    width:100%;
-}
-
-.chatCard .chat-messages{
-    width:100%;
-}
-
-.chatMessage{
-    max-width:85%;
+.systemMessage{
     width:fit-content;
-    padding:12px 16px;
-    margin:8px 0;
-    border-radius:15px;
-    background:#12395d;
+    max-width:85%;
+    margin:8px auto 18px;
+    padding:9px 13px;
+    border-radius:8px;
+    background:#182229;
+    color:#aebac1;
+    font-size:13px;
+    line-height:1.5;
+    text-align:center;
 }
 
-@media screen and (max-width:768px){
+/* FIREBASE MESSAGES */
 
-    .chatCard{
-        margin:15px 0 !important;
-        padding:15px !important;
-        border-radius:0 !important;
+#messages p:not(.systemMessage){
+    width:fit-content;
+    max-width:78%;
+    margin:6px 0;
+    padding:8px 11px;
+    background:#202c33;
+    border-radius:8px 8px 8px 2px;
+    color:#e9edef;
+    font-size:15px;
+    line-height:1.45;
+    word-wrap:break-word;
+}
+
+/* NAME INSIDE MESSAGE */
+
+#messages p:not(.systemMessage) strong{
+    display:block;
+    color:#00a884;
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+/* ==========================================
+   CHAT INPUT
+========================================== */
+
+.chatBox{
+    width:100%;
+    padding:8px 10px 10px;
+    background:#202c33;
+    border-top:1px solid #26343b;
+}
+
+.chatBox textarea{
+    display:block;
+    width:100%;
+    min-height:55px;
+    max-height:130px;
+    resize:none;
+    border:0;
+    outline:none;
+    border-radius:25px;
+    padding:16px 18px;
+    background:#2a3942;
+    color:#e9edef;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:16px;
+}
+
+.chatBox textarea::placeholder{
+    color:#8696a0;
+}
+
+/* ==========================================
+   CHAT BUTTONS
+========================================== */
+
+.chatActions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:8px;
+}
+
+.chatActions button{
+    border:0;
+    border-radius:22px;
+    padding:11px 20px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+#emojiBtn{
+    background:#2a3942;
+    color:#e9edef;
+}
+
+#send{
+    margin-left:auto;
+    background:#00a884;
+    color:#ffffff;
+    min-width:90px;
+}
+
+#send:active{
+    transform:scale(.97);
+}
+
+/* ==========================================
+   HIDDEN OLD CHAT CONTAINER
+========================================== */
+
+.chat-messages{
+    display:none;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer{
+    max-width:900px;
+    margin:0 auto;
+    padding:25px 18px;
+    background:#111b21;
+    border-top:1px solid #26343b;
+    text-align:center;
+}
+
+.footerContent h3{
+    margin:0 0 7px;
+    color:#e9edef;
+    font-size:17px;
+}
+
+.footerContent p{
+    color:#8696a0;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    #activeListenersCard{
+        padding:13px 15px;
+    }
+
+    #profileCard{
+        padding:10px 15px;
+    }
+
+    .profileImage{
+        width:52px !important;
+        height:52px !important;
+        min-width:52px;
+    }
+
+    .profileDetails input[type="text"]{
+        font-size:16px;
+    }
+
+    .chatTitle{
+        padding:14px 15px;
+    }
+
+    .chatTitle h2{
+        font-size:19px;
     }
 
     .chatCard .messages{
-        min-height:300px;
-        max-height:500px;
-        padding:12px;
+        height:52vh;
+        min-height:320px;
+        padding:15px 10px 20px;
     }
 
-    .chatMessage{
-        max-width:90%;
+    #messages p:not(.systemMessage){
+        max-width:88%;
+        font-size:15px;
+    }
+
+    .chatBox{
+        padding:8px;
+    }
+
+    .chatBox textarea{
+        min-height:52px;
+        font-size:16px;
+    }
+
+    .chatActions button{
+        padding:10px 16px;
+    }
+
+}
+
+/* ==========================================
+   VERY SMALL PHONES
+========================================== */
+
+@media(max-width:400px){
+
+    .profileImage{
+        width:48px !important;
+        height:48px !important;
+        min-width:48px;
+    }
+
+    .profileRow{
+        gap:10px;
+    }
+
+    #messages p:not(.systemMessage){
+        max-width:92%;
     }
 
 }
@@ -80,81 +425,41 @@
 
 <body>
 
-<!-- ==============================
-     HEADER
-============================== -->
 
-<header class="header">
-
-<div class="brand">
-
-<h1>📻 Kulzzy Radio Network</h1>
-
-<p>Celebrating Lives Everyday</p>
-
-</div>
-
-<div class="liveStatus">
-
-<span class="liveDot"></span>
-
-<span>LIVE NOW</span>
-
-</div>
-
-</header>
-
-
-<!-- ==============================
-     HERO
-============================== -->
-
-<section class="hero">
-
-<h2>Welcome to Kulzzy Radio Live Community</h2>
-
-<p>
-
-Meet listeners around the world, celebrate lives,
-advertise your business and enjoy live radio 24/7.
-
-</p>
-
-<button id="listenBtn">
-
-🎧 LISTEN LIVE
-
-</button>
-
-</section>
-
-
-<!-- ==============================
+<!-- ==========================================
      ACTIVE LISTENERS
-============================== -->
+========================================== -->
 
-<section class="card">
+<section
+class="card"
+id="activeListenersCard">
 
 <h2>👥 Active Listeners</h2>
 
 <div id="activeListeners">
 
+<div class="listenerIcon">
+👥
+</div>
+
+<span>
 0 Listeners Online
+</span>
 
 </div>
 
 </section>
 
 
-<!-- ==============================
-     YOUR PROFILE
-============================== -->
+<!-- ==========================================
+     PROFILE
+========================================== -->
 
-<section class="card">
+<section
+class="card"
+id="profileCard">
 
-<h2>👤 Your Profile</h2>
-
-<div class="profileCard">
+<div class="profileRow">
 
 <img
 id="profilePreview"
@@ -162,10 +467,7 @@ src="assets/images/default-avatar.png"
 alt="Profile Picture"
 class="profileImage">
 
-<input
-type="file"
-id="profileImage"
-accept="image/*">
+<div class="profileDetails">
 
 <input
 type="text"
@@ -173,23 +475,38 @@ id="name"
 placeholder="Enter your display name">
 
 <h3 id="welcomeName">
-
 Welcome!
-
 </h3>
+
+<div class="profileFile">
+
+<input
+type="file"
+id="profileImage"
+accept="image/*">
+
+</div>
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- ==============================
+<!-- ==========================================
      COMMUNITY CHAT
-============================== -->
+========================================== -->
 
-<section class="card chatCard">
+<section
+class="card chatCard">
+
+<div class="chatTitle">
 
 <h2>💬 Community Chat</h2>
+
+</div>
+
 
 <div
 id="messages"
@@ -210,18 +527,21 @@ Start chatting with listeners around the world.
 
 <textarea
 id="message"
-placeholder="Type your message here..."></textarea>
+placeholder="Type a message..."></textarea>
 
 
 <div class="chatActions">
 
-<button id="emojiBtn">
+<button
+id="emojiBtn">
 
 😊 Emoji
 
 </button>
 
-<button id="send">
+
+<button
+id="send">
 
 📤 Send
 
@@ -240,9 +560,9 @@ class="chat-messages">
 </section>
 
 
-<!-- ==============================
+<!-- ==========================================
      FOOTER
-============================== -->
+========================================== -->
 
 <footer class="footer">
 
@@ -257,14 +577,7 @@ Celebrating Lives Everyday
 </p>
 
 <p>
-Broadcasting celebrations,
-announcements, interviews and
-community conversations worldwide.
-</p>
-
-<p>
-© 2026 Kulzzy Radio Network.
-All Rights Reserved.
+© 2026 Kulzzy Radio Network. All Rights Reserved.
 </p>
 
 </div>
@@ -272,25 +585,25 @@ All Rights Reserved.
 </footer>
 
 
-<!-- ==============================
+<!-- ==========================================
      JAVASCRIPT
-============================== -->
+========================================== -->
 
 <script
 type="module"
-src="js/firebase.js?v=2">
+src="js/firebase.js?v=3">
 </script>
 
 <script
 type="module"
-src="js/app.js?v=2">
+src="js/app.js?v=3">
 </script>
 
 <script
 type="module"
-src="js/chat.js?v=2">
+src="js/chat.js?v=3">
 </script>
 
 
 </body>
-  </html>
+</html>
