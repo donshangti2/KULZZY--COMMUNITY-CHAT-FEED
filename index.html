@@ -21,7 +21,13 @@ content="#0b141a">
 rel="stylesheet"
 href="css/style.css">
 
+
 <style>
+
+/* ==================================================
+   KULZZY RADIO COMMUNITY CHAT
+   COMPLETE WHATSAPP-STYLE INTERFACE
+================================================== */
 
 *{
     box-sizing:border-box;
@@ -29,19 +35,31 @@ href="css/style.css">
 
 html,
 body{
+
     margin:0;
     padding:0;
+
+    width:100%;
+
     background:#0b141a;
+
     color:#e9edef;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
 }
 
 
-/* =====================================
+/* ==================================================
    ACTIVE LISTENERS
-===================================== */
+================================================== */
 
 #activeListenersCard{
+
+    width:100%;
 
     padding:14px 18px;
 
@@ -52,15 +70,19 @@ body{
 
 }
 
+
 #activeListenersCard h2{
 
     margin:0 0 10px;
 
     font-size:18px;
 
+    font-weight:600;
+
     color:#e9edef;
 
 }
+
 
 #activeListeners{
 
@@ -72,13 +94,18 @@ body{
 
     color:#aebac1;
 
+    font-size:15px;
+
 }
+
 
 .listenerIcon{
 
     width:40px;
 
     height:40px;
+
+    min-width:40px;
 
     border-radius:50%;
 
@@ -90,14 +117,18 @@ body{
 
     background:#202c33;
 
+    font-size:20px;
+
 }
 
 
-/* =====================================
+/* ==================================================
    PROFILE
-===================================== */
+================================================== */
 
 #profileCard{
+
+    width:100%;
 
     padding:10px 18px;
 
@@ -108,6 +139,7 @@ body{
 
 }
 
+
 .profileRow{
 
     display:flex;
@@ -117,6 +149,7 @@ body{
     gap:12px;
 
 }
+
 
 .profileImage{
 
@@ -130,21 +163,30 @@ body{
 
     object-fit:cover;
 
-    border:2px solid #00a884 !important;
+    background:#202c33;
+
+    border:
+    2px solid #00a884 !important;
 
 }
+
 
 .profileDetails{
 
     flex:1;
 
+    min-width:0;
+
 }
+
 
 .profileDetails input[type="text"]{
 
+    display:block;
+
     width:100%;
 
-    max-width:400px;
+    max-width:420px;
 
     padding:5px 0;
 
@@ -163,19 +205,38 @@ body{
 
 }
 
+
+.profileDetails input[type="text"]:focus{
+
+    border-bottom:
+    2px solid #00a884;
+
+}
+
+
 .profileDetails h3{
 
     margin:4px 0;
 
     font-size:13px;
 
-    color:#8696a0;
-
     font-weight:normal;
+
+    color:#8696a0;
 
 }
 
+
+.profileFile{
+
+    margin-top:3px;
+
+}
+
+
 .profileFile input{
+
+    max-width:100%;
 
     color:#8696a0;
 
@@ -184,24 +245,44 @@ body{
 }
 
 
-/* =====================================
+/* ==================================================
    COMMUNITY CHAT
-===================================== */
+================================================== */
 
 .chatCard{
 
     width:100%;
 
+    max-width:900px;
+
+    margin:0 auto;
+
+    padding:0;
+
     background:#0b141a;
+
+    border:0;
+
+    border-radius:0;
 
 }
 
 
-/* CHAT HEADER */
+/* ==================================================
+   CHAT HEADER
+================================================== */
 
 .chatTitle{
 
-    padding:15px 18px;
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    width:100%;
+
+    padding:12px 14px;
 
     background:#202c33;
 
@@ -210,37 +291,143 @@ body{
 
 }
 
+
 .chatTitle h2{
+
+    flex:1;
 
     margin:0;
 
     font-size:20px;
+
+    font-weight:600;
 
     color:#e9edef;
 
 }
 
 
-/* =====================================
-   MESSAGE AREA
-===================================== */
+/* ==================================================
+   POST BUTTON
+================================================== */
 
-.messages{
+.postButton{
+
+    border:0;
+
+    border-radius:20px;
+
+    padding:8px 13px;
+
+    background:#00a884;
+
+    color:#ffffff;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.postButton:active{
+
+    transform:scale(.96);
+
+}
+
+
+/* ==================================================
+   NOTIFICATION BUTTON
+================================================== */
+
+.notificationButton{
+
+    position:relative;
+
+    width:40px;
+
+    height:38px;
+
+    border:0;
+
+    border-radius:20px;
+
+    background:#2a3942;
+
+    color:#ffffff;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+}
+
+
+.notificationBadge{
+
+    position:absolute;
+
+    top:-5px;
+
+    right:-3px;
+
+    min-width:18px;
+
+    height:18px;
+
+    padding:0 4px;
+
+    border-radius:20px;
+
+    background:#e53935;
+
+    color:#ffffff;
+
+    font-size:10px;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* ==================================================
+   MESSAGE AREA
+================================================== */
+
+#messages{
+
+    width:100%;
 
     height:58vh;
 
     min-height:400px;
 
+    max-height:700px;
+
     overflow-y:auto;
 
-    padding:15px 10px 25px;
+    overflow-x:hidden;
+
+    padding:
+    15px
+    10px
+    25px;
 
     background:#0b141a;
 
 }
 
 
-/* SYSTEM */
+/* ==================================================
+   SYSTEM MESSAGE
+================================================== */
 
 .systemMessage{
 
@@ -248,9 +435,13 @@ body{
 
     max-width:90%;
 
-    margin:8px auto 18px;
+    margin:
+    8px auto
+    18px;
 
-    padding:9px 13px;
+    padding:
+    9px
+    13px;
 
     background:#182229;
 
@@ -267,9 +458,9 @@ body{
 }
 
 
-/* =====================================
+/* ==================================================
    TEXT MESSAGE
-===================================== */
+================================================== */
 
 .communityMessage{
 
@@ -279,19 +470,28 @@ body{
 
     margin:7px 0;
 
-    padding:8px 10px;
+    padding:
+    8px
+    10px;
 
     background:#202c33;
 
     border-radius:
-    8px 8px 8px 2px;
+    8px
+    8px
+    8px
+    2px;
 
     box-shadow:
-    0 1px 2px rgba(0,0,0,.25);
+    0 1px 2px
+    rgba(0,0,0,.25);
 
 }
 
+
 .messageName{
+
+    margin-bottom:3px;
 
     color:#00a884;
 
@@ -299,9 +499,8 @@ body{
 
     font-weight:bold;
 
-    margin-bottom:3px;
-
 }
+
 
 .messageText{
 
@@ -316,73 +515,9 @@ body{
 }
 
 
-/* =====================================
-   LISTENER ACTIONS
-===================================== */
-
-.listenerActions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    margin-top:7px;
-
-    padding-top:5px;
-
-    border-top:
-    1px solid rgba(255,255,255,.06);
-
-}
-
-.listenerActions button{
-
-    border:0;
-
-    border-radius:15px;
-
-    padding:5px 9px;
-
-    background:#2a3942;
-
-    color:#d9e1e5;
-
-    font-size:11px;
-
-    cursor:pointer;
-
-}
-
-.listenerActions button:hover{
-
-    background:#394b55;
-
-}
-
-.listenerActions .following{
-
-    background:#00a884;
-
-    color:#ffffff;
-
-}
-
-.viewCounter{
-
-    color:#8696a0;
-
-    font-size:11px;
-
-    margin-left:2px;
-
-}
-
-
-/* =====================================
+/* ==================================================
    PICTURE POST
-===================================== */
+================================================== */
 
 .picturePost{
 
@@ -390,7 +525,8 @@ body{
 
     max-width:430px;
 
-    margin:14px 0;
+    margin:
+    14px 0;
 
     padding:8px;
 
@@ -401,7 +537,9 @@ body{
 }
 
 
-/* POST HEADER */
+/* ==================================================
+   POST HEADER
+================================================== */
 
 .postHeader{
 
@@ -411,15 +549,21 @@ body{
 
     gap:10px;
 
-    padding:4px 5px 9px;
+    padding:
+    4px
+    5px
+    9px;
 
 }
+
 
 .postAvatar{
 
     width:38px;
 
     height:38px;
+
+    min-width:38px;
 
     border-radius:50%;
 
@@ -431,9 +575,19 @@ body{
 
     background:#2a3942;
 
+    font-size:18px;
+
 }
 
-.postHeader strong{
+
+.postUser{
+
+    min-width:0;
+
+}
+
+
+.postUser strong{
 
     display:block;
 
@@ -443,20 +597,23 @@ body{
 
 }
 
-.postHeader small{
+
+.postUser small{
 
     display:block;
+
+    margin-top:2px;
 
     color:#8696a0;
 
     font-size:11px;
 
-    margin-top:2px;
-
 }
 
 
-/* POST IMAGE */
+/* ==================================================
+   POST IMAGE
+================================================== */
 
 .postImage{
 
@@ -475,27 +632,39 @@ body{
 }
 
 
-/* POST FOOTER */
+/* ==================================================
+   POST ACTIONS
+================================================== */
 
-.postFooter{
+.postActions{
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:8px;
 
-    padding:8px 3px 2px;
+    padding:
+    8px
+    3px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.06);
 
 }
 
-.postFooter button{
+
+.likeButton,
+.commentButton{
 
     border:0;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    padding:7px 12px;
+    padding:
+    7px
+    11px;
 
     background:#2a3942;
 
@@ -503,15 +672,23 @@ body{
 
     font-size:12px;
 
-}
-
-.postFooter button:hover{
-
-    background:#394b55;
+    cursor:pointer;
 
 }
 
-.postViews{
+
+.likeButton.liked{
+
+    background:#5b2730;
+
+    color:#ff6b81;
+
+}
+
+
+.postViewCount{
+
+    margin-left:auto;
 
     color:#8696a0;
 
@@ -520,13 +697,142 @@ body{
 }
 
 
-/* =====================================
-   CHAT BOX
-===================================== */
+/* ==================================================
+   COMMENTS
+================================================== */
+
+.commentArea{
+
+    padding-top:7px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.06);
+
+}
+
+
+.comments{
+
+    max-height:180px;
+
+    overflow-y:auto;
+
+}
+
+
+.commentBubble{
+
+    padding:
+    6px
+    8px;
+
+    margin:
+    4px 0;
+
+    background:#182229;
+
+    border-radius:7px;
+
+    font-size:12px;
+
+}
+
+
+.commentBubble strong{
+
+    margin-right:5px;
+
+    color:#00a884;
+
+}
+
+
+.commentBubble span{
+
+    color:#d9e1e5;
+
+}
+
+
+/* ==================================================
+   COMMENT INPUT
+================================================== */
+
+.commentInputRow{
+
+    display:flex;
+
+    gap:5px;
+
+    margin-top:7px;
+
+}
+
+
+.commentInput{
+
+    flex:1;
+
+    min-width:0;
+
+    border:0;
+
+    outline:none;
+
+    border-radius:18px;
+
+    padding:
+    9px
+    12px;
+
+    background:#2a3942;
+
+    color:#ffffff;
+
+    font-size:13px;
+
+}
+
+
+.commentInput::placeholder{
+
+    color:#8696a0;
+
+}
+
+
+.commentSend{
+
+    width:38px;
+
+    min-width:38px;
+
+    height:38px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:#00a884;
+
+    color:#ffffff;
+
+    cursor:pointer;
+
+}
+
+
+/* ==================================================
+   CHAT INPUT
+================================================== */
 
 .chatBox{
 
-    padding:8px;
+    width:100%;
+
+    padding:
+    8px;
 
     background:#202c33;
 
@@ -534,6 +840,7 @@ body{
     1px solid #26343b;
 
 }
+
 
 .chatBox textarea{
 
@@ -553,15 +860,23 @@ body{
 
     border-radius:25px;
 
-    padding:15px 18px;
+    padding:
+    15px
+    18px;
 
     background:#2a3942;
 
     color:#e9edef;
 
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
     font-size:16px;
 
 }
+
 
 .chatBox textarea::placeholder{
 
@@ -570,11 +885,15 @@ body{
 }
 
 
-/* BUTTONS */
+/* ==================================================
+   CHAT BUTTONS
+================================================== */
 
 .chatActions{
 
     display:flex;
+
+    align-items:center;
 
     gap:8px;
 
@@ -582,19 +901,25 @@ body{
 
 }
 
+
 .chatActions button{
 
     border:0;
 
     border-radius:20px;
 
-    padding:10px 18px;
+    padding:
+    10px
+    18px;
+
+    font-size:14px;
 
     font-weight:bold;
 
     cursor:pointer;
 
 }
+
 
 #emojiBtn{
 
@@ -603,6 +928,7 @@ body{
     color:#e9edef;
 
 }
+
 
 #send{
 
@@ -615,7 +941,9 @@ body{
 }
 
 
-/* HIDE OLD EXTRA CHAT */
+/* ==================================================
+   HIDE OLD CHAT CONTAINER
+================================================== */
 
 .chat-messages{
 
@@ -624,25 +952,108 @@ body{
 }
 
 
-/* =====================================
+/* ==================================================
+   NOTIFICATION PANEL
+================================================== */
+
+.notificationPanel{
+
+    display:none;
+
+    position:absolute;
+
+    right:10px;
+
+    top:60px;
+
+    width:280px;
+
+    max-width:
+    calc(100vw - 20px);
+
+    max-height:350px;
+
+    overflow-y:auto;
+
+    z-index:1000;
+
+    background:#202c33;
+
+    border:
+    1px solid #39464d;
+
+    border-radius:10px;
+
+    box-shadow:
+    0 8px 30px
+    rgba(0,0,0,.5);
+
+}
+
+
+.notificationPanel.active{
+
+    display:block;
+
+}
+
+
+.notificationItem{
+
+    padding:
+    12px;
+
+    border-bottom:
+    1px solid #39464d;
+
+    color:#e9edef;
+
+    font-size:13px;
+
+}
+
+
+.notificationItem:last-child{
+
+    border-bottom:0;
+
+}
+
+
+.notificationItem small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#8696a0;
+
+}
+
+
+/* ==================================================
    MOBILE
-===================================== */
+================================================== */
 
 @media(max-width:600px){
 
     #activeListenersCard{
 
         padding:
-        12px 14px;
+        12px
+        14px;
 
     }
+
 
     #profileCard{
 
         padding:
-        9px 14px;
+        9px
+        14px;
 
     }
+
 
     .profileImage{
 
@@ -654,16 +1065,56 @@ body{
 
     }
 
-    .messages{
+
+    .chatTitle{
+
+        padding:
+        11px
+        9px;
+
+    }
+
+
+    .chatTitle h2{
+
+        font-size:18px;
+
+    }
+
+
+    .postButton{
+
+        padding:
+        7px
+        10px;
+
+        font-size:12px;
+
+    }
+
+
+    .notificationButton{
+
+        width:36px;
+
+        height:36px;
+
+    }
+
+
+    #messages{
 
         height:58vh;
 
         min-height:350px;
 
         padding:
-        12px 8px 20px;
+        12px
+        8px
+        20px;
 
     }
+
 
     .communityMessage{
 
@@ -671,15 +1122,64 @@ body{
 
     }
 
+
     .picturePost{
 
         width:94%;
 
     }
 
+
     .postImage{
 
         max-height:400px;
+
+    }
+
+
+    .chatBox{
+
+        padding:7px;
+
+    }
+
+
+    .chatBox textarea{
+
+        min-height:52px;
+
+        font-size:16px;
+
+    }
+
+}
+
+
+/* ==================================================
+   VERY SMALL PHONES
+================================================== */
+
+@media(max-width:380px){
+
+    .chatTitle h2{
+
+        font-size:16px;
+
+    }
+
+
+    .postButton{
+
+        padding:
+        6px
+        8px;
+
+    }
+
+
+    .communityMessage{
+
+        max-width:94%;
 
     }
 
@@ -693,40 +1193,55 @@ body{
 <body>
 
 
-<!-- =====================================
+<!-- ==================================================
      ACTIVE LISTENERS
-===================================== -->
+================================================== -->
 
 <section
 id="activeListenersCard">
+
 
 <h2>
 👥 Active Listeners
 </h2>
 
-<div id="activeListeners">
 
-<div class="listenerIcon">
+<div
+id="activeListeners">
+
+
+<div
+class="listenerIcon">
+
 👥
+
 </div>
+
 
 <span>
+
 0 Listeners Online
+
 </span>
 
+
 </div>
+
 
 </section>
 
 
-<!-- =====================================
+<!-- ==================================================
      PROFILE
-===================================== -->
+================================================== -->
 
 <section
 id="profileCard">
 
-<div class="profileRow">
+
+<div
+class="profileRow">
+
 
 <img
 id="profilePreview"
@@ -735,7 +1250,9 @@ alt="Profile Picture"
 class="profileImage">
 
 
-<div class="profileDetails">
+<div
+class="profileDetails">
+
 
 <input
 type="text"
@@ -743,56 +1260,135 @@ id="name"
 placeholder="Enter your display name">
 
 
-<h3 id="welcomeName">
+<h3
+id="welcomeName">
+
 Welcome!
+
 </h3>
 
 
-<div class="profileFile">
+<div
+class="profileFile">
+
 
 <input
 type="file"
 id="profileImage"
 accept="image/*">
 
-</div>
 
 </div>
 
+
 </div>
+
+
+</div>
+
 
 </section>
 
 
-<!-- =====================================
+<!-- ==================================================
      COMMUNITY CHAT
-     EVERYTHING IS INSIDE HERE
-===================================== -->
+================================================== -->
 
 <section
 class="chatCard">
 
 
-<div class="chatTitle">
+<!-- CHAT HEADER -->
+
+<div
+class="chatTitle">
+
 
 <h2>
 💬 Community Chat
 </h2>
 
+
+<button
+class="postButton"
+id="mainPostButton">
+
+📷 Post
+
+</button>
+
+
+<button
+class="notificationButton"
+id="notificationButton"
+title="Notifications">
+
+🔔
+
+
+<span
+id="notificationBadge"
+class="notificationBadge">
+
+0
+
+</span>
+
+
+</button>
+
+
 </div>
 
+
+<!-- ==================================================
+     NOTIFICATION PANEL
+================================================== -->
+
+<div
+id="notificationPanel"
+class="notificationPanel">
+
+</div>
+
+
+<!-- ==================================================
+     CHAT MESSAGES
+================================================== -->
 
 <div
 id="messages"
 class="messages">
 
 
-<p class="systemMessage">
+<p
+class="systemMessage">
 
 Welcome to Kulzzy Radio Live Community.
+
 <br>
 
 Start chatting with listeners around the world.
+
+<br><br>
+
+📷 Post pictures
+
+&nbsp; • &nbsp;
+
+❤️ Like
+
+&nbsp; • &nbsp;
+
+💬 Comment
+
+&nbsp; • &nbsp;
+
+👁️ View
+
+&nbsp; • &nbsp;
+
+👤 Follow
 
 </p>
 
@@ -800,7 +1396,12 @@ Start chatting with listeners around the world.
 </div>
 
 
-<div class="chatBox">
+<!-- ==================================================
+     CHAT INPUT
+================================================== -->
+
+<div
+class="chatBox">
 
 
 <textarea
@@ -808,7 +1409,8 @@ id="message"
 placeholder="Type a message..."></textarea>
 
 
-<div class="chatActions">
+<div
+class="chatActions">
 
 
 <button
@@ -833,6 +1435,7 @@ id="send">
 <div
 id="chatMessages"
 class="chat-messages">
+
 </div>
 
 
@@ -842,9 +1445,9 @@ class="chat-messages">
 </section>
 
 
-<!-- =====================================
+<!-- ==================================================
      SCRIPTS
-===================================== -->
+================================================== -->
 
 <script
 type="module"
@@ -861,6 +1464,248 @@ src="js/app.js?v=4">
 <script
 type="module"
 src="js/chat.js?v=4">
+</script>
+
+
+<!-- ==================================================
+     NOTIFICATION PANEL SCRIPT
+================================================== -->
+
+<script
+type="module">
+
+import {
+
+    db,
+    ref,
+    onValue,
+    update
+
+} from "./js/firebase.js";
+
+
+const listenerId =
+    localStorage.getItem(
+        "kulzzyListenerId"
+    );
+
+
+const notificationButton =
+    document.getElementById(
+        "notificationButton"
+    );
+
+
+const notificationPanel =
+    document.getElementById(
+        "notificationPanel"
+    );
+
+
+const badge =
+    document.getElementById(
+        "notificationBadge"
+    );
+
+
+if (
+    listenerId &&
+    notificationButton &&
+    notificationPanel
+) {
+
+
+    notificationButton.addEventListener(
+        "click",
+        () => {
+
+            notificationPanel.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+
+    onValue(
+
+        ref(
+            db,
+            "notifications/" +
+            listenerId
+        ),
+
+        (snapshot) => {
+
+
+            const data =
+                snapshot.val() || {};
+
+
+            const items =
+                Object.entries(data)
+                    .filter(
+                        ([key,value]) =>
+                            value
+                    )
+                    .sort(
+                        (a,b) =>
+                            (b[1].time || 0) -
+                            (a[1].time || 0)
+                    );
+
+
+            const unread =
+                items.filter(
+                    ([key,value]) =>
+                        value.read === false
+                ).length;
+
+
+            badge.textContent =
+                unread;
+
+
+            badge.style.display =
+                unread > 0
+                ? "flex"
+                : "none";
+
+
+            if (
+                items.length === 0
+            ) {
+
+                notificationPanel.innerHTML = `
+
+                    <div
+                    class="notificationItem">
+
+                    🔔 No notifications yet.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            notificationPanel.innerHTML =
+                items.map(
+                    ([key,item]) => {
+
+
+                        let text =
+                            "New activity";
+
+
+                        if (
+                            item.type ===
+                            "follow"
+                        ) {
+
+                            text =
+                            `👤 ${
+                                item.fromName
+                                || "Someone"
+                            } followed you`;
+
+                        }
+
+
+                        if (
+                            item.type ===
+                            "like"
+                        ) {
+
+                            text =
+                            `❤️ ${
+                                item.fromName
+                                || "Someone"
+                            } liked your post`;
+
+                        }
+
+
+                        if (
+                            item.type ===
+                            "comment"
+                        ) {
+
+                            text =
+                            `💬 ${
+                                item.fromName
+                                || "Someone"
+                            } commented on your post`;
+
+                        }
+
+
+                        return `
+
+                            <div
+                            class="notificationItem"
+                            data-key="${key}">
+
+                            ${text}
+
+                            <small>
+
+                            ${
+                                item.read
+                                ? "Read"
+                                : "New"
+
+                            }
+
+                            </small>
+
+                            </div>
+
+                        `;
+
+                    }
+                ).join("");
+
+
+            /* MARK NOTIFICATIONS AS READ */
+
+            items.forEach(
+                ([key,item]) => {
+
+                    if (
+                        item.read === false
+                    ) {
+
+                        update(
+
+                            ref(
+                                db,
+                                "notifications/" +
+                                listenerId +
+                                "/" +
+                                key
+                            ),
+
+                            {
+                                read:true
+                            }
+
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+    );
+
+}
+
 </script>
 
 
