@@ -11,9 +11,78 @@
 
 <link rel="stylesheet" href="css/style.css">
 
+<!-- WhatsApp-style wide chat layout -->
+<style>
+
+.chatCard{
+    width:100%;
+    margin:25px 0 !important;
+    border-radius:0 !important;
+}
+
+.chatCard .messages{
+    width:100%;
+    min-height:350px;
+    max-height:550px;
+    border-radius:0;
+    padding:20px;
+}
+
+.chatCard .chatBox{
+    width:100%;
+}
+
+.chatCard .chatBox textarea{
+    width:100%;
+    min-height:100px;
+}
+
+.chatCard .chatActions{
+    width:100%;
+}
+
+.chatCard .chat-messages{
+    width:100%;
+}
+
+.chatMessage{
+    max-width:85%;
+    width:fit-content;
+    padding:12px 16px;
+    margin:8px 0;
+    border-radius:15px;
+    background:#12395d;
+}
+
+@media screen and (max-width:768px){
+
+    .chatCard{
+        margin:15px 0 !important;
+        padding:15px !important;
+        border-radius:0 !important;
+    }
+
+    .chatCard .messages{
+        min-height:300px;
+        max-height:500px;
+        padding:12px;
+    }
+
+    .chatMessage{
+        max-width:90%;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
+
+<!-- ==============================
+     HEADER
+============================== -->
 
 <header class="header">
 
@@ -35,13 +104,19 @@
 
 </header>
 
+
+<!-- ==============================
+     HERO
+============================== -->
+
 <section class="hero">
 
 <h2>Welcome to Kulzzy Radio Live Community</h2>
 
 <p>
 
-Meet listeners around the world, celebrate lives, advertise your business and enjoy live radio 24/7.
+Meet listeners around the world, celebrate lives,
+advertise your business and enjoy live radio 24/7.
 
 </p>
 
@@ -53,29 +128,10 @@ Meet listeners around the world, celebrate lives, advertise your business and en
 
 </section>
 
-<section class="card">
 
-<h2>📢 Today's Announcement</h2>
-
-<p id="announcement">
-
-Loading announcement...
-
-</p>
-
-</section>
-
-<section class="card">
-
-<h2>🎂 Today's Celebrants</h2>
-
-<p id="celebrants">
-
-Loading celebrants...
-
-</p>
-
-</section>
+<!-- ==============================
+     ACTIVE LISTENERS
+============================== -->
 
 <section class="card">
 
@@ -88,7 +144,14 @@ Loading celebrants...
 </div>
 
 </section>
+
+
+<!-- ==============================
+     YOUR PROFILE
+============================== -->
+
 <section class="card">
+
 <h2>👤 Your Profile</h2>
 
 <div class="profileCard">
@@ -110,24 +173,38 @@ id="name"
 placeholder="Enter your display name">
 
 <h3 id="welcomeName">
+
 Welcome!
+
 </h3>
 
 </div>
 
 </section>
-<section class="card">
+
+
+<!-- ==============================
+     COMMUNITY CHAT
+============================== -->
+
+<section class="card chatCard">
 
 <h2>💬 Community Chat</h2>
 
-<div id="messages" class="messages">
+<div
+id="messages"
+class="messages">
 
 <p class="systemMessage">
+
 Welcome to Kulzzy Radio Live Community.
+<br>
 Start chatting with listeners around the world.
+
 </p>
 
 </div>
+
 
 <div class="chatBox">
 
@@ -135,52 +212,85 @@ Start chatting with listeners around the world.
 id="message"
 placeholder="Type your message here..."></textarea>
 
+
 <div class="chatActions">
-<button id="emojiBtn">😊 Emoji</button>
-<button id="send">📤 Send</button>
+
+<button id="emojiBtn">
+
+😊 Emoji
+
+</button>
+
+<button id="send">
+
+📤 Send
+
+</button>
+
 </div>
 
-<div id="chatMessages" class="chat-messages"></div>
+
+<div
+id="chatMessages"
+class="chat-messages">
+</div>
 
 </div>
-</section>
-
-<section class="card">
-
-<h2>🌍 Kulzzy Radio Network</h2>
-
-<p>
-Celebrating birthdays, anniversaries, businesses, achievements and special moments every day.
-</p>
-
-<p>
-🌐 www.kulzzyradio.com
-</p>
 
 </section>
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
 <footer class="footer">
 
 <div class="footerContent">
 
-<h3>📻 Kulzzy Radio Network</h3>
-
-<p>Celebrating Lives Everyday</p>
+<h3>
+📻 Kulzzy Radio Network
+</h3>
 
 <p>
-Broadcasting celebrations, announcements, interviews and community conversations worldwide.
+Celebrating Lives Everyday
 </p>
 
 <p>
-© 2026 Kulzzy Radio Network. All Rights Reserved.
+Broadcasting celebrations,
+announcements, interviews and
+community conversations worldwide.
+</p>
+
+<p>
+© 2026 Kulzzy Radio Network.
+All Rights Reserved.
 </p>
 
 </div>
 
 </footer>
 
-<script type="module" src="js/firebase.js"></script>
-<script type="module" src="js/app.js"></script>
-<script type="module" src="js/chat.js"></script>
+
+<!-- ==============================
+     JAVASCRIPT
+============================== -->
+
+<script
+type="module"
+src="js/firebase.js?v=2">
+</script>
+
+<script
+type="module"
+src="js/app.js?v=2">
+</script>
+
+<script
+type="module"
+src="js/chat.js?v=2">
+</script>
+
 
 </body>
-</html>
+  </html>
