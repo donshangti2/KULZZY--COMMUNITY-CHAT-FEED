@@ -1,33 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-Kulzzy Radio | Community Chat
-</title>
-
-<meta
-name="theme-color"
-content="#0b141a">
-
-<link
-rel="stylesheet"
-href="css/style.css">
-
+<title>Kulzzy Radio Community Chat</title>
 
 <style>
-
-/* ==================================================
-   KULZZY RADIO COMMUNITY CHAT
-   COMPLETE WHATSAPP-STYLE INTERFACE
-================================================== */
 
 *{
     box-sizing:border-box;
@@ -35,1152 +17,634 @@ href="css/style.css">
 
 html,
 body{
-
     margin:0;
     padding:0;
-
     width:100%;
-
-    background:#0b141a;
-
-    color:#e9edef;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-}
-
-
-/* ==================================================
-   ACTIVE LISTENERS
-================================================== */
-
-#activeListenersCard{
-
-    width:100%;
-
-    padding:14px 18px;
-
-    background:#111b21;
-
-    border-bottom:
-    1px solid #26343b;
-
-}
-
-
-#activeListenersCard h2{
-
-    margin:0 0 10px;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    color:#e9edef;
-
-}
-
-
-#activeListeners{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    color:#aebac1;
-
-    font-size:15px;
-
-}
-
-
-.listenerIcon{
-
-    width:40px;
-
-    height:40px;
-
-    min-width:40px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#202c33;
-
-    font-size:20px;
-
-}
-
-
-/* ==================================================
-   PROFILE
-================================================== */
-
-#profileCard{
-
-    width:100%;
-
-    padding:10px 18px;
-
-    background:#111b21;
-
-    border-bottom:
-    1px solid #26343b;
-
-}
-
-
-.profileRow{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-
-.profileImage{
-
-    width:52px !important;
-
-    height:52px !important;
-
-    min-width:52px;
-
-    border-radius:50% !important;
-
-    object-fit:cover;
-
-    background:#202c33;
-
-    border:
-    2px solid #00a884 !important;
-
-}
-
-
-.profileDetails{
-
-    flex:1;
-
-    min-width:0;
-
-}
-
-
-.profileDetails input[type="text"]{
-
-    display:block;
-
-    width:100%;
-
-    max-width:420px;
-
-    padding:5px 0;
-
-    border:0;
-
-    border-bottom:
-    1px solid #39464d;
-
-    outline:none;
-
-    background:transparent;
-
-    color:#e9edef;
-
-    font-size:16px;
-
-}
-
-
-.profileDetails input[type="text"]:focus{
-
-    border-bottom:
-    2px solid #00a884;
-
-}
-
-
-.profileDetails h3{
-
-    margin:4px 0;
-
-    font-size:13px;
-
-    font-weight:normal;
-
-    color:#8696a0;
-
-}
-
-
-.profileFile{
-
-    margin-top:3px;
-
-}
-
-
-.profileFile input{
-
-    max-width:100%;
-
-    color:#8696a0;
-
-    font-size:11px;
-
-}
-
-
-/* ==================================================
-   COMMUNITY CHAT
-================================================== */
-
-.chatCard{
-
-    width:100%;
-
-    max-width:900px;
-
-    margin:0 auto;
-
-    padding:0;
-
-    background:#0b141a;
-
-    border:0;
-
-    border-radius:0;
-
-}
-
-
-/* ==================================================
-   CHAT HEADER
-================================================== */
-
-.chatTitle{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    width:100%;
-
-    padding:12px 14px;
-
-    background:#202c33;
-
-    border-bottom:
-    1px solid #39464d;
-
-}
-
-
-.chatTitle h2{
-
-    flex:1;
-
-    margin:0;
-
-    font-size:20px;
-
-    font-weight:600;
-
-    color:#e9edef;
-
-}
-
-
-/* ==================================================
-   POST BUTTON
-================================================== */
-
-.postButton{
-
-    border:0;
-
-    border-radius:20px;
-
-    padding:8px 13px;
-
-    background:#00a884;
-
+    min-height:100%;
+    background:#001522;
     color:#ffffff;
-
-    font-size:13px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-
-.postButton:active{
-
-    transform:scale(.96);
-
-}
-
-
-/* ==================================================
-   NOTIFICATION BUTTON
-================================================== */
-
-.notificationButton{
-
-    position:relative;
-
-    width:40px;
-
-    height:38px;
-
-    border:0;
-
-    border-radius:20px;
-
-    background:#2a3942;
-
-    color:#ffffff;
-
-    font-size:17px;
-
-    cursor:pointer;
-
-}
-
-
-.notificationBadge{
-
-    position:absolute;
-
-    top:-5px;
-
-    right:-3px;
-
-    min-width:18px;
-
-    height:18px;
-
-    padding:0 4px;
-
-    border-radius:20px;
-
-    background:#e53935;
-
-    color:#ffffff;
-
-    font-size:10px;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-
-/* ==================================================
-   MESSAGE AREA
-================================================== */
-
-#messages{
-
-    width:100%;
-
-    height:58vh;
-
-    min-height:400px;
-
-    max-height:700px;
-
-    overflow-y:auto;
-
+body{
     overflow-x:hidden;
-
-    padding:
-    15px
-    10px
-    25px;
-
-    background:#0b141a;
-
 }
 
-
-/* ==================================================
-   SYSTEM MESSAGE
-================================================== */
-
-.systemMessage{
-
-    width:fit-content;
-
-    max-width:90%;
-
-    margin:
-    8px auto
-    18px;
-
-    padding:
-    9px
-    13px;
-
-    background:#182229;
-
-    border-radius:8px;
-
-    color:#8696a0;
-
-    text-align:center;
-
-    font-size:13px;
-
-    line-height:1.5;
-
-}
-
-
-/* ==================================================
-   TEXT MESSAGE
-================================================== */
-
-.communityMessage{
-
-    width:fit-content;
-
-    max-width:88%;
-
-    margin:7px 0;
-
-    padding:
-    8px
-    10px;
-
-    background:#202c33;
-
-    border-radius:
-    8px
-    8px
-    8px
-    2px;
-
-    box-shadow:
-    0 1px 2px
-    rgba(0,0,0,.25);
-
-}
-
-
-.messageName{
-
-    margin-bottom:3px;
-
-    color:#00a884;
-
-    font-size:13px;
-
-    font-weight:bold;
-
-}
-
-
-.messageText{
-
-    color:#e9edef;
-
-    font-size:15px;
-
-    line-height:1.45;
-
-    word-break:break-word;
-
-}
-
-
-/* ==================================================
-   PICTURE POST
-================================================== */
-
-.picturePost{
-
-    width:90%;
-
-    max-width:430px;
-
-    margin:
-    14px 0;
-
-    padding:8px;
-
-    background:#202c33;
-
-    border-radius:10px;
-
-}
-
-
-/* ==================================================
-   POST HEADER
-================================================== */
-
-.postHeader{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:
-    4px
-    5px
-    9px;
-
-}
-
-
-.postAvatar{
-
-    width:38px;
-
-    height:38px;
-
-    min-width:38px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#2a3942;
-
-    font-size:18px;
-
-}
-
-
-.postUser{
-
-    min-width:0;
-
-}
-
-
-.postUser strong{
-
-    display:block;
-
-    color:#e9edef;
-
-    font-size:14px;
-
-}
-
-
-.postUser small{
-
-    display:block;
-
-    margin-top:2px;
-
-    color:#8696a0;
-
-    font-size:11px;
-
-}
-
-
-/* ==================================================
-   POST IMAGE
-================================================== */
-
-.postImage{
-
-    display:block;
-
+/* =====================================
+   MAIN
+===================================== */
+
+.app{
     width:100%;
-
-    max-height:430px;
-
-    object-fit:cover;
-
-    border-radius:7px;
-
-    cursor:pointer;
-
+    max-width:760px;
+    margin:0 auto;
+    background:#001522;
+    min-height:100vh;
 }
 
+/* =====================================
+   TOP TITLE
+===================================== */
 
-/* ==================================================
-   POST ACTIONS
-================================================== */
+.top-title{
+    padding:18px 20px 14px;
+    background:#001522;
+    border-bottom:1px solid rgba(255,204,0,.18);
+}
 
-.postActions{
+.top-title h1{
+    margin:0;
+    font-size:27px;
+    line-height:1.2;
+    color:#ffd000;
+    font-weight:800;
+}
 
+.top-title p{
+    margin:7px 0 0;
+    font-size:16px;
+    color:#d7e2e8;
+}
+
+/* =====================================
+   PROFILE
+===================================== */
+
+.profile-card{
+    margin:14px 12px;
+    padding:18px;
+    background:#032d43;
+    border-radius:22px;
+    border:1px solid rgba(255,208,0,.16);
+}
+
+.profile-title{
+    margin:0 0 16px;
+    color:#ffd000;
+    font-size:23px;
+    font-weight:800;
+}
+
+.profile-main{
     display:flex;
-
     align-items:center;
-
-    gap:8px;
-
-    padding:
-    8px
-    3px;
-
-    border-top:
-    1px solid
-    rgba(255,255,255,.06);
-
+    gap:16px;
 }
 
+.profile-photo-wrap{
+    width:92px;
+    height:92px;
+    flex:0 0 92px;
+    border-radius:50%;
+    border:4px solid #ffd000;
+    overflow:hidden;
+    background:#061d28;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
 
-.likeButton,
-.commentButton{
+.profile-photo{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
 
+.profile-placeholder{
+    font-size:38px;
+    color:#ffd000;
+}
+
+.profile-details{
+    flex:1;
+    min-width:0;
+}
+
+.profile-name{
+    font-size:21px;
+    font-weight:700;
+    color:#ffffff;
+    word-break:break-word;
+}
+
+.profile-editor{
+    margin-top:16px;
+}
+
+.profile-editor input[type="text"]{
+    width:100%;
+    height:52px;
     border:0;
+    outline:0;
+    border-radius:15px;
+    padding:0 16px;
+    font-size:18px;
+    background:#ffffff;
+    color:#111111;
+}
 
+.file-row{
+    margin-top:10px;
+    background:#06476b;
+    border-radius:14px;
+    padding:10px;
+}
+
+.file-row input{
+    width:100%;
+    color:#ffffff;
+    font-size:15px;
+}
+
+.save-profile{
+    width:100%;
+    height:48px;
+    margin-top:11px;
+    border:0;
+    border-radius:14px;
+    background:#ffd000;
+    color:#07131b;
+    font-size:18px;
+    font-weight:800;
+}
+
+.profile-status{
+    margin-top:9px;
+    color:#aebfc8;
+    font-size:14px;
+}
+
+.profile-saved{
+    display:none;
+}
+
+/* =====================================
+   COMMUNITY HEADER
+===================================== */
+
+.community-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 16px;
+    background:#082d3d;
+    border-top:1px solid rgba(255,208,0,.15);
+    border-bottom:1px solid rgba(255,208,0,.18);
+}
+
+.community-title{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#ffffff;
+    font-size:23px;
+    font-weight:700;
+}
+
+.community-title span{
+    color:#ffd000;
+}
+
+.notification-top{
+    width:48px;
+    height:48px;
+    border:0;
+    border-radius:50%;
+    background:#032d43;
+    color:#ffd000;
+    font-size:25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* =====================================
+   CHAT AREA
+===================================== */
+
+.chat-area{
+    padding:12px 8px 145px;
+    background:#001522;
+    min-height:420px;
+}
+
+.chat-intro{
+    margin:0 8px 16px;
+    padding:18px;
+    border-radius:17px;
+    background:#112a34;
+    border:1px solid rgba(255,208,0,.10);
+    text-align:center;
+    color:#aebdc4;
+    font-size:16px;
+    line-height:1.55;
+}
+
+/* =====================================
+   MESSAGES
+===================================== */
+
+.messages{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.message-row{
+    width:100%;
+    display:flex;
+}
+
+.message-row.mine{
+    justify-content:flex-end;
+}
+
+.message-bubble{
+    max-width:82%;
+    min-width:70px;
+    padding:9px 13px 8px;
+    background:#172f39;
+    border-radius:6px 17px 17px 17px;
+    color:#ffffff;
+    box-shadow:0 2px 4px rgba(0,0,0,.16);
+}
+
+.message-row.mine .message-bubble{
+    background:#064936;
+    border-radius:17px 6px 17px 17px;
+}
+
+.message-name{
+    color:#ffd000;
+    font-weight:800;
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.message-text{
+    font-size:18px;
+    line-height:1.38;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+.message-time{
+    margin-top:5px;
+    text-align:right;
+    font-size:11px;
+    color:#a9bbc2;
+}
+
+/* =====================================
+   POSTS
+===================================== */
+
+.post-card{
+    margin:12px 4px;
+    padding:12px;
+    background:#092b39;
     border-radius:18px;
+    border:1px solid rgba(255,208,0,.12);
+}
 
-    padding:
-    7px
-    11px;
+.post-user{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-    background:#2a3942;
+.post-avatar{
+    width:48px;
+    height:48px;
+    flex:0 0 48px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #ffd000;
+    background:#031a24;
+}
 
-    color:#e9edef;
+.post-user-info{
+    flex:1;
+    min-width:0;
+}
 
+.post-name{
+    color:#ffd000;
+    font-size:16px;
+    font-weight:800;
+    overflow-wrap:anywhere;
+}
+
+.post-date{
+    color:#8da4ad;
     font-size:12px;
-
-    cursor:pointer;
-
+    margin-top:3px;
 }
 
-
-.likeButton.liked{
-
-    background:#5b2730;
-
-    color:#ff6b81;
-
+.post-image{
+    width:100%;
+    max-height:480px;
+    object-fit:cover;
+    border-radius:14px;
+    margin-top:10px;
+    display:block;
 }
 
-
-.postViewCount{
-
-    margin-left:auto;
-
-    color:#8696a0;
-
-    font-size:12px;
-
+.post-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:10px;
+    overflow-x:auto;
 }
 
+.post-action{
+    flex:0 0 auto;
+    border:0;
+    border-radius:18px;
+    padding:8px 12px;
+    background:#123b4b;
+    color:#ffffff;
+    font-size:14px;
+    white-space:nowrap;
+}
 
-/* ==================================================
+.post-action.active{
+    color:#ffd000;
+}
+
+.post-views{
+    color:#9db2ba;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+/* =====================================
    COMMENTS
-================================================== */
-
-.commentArea{
-
-    padding-top:7px;
-
-    border-top:
-    1px solid
-    rgba(255,255,255,.06);
-
-}
-
+===================================== */
 
 .comments{
-
-    max-height:180px;
-
-    overflow-y:auto;
-
-}
-
-
-.commentBubble{
-
-    padding:
-    6px
-    8px;
-
-    margin:
-    4px 0;
-
-    background:#182229;
-
-    border-radius:7px;
-
-    font-size:12px;
-
-}
-
-
-.commentBubble strong{
-
-    margin-right:5px;
-
-    color:#00a884;
-
-}
-
-
-.commentBubble span{
-
-    color:#d9e1e5;
-
-}
-
-
-/* ==================================================
-   COMMENT INPUT
-================================================== */
-
-.commentInputRow{
-
-    display:flex;
-
-    gap:5px;
-
-    margin-top:7px;
-
-}
-
-
-.commentInput{
-
-    flex:1;
-
-    min-width:0;
-
-    border:0;
-
-    outline:none;
-
-    border-radius:18px;
-
-    padding:
-    9px
-    12px;
-
-    background:#2a3942;
-
-    color:#ffffff;
-
-    font-size:13px;
-
-}
-
-
-.commentInput::placeholder{
-
-    color:#8696a0;
-
-}
-
-
-.commentSend{
-
-    width:38px;
-
-    min-width:38px;
-
-    height:38px;
-
-    border:0;
-
-    border-radius:50%;
-
-    background:#00a884;
-
-    color:#ffffff;
-
-    cursor:pointer;
-
-}
-
-
-/* ==================================================
-   CHAT INPUT
-================================================== */
-
-.chatBox{
-
-    width:100%;
-
-    padding:
-    8px;
-
-    background:#202c33;
-
-    border-top:
-    1px solid #26343b;
-
-}
-
-
-.chatBox textarea{
-
-    display:block;
-
-    width:100%;
-
-    min-height:54px;
-
-    max-height:130px;
-
-    resize:none;
-
-    border:0;
-
-    outline:none;
-
-    border-radius:25px;
-
-    padding:
-    15px
-    18px;
-
-    background:#2a3942;
-
-    color:#e9edef;
-
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-    font-size:16px;
-
-}
-
-
-.chatBox textarea::placeholder{
-
-    color:#8696a0;
-
-}
-
-
-/* ==================================================
-   CHAT BUTTONS
-================================================== */
-
-.chatActions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-top:8px;
-
-}
-
-
-.chatActions button{
-
-    border:0;
-
-    border-radius:20px;
-
-    padding:
-    10px
-    18px;
-
-    font-size:14px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-}
-
-
-#emojiBtn{
-
-    background:#2a3942;
-
-    color:#e9edef;
-
-}
-
-
-#send{
-
-    margin-left:auto;
-
-    background:#00a884;
-
-    color:#ffffff;
-
-}
-
-
-/* ==================================================
-   HIDE OLD CHAT CONTAINER
-================================================== */
-
-.chat-messages{
-
+    margin-top:10px;
     display:none;
-
 }
 
-
-/* ==================================================
-   NOTIFICATION PANEL
-================================================== */
-
-.notificationPanel{
-
-    display:none;
-
-    position:absolute;
-
-    right:10px;
-
-    top:60px;
-
-    width:280px;
-
-    max-width:
-    calc(100vw - 20px);
-
-    max-height:350px;
-
-    overflow-y:auto;
-
-    z-index:1000;
-
-    background:#202c33;
-
-    border:
-    1px solid #39464d;
-
+.comment-item{
+    padding:8px 10px;
+    margin-top:6px;
+    background:#102f3b;
     border-radius:10px;
-
-    box-shadow:
-    0 8px 30px
-    rgba(0,0,0,.5);
-
 }
 
-
-.notificationPanel.active{
-
-    display:block;
-
-}
-
-
-.notificationItem{
-
-    padding:
-    12px;
-
-    border-bottom:
-    1px solid #39464d;
-
-    color:#e9edef;
-
+.comment-name{
+    color:#ffd000;
+    font-weight:700;
     font-size:13px;
-
 }
 
-
-.notificationItem:last-child{
-
-    border-bottom:0;
-
+.comment-text{
+    margin-top:3px;
+    color:#ffffff;
+    font-size:14px;
 }
 
-
-.notificationItem small{
-
-    display:block;
-
-    margin-top:4px;
-
-    color:#8696a0;
-
+.comment-box{
+    display:flex;
+    gap:6px;
+    margin-top:8px;
 }
 
+.comment-input{
+    flex:1;
+    min-width:0;
+    height:40px;
+    border:0;
+    outline:0;
+    border-radius:12px;
+    padding:0 12px;
+    background:#ffffff;
+    color:#111111;
+}
 
-/* ==================================================
+.comment-send{
+    width:70px;
+    border:0;
+    border-radius:12px;
+    background:#ffd000;
+    color:#07131b;
+    font-weight:800;
+}
+
+/* =====================================
+   COMPOSER
+===================================== */
+
+.composer-wrap{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:1000;
+    background:#062535;
+    border-top:1px solid rgba(255,208,0,.25);
+    padding:8px;
+    padding-bottom:calc(8px + env(safe-area-inset-bottom));
+}
+
+.composer{
+    width:100%;
+    max-width:744px;
+    margin:0 auto;
+}
+
+.text-row{
+    display:flex;
+    align-items:flex-end;
+    gap:7px;
+}
+
+.message-input{
+    flex:1;
+    min-width:0;
+    min-height:48px;
+    max-height:145px;
+    resize:none;
+    overflow-y:auto;
+    border:0;
+    outline:0;
+    border-radius:22px;
+    padding:13px 15px;
+    background:#162c34;
+    color:#ffffff;
+    font-size:17px;
+    line-height:1.35;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.message-input::placeholder{
+    color:#94a7ad;
+}
+
+/* =====================================
+   COMPOSER BUTTONS
+===================================== */
+
+.composer-buttons{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:7px;
+    margin-top:7px;
+}
+
+.compose-btn{
+    height:43px;
+    border:0;
+    border-radius:15px;
+    padding:0 14px;
+    background:#0a3c50;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:700;
+}
+
+.compose-btn.camera{
+    color:#ffd000;
+}
+
+.compose-btn.upload{
+    color:#ffd000;
+}
+
+.compose-btn.post{
+    background:#ffd000;
+    color:#07131b;
+}
+
+.compose-btn.send{
+    background:#ffd000;
+    color:#07131b;
+    min-width:80px;
+}
+
+/* =====================================
+   POST PREVIEW
+===================================== */
+
+.post-preview{
+    display:none;
+    margin-top:7px;
+    padding:8px;
+    background:#082d3d;
+    border-radius:12px;
+    position:relative;
+}
+
+.post-preview img{
+    width:100%;
+    max-height:180px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.remove-preview{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:#07131b;
+    color:#ffffff;
+    font-size:20px;
+}
+
+/* =====================================
+   LOGIN BLOCK
+===================================== */
+
+.profile-required{
+    display:none;
+    margin:8px 0 0;
+    padding:9px;
+    border-radius:12px;
+    text-align:center;
+    background:#342c08;
+    color:#ffd000;
+    font-size:14px;
+}
+
+/* =====================================
+   NOTIFICATION POPUP
+===================================== */
+
+.notice{
+    position:fixed;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%) translateY(-120px);
+    z-index:3000;
+    width:calc(100% - 30px);
+    max-width:450px;
+    padding:13px 16px;
+    border-radius:14px;
+    background:#082d3d;
+    border:1px solid #ffd000;
+    color:#ffffff;
+    box-shadow:0 8px 30px rgba(0,0,0,.35);
+    transition:.3s ease;
+    text-align:center;
+}
+
+.notice.show{
+    transform:translateX(-50%) translateY(0);
+}
+
+/* =====================================
+   HIDDEN INPUTS
+===================================== */
+
+.hidden-input{
+    display:none;
+}
+
+/* =====================================
    MOBILE
-================================================== */
+===================================== */
 
-@media(max-width:600px){
+@media(max-width:520px){
 
-    #activeListenersCard{
-
-        padding:
-        12px
-        14px;
-
+    .top-title h1{
+        font-size:24px;
     }
 
-
-    #profileCard{
-
-        padding:
-        9px
-        14px;
-
+    .community-title{
+        font-size:21px;
     }
 
-
-    .profileImage{
-
-        width:50px !important;
-
-        height:50px !important;
-
-        min-width:50px;
-
+    .profile-card{
+        border-radius:18px;
     }
 
-
-    .chatTitle{
-
-        padding:
-        11px
-        9px;
-
+    .profile-photo-wrap{
+        width:82px;
+        height:82px;
+        flex-basis:82px;
     }
 
-
-    .chatTitle h2{
-
-        font-size:18px;
-
+    .message-bubble{
+        max-width:88%;
     }
 
-
-    .postButton{
-
-        padding:
-        7px
-        10px;
-
-        font-size:12px;
-
+    .compose-btn{
+        padding:0 11px;
+        font-size:14px;
     }
 
-
-    .notificationButton{
-
-        width:36px;
-
-        height:36px;
-
-    }
-
-
-    #messages{
-
-        height:58vh;
-
-        min-height:350px;
-
-        padding:
-        12px
-        8px
-        20px;
-
-    }
-
-
-    .communityMessage{
-
-        max-width:92%;
-
-    }
-
-
-    .picturePost{
-
-        width:94%;
-
-    }
-
-
-    .postImage{
-
-        max-height:400px;
-
-    }
-
-
-    .chatBox{
-
-        padding:7px;
-
-    }
-
-
-    .chatBox textarea{
-
-        min-height:52px;
-
-        font-size:16px;
-
-    }
-
-}
-
-
-/* ==================================================
-   VERY SMALL PHONES
-================================================== */
-
-@media(max-width:380px){
-
-    .chatTitle h2{
-
-        font-size:16px;
-
-    }
-
-
-    .postButton{
-
-        padding:
-        6px
-        8px;
-
-    }
-
-
-    .communityMessage{
-
-        max-width:94%;
-
+    .compose-btn.send{
+        min-width:70px;
     }
 
 }
@@ -1189,337 +653,1648 @@ body{
 
 </head>
 
-
 <body>
 
+<div class="app">
 
-<!-- ==================================================
-     ACTIVE LISTENERS
-================================================== -->
+    <!-- =================================
+         TITLE
+    ================================== -->
 
-<section
-id="activeListenersCard">
+    <section class="top-title">
+
+        <h1>🎉 Celebrate, Sell &amp; Network</h1>
+
+        <p>
+            Connect with people, celebrate your moments,
+            promote your business and network.
+        </p>
+
+    </section>
 
 
-<h2>
-👥 Active Listeners
-</h2>
+    <!-- =================================
+         PROFILE
+    ================================== -->
+
+    <section class="profile-card">
+
+        <h2 class="profile-title">👤 Your Profile</h2>
+
+        <div class="profile-main">
+
+            <div class="profile-photo-wrap">
+
+                <img
+                    id="profileImage"
+                    class="profile-photo"
+                    alt="Profile"
+                    style="display:none;">
+
+                <div
+                    id="profilePlaceholder"
+                    class="profile-placeholder">
+                    👤
+                </div>
+
+            </div>
+
+            <div class="profile-details">
+
+                <div
+                    id="savedProfileName"
+                    class="profile-name">
+                    Create your profile
+                </div>
+
+            </div>
+
+        </div>
 
 
-<div
-id="activeListeners">
+        <div
+            id="profileEditor"
+            class="profile-editor">
+
+            <input
+                type="text"
+                id="profileNameInput"
+                placeholder="Write your name"
+                maxlength="40">
+
+            <div class="file-row">
+
+                <input
+                    type="file"
+                    id="profileFile"
+                    accept="image/*">
+
+            </div>
+
+            <button
+                class="save-profile"
+                id="saveProfileBtn">
+                💾 Save Profile
+            </button>
+
+            <div
+                id="profileStatus"
+                class="profile-status">
+                Upload a profile picture and write your name before saving.
+            </div>
+
+        </div>
 
 
-<div
-class="listenerIcon">
+        <div
+            id="profileSaved"
+            class="profile-saved">
 
-👥
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         COMMUNITY HEADER
+    ================================== -->
+
+    <section class="community-header">
+
+        <div class="community-title">
+            💬 <span>Community Chat</span>
+        </div>
+
+        <button
+            id="notificationTop"
+            class="notification-top">
+            🔔
+        </button>
+
+    </section>
+
+
+    <!-- =================================
+         CHAT
+    ================================== -->
+
+    <main class="chat-area">
+
+        <div class="chat-intro">
+
+            Kulzzy Radio Live Community.<br>
+            Start chatting with listeners around the world.
+
+        </div>
+
+
+        <div
+            id="messages"
+            class="messages">
+
+        </div>
+
+
+        <div
+            id="posts"
+            class="posts">
+
+        </div>
+
+    </main>
 
 </div>
 
 
-<span>
+<!-- =====================================
+     COMPOSER
+====================================== -->
 
-0 Listeners Online
+<div class="composer-wrap">
 
-</span>
+    <div class="composer">
 
+        <div
+            id="profileRequired"
+            class="profile-required">
+
+            Please save your profile picture and name before
+            sending a message or posting.
+
+        </div>
+
+
+        <textarea
+            id="messageInput"
+            class="message-input"
+            rows="1"
+            maxlength="1000"
+            placeholder="Type a message..."></textarea>
+
+
+        <div class="composer-buttons">
+
+            <!-- CAMERA -->
+
+            <button
+                id="cameraBtn"
+                class="compose-btn camera">
+
+                📷 Camera
+
+            </button>
+
+
+            <!-- UPLOAD -->
+
+            <button
+                id="uploadBtn"
+                class="compose-btn upload">
+
+                🖼️ Upload
+
+            </button>
+
+
+            <!-- POST -->
+
+            <button
+                id="postBtn"
+                class="compose-btn post">
+
+                📸 Post
+
+            </button>
+
+
+            <!-- SEND -->
+
+            <button
+                id="sendBtn"
+                class="compose-btn send">
+
+                ➤ Send
+
+            </button>
+
+        </div>
+
+
+        <!-- POST PREVIEW -->
+
+        <div
+            id="postPreview"
+            class="post-preview">
+
+            <img
+                id="postPreviewImage"
+                alt="Post preview">
+
+            <button
+                id="removePreview"
+                class="remove-preview">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <!-- CAMERA INPUT -->
+
+        <input
+            type="file"
+            id="cameraInput"
+            class="hidden-input"
+            accept="image/*"
+            capture="environment">
+
+
+        <!-- PHONE UPLOAD -->
+
+        <input
+            type="file"
+            id="uploadInput"
+            class="hidden-input"
+            accept="image/*">
+
+    </div>
 
 </div>
 
 
-</section>
-
-
-<!-- ==================================================
-     PROFILE
-================================================== -->
-
-<section
-id="profileCard">
-
+<!-- =====================================
+     NOTICE
+====================================== -->
 
 <div
-class="profileRow">
-
-
-<img
-id="profilePreview"
-src="assets/images/default-avatar.png"
-alt="Profile Picture"
-class="profileImage">
-
-
-<div
-class="profileDetails">
-
-
-<input
-type="text"
-id="name"
-placeholder="Enter your display name">
-
-
-<h3
-id="welcomeName">
-
-Welcome!
-
-</h3>
-
-
-<div
-class="profileFile">
-
-
-<input
-type="file"
-id="profileImage"
-accept="image/*">
-
+    id="notice"
+    class="notice">
 
 </div>
 
 
-</div>
-
-
-</div>
-
-
-</section>
-
-
-<!-- ==================================================
-     COMMUNITY CHAT
-================================================== -->
-
-<section
-class="chatCard">
-
-
-<!-- CHAT HEADER -->
-
-<div
-class="chatTitle">
-
-
-<h2>
-💬 Community Chat
-</h2>
-
-
-<button
-class="postButton"
-id="mainPostButton">
-
-📷 Post
-
-</button>
-
-
-<button
-class="notificationButton"
-id="notificationButton"
-title="Notifications">
-
-🔔
-
-
-<span
-id="notificationBadge"
-class="notificationBadge">
-
-0
-
-</span>
-
-
-</button>
-
-
-</div>
-
-
-<!-- ==================================================
-     NOTIFICATION PANEL
-================================================== -->
-
-<div
-id="notificationPanel"
-class="notificationPanel">
-
-</div>
-
-
-<!-- ==================================================
-     CHAT MESSAGES
-================================================== -->
-
-<div
-id="messages"
-class="messages">
-
-
-<p
-class="systemMessage">
-
-Welcome to Kulzzy Radio Live Community.
-
-<br>
-
-Start chatting with listeners around the world.
-
-<br><br>
-
-📷 Post pictures
-
-&nbsp; • &nbsp;
-
-❤️ Like
-
-&nbsp; • &nbsp;
-
-💬 Comment
-
-&nbsp; • &nbsp;
-
-👁️ View
-
-&nbsp; • &nbsp;
-
-👤 Follow
-
-</p>
-
-
-</div>
-
-
-<!-- ==================================================
-     CHAT INPUT
-================================================== -->
-
-<div
-class="chatBox">
-
-
-<textarea
-id="message"
-placeholder="Type a message..."></textarea>
-
-
-<div
-class="chatActions">
-
-
-<button
-id="emojiBtn">
-
-😊 Emoji
-
-</button>
-
-
-<button
-id="send">
-
-📤 Send
-
-</button>
-
-
-</div>
-
-
-<div
-id="chatMessages"
-class="chat-messages">
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-<!-- ==================================================
-     SCRIPTS
-================================================== -->
-
-<script
-type="module"
-src="js/firebase.js?v=4">
-</script>
-
-
-<script
-type="module"
-src="js/app.js?v=4">
-</script>
-
-
-<script
-type="module"
-src="js/chat.js?v=4">
-</script>
-
-
-<!-- ==================================================
-     NOTIFICATION PANEL SCRIPT
-================================================== -->
-
-<script
-type="module">
+<script type="module">
+
+/* =====================================================
+   FIREBASE
+===================================================== */
 
 import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-    db,
+import {
+    getDatabase,
     ref,
+    push,
+    set,
+    get,
+    onChildAdded,
     onValue,
-    update
+    update,
+    runTransaction
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-} from "./js/firebase.js";
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBH85NGWsSAK5cubbPdnmunwYZFZpj_CB0",
+
+    authDomain:
+        "kulzzy-radio-chat.firebaseapp.com",
+
+    databaseURL:
+        "https://kulzzy-radio-chat-default-rtdb.europe-west1.firebasedatabase.app",
+
+    projectId:
+        "kulzzy-radio-chat",
+
+    storageBucket:
+        "kulzzy-radio-chat.firebasestorage.app",
+
+    messagingSenderId:
+        "510100635134",
+
+    appId:
+        "1:510100635134:web:9d3b2e983eb6e9a385d4af"
+
+};
 
 
-const listenerId =
-    localStorage.getItem(
-        "kulzzyListenerId"
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(app);
+
+
+/* =====================================================
+   CLOUDINARY
+===================================================== */
+
+const CLOUDINARY_CLOUD_NAME =
+    "s4j0x7dk";
+
+/*
+   IMPORTANT:
+   Put your Cloudinary UNSIGNED UPLOAD PRESET here.
+
+   Example:
+
+   const CLOUDINARY_UPLOAD_PRESET = "kulzzyradio";
+
+*/
+
+const CLOUDINARY_UPLOAD_PRESET =
+    "Community Chat";
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const profileImage =
+    document.getElementById("profileImage");
+
+const profilePlaceholder =
+    document.getElementById("profilePlaceholder");
+
+const profileNameInput =
+    document.getElementById("profileNameInput");
+
+const profileFile =
+    document.getElementById("profileFile");
+
+const saveProfileBtn =
+    document.getElementById("saveProfileBtn");
+
+const profileEditor =
+    document.getElementById("profileEditor");
+
+const savedProfileName =
+    document.getElementById("savedProfileName");
+
+const profileStatus =
+    document.getElementById("profileStatus");
+
+const messageInput =
+    document.getElementById("messageInput");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const cameraBtn =
+    document.getElementById("cameraBtn");
+
+const uploadBtn =
+    document.getElementById("uploadBtn");
+
+const postBtn =
+    document.getElementById("postBtn");
+
+const cameraInput =
+    document.getElementById("cameraInput");
+
+const uploadInput =
+    document.getElementById("uploadInput");
+
+const postPreview =
+    document.getElementById("postPreview");
+
+const postPreviewImage =
+    document.getElementById("postPreviewImage");
+
+const removePreview =
+    document.getElementById("removePreview");
+
+const messages =
+    document.getElementById("messages");
+
+const posts =
+    document.getElementById("posts");
+
+const profileRequired =
+    document.getElementById("profileRequired");
+
+const notice =
+    document.getElementById("notice");
+
+const notificationTop =
+    document.getElementById("notificationTop");
+
+
+/* =====================================================
+   LOCAL PROFILE
+===================================================== */
+
+let currentProfile =
+    JSON.parse(
+        localStorage.getItem("kulzzyProfile") || "null"
     );
 
 
-const notificationButton =
-    document.getElementById(
-        "notificationButton"
+/* =====================================================
+   NOTICE
+===================================================== */
+
+function showNotice(text){
+
+    notice.textContent = text;
+
+    notice.classList.add("show");
+
+    setTimeout(() => {
+
+        notice.classList.remove("show");
+
+    }, 3000);
+
+}
+
+
+/* =====================================================
+   CHECK PROFILE
+===================================================== */
+
+function hasProfile(){
+
+    return !!(
+        currentProfile &&
+        currentProfile.name &&
+        currentProfile.photo
+    );
+
+}
+
+
+/* =====================================================
+   APPLY PROFILE
+===================================================== */
+
+function applyProfile(){
+
+    if(!hasProfile()){
+
+        profileEditor.style.display = "block";
+
+        savedProfileName.textContent =
+            "Create your profile";
+
+        profileImage.style.display = "none";
+
+        profilePlaceholder.style.display =
+            "flex";
+
+        profileRequired.style.display =
+            "block";
+
+        return;
+    }
+
+
+    profileEditor.style.display =
+        "none";
+
+    profileRequired.style.display =
+        "none";
+
+    savedProfileName.textContent =
+        currentProfile.name;
+
+    profileImage.src =
+        currentProfile.photo;
+
+    profileImage.style.display =
+        "block";
+
+    profilePlaceholder.style.display =
+        "none";
+}
+
+
+/* =====================================================
+   INITIAL PROFILE
+===================================================== */
+
+applyProfile();
+
+
+/* =====================================================
+   CLOUDINARY UPLOAD
+===================================================== */
+
+async function uploadToCloudinary(file){
+
+    if(!file){
+
+        throw new Error(
+            "No picture selected."
+        );
+
+    }
+
+
+    if(
+        CLOUDINARY_UPLOAD_PRESET ===
+        "YOUR_UPLOAD_PRESET"
+    ){
+
+        throw new Error(
+            "Cloudinary Upload Preset has not been added yet."
+        );
+
+    }
+
+
+    const url =
+        `https://api.cloudinary.com/v1_1/` +
+        `${CLOUDINARY_CLOUD_NAME}/image/upload`;
+
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "file",
+        file
+    );
+
+    formData.append(
+        "upload_preset",
+        CLOUDINARY_UPLOAD_PRESET
     );
 
 
-const notificationPanel =
-    document.getElementById(
-        "notificationPanel"
+    const response =
+        await fetch(
+            url,
+            {
+                method:"POST",
+                body:formData
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if(!response.ok){
+
+        throw new Error(
+            data.error?.message ||
+            "Cloudinary upload failed."
+        );
+
+    }
+
+
+    return data.secure_url;
+
+}
+
+
+/* =====================================================
+   SAVE PROFILE
+===================================================== */
+
+saveProfileBtn.addEventListener(
+    "click",
+    async () => {
+
+        const name =
+            profileNameInput.value.trim();
+
+        const file =
+            profileFile.files[0];
+
+
+        if(!name){
+
+            showNotice(
+                "Please write your name."
+            );
+
+            return;
+        }
+
+
+        if(!file){
+
+            showNotice(
+                "Please upload a profile picture."
+            );
+
+            return;
+        }
+
+
+        saveProfileBtn.disabled =
+            true;
+
+        saveProfileBtn.textContent =
+            "Uploading...";
+
+
+        try{
+
+            const photo =
+                await uploadToCloudinary(
+                    file
+                );
+
+
+            currentProfile = {
+
+                name:name,
+
+                photo:photo,
+
+                savedAt:Date.now()
+
+            };
+
+
+            localStorage.setItem(
+                "kulzzyProfile",
+                JSON.stringify(
+                    currentProfile
+                )
+            );
+
+
+            applyProfile();
+
+
+            showNotice(
+                "Profile saved successfully."
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showNotice(
+                error.message
+            );
+
+        }
+
+
+        saveProfileBtn.disabled =
+            false;
+
+        saveProfileBtn.textContent =
+            "💾 Save Profile";
+
+    }
+);
+
+
+/* =====================================================
+   MESSAGE AUTO HEIGHT
+===================================================== */
+
+function resizeMessageBox(){
+
+    messageInput.style.height =
+        "auto";
+
+    messageInput.style.height =
+        Math.min(
+            messageInput.scrollHeight,
+            145
+        ) + "px";
+
+}
+
+
+messageInput.addEventListener(
+    "input",
+    resizeMessageBox
+);
+
+
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
+
+sendBtn.addEventListener(
+    "click",
+    async () => {
+
+        if(!hasProfile()){
+
+            showNotice(
+                "Save your profile before chatting."
+            );
+
+            return;
+        }
+
+
+        const text =
+            messageInput.value.trim();
+
+
+        if(!text){
+
+            return;
+        }
+
+
+        sendBtn.disabled =
+            true;
+
+
+        try{
+
+            await push(
+                ref(db,"chat"),
+                {
+
+                    name:
+                        currentProfile.name,
+
+                    text:text,
+
+                    photo:
+                        currentProfile.photo,
+
+                    time:
+                        Date.now()
+
+                }
+            );
+
+
+            messageInput.value =
+                "";
+
+            resizeMessageBox();
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showNotice(
+                "Message could not be sent."
+            );
+
+        }
+
+
+        sendBtn.disabled =
+            false;
+
+    }
+);
+
+
+/* =====================================================
+   ENTER TO SEND
+===================================================== */
+
+messageInput.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendBtn.click();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   DISPLAY CHAT MESSAGE
+===================================================== */
+
+function displayMessage(
+    data,
+    id
+){
+
+    if(!data) return;
+
+
+    const mine =
+        hasProfile() &&
+        data.name ===
+        currentProfile.name;
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+    row.className =
+        "message-row" +
+        (mine ? " mine" : "");
+
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        "message-bubble";
+
+
+    const name =
+        document.createElement(
+            "div"
+        );
+
+    name.className =
+        "message-name";
+
+    name.textContent =
+        data.name ||
+        "Listener";
+
+
+    const text =
+        document.createElement(
+            "div"
+        );
+
+    text.className =
+        "message-text";
+
+    text.textContent =
+        data.text ||
+        "";
+
+
+    const time =
+        document.createElement(
+            "div"
+        );
+
+    time.className =
+        "message-time";
+
+    time.textContent =
+        data.time
+            ? new Date(
+                data.time
+              ).toLocaleTimeString(
+                [],
+                {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+              )
+            : "";
+
+
+    bubble.appendChild(
+        name
+    );
+
+    bubble.appendChild(
+        text
+    );
+
+    bubble.appendChild(
+        time
+    );
+
+    row.appendChild(
+        bubble
+    );
+
+    messages.appendChild(
+        row
     );
 
 
-const badge =
-    document.getElementById(
-        "notificationBadge"
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* =====================================================
+   CHAT LISTENER
+===================================================== */
+
+onChildAdded(
+    ref(db,"chat"),
+    snapshot => {
+
+        displayMessage(
+            snapshot.val(),
+            snapshot.key
+        );
+
+    }
+);
+
+
+/* =====================================================
+   POST FILE SELECTION
+===================================================== */
+
+function choosePostFile(file){
+
+    if(!file){
+
+        return;
+    }
+
+
+    if(
+        !file.type.startsWith(
+            "image/"
+        )
+    ){
+
+        showNotice(
+            "Only pictures can be posted."
+        );
+
+        return;
+    }
+
+
+    postPreviewImage.src =
+        URL.createObjectURL(
+            file
+        );
+
+    postPreview.style.display =
+        "block";
+
+
+    postBtn.textContent =
+        "📸 Post Picture";
+
+}
+
+
+/* =====================================================
+   CAMERA
+===================================================== */
+
+cameraBtn.addEventListener(
+    "click",
+    () => {
+
+        if(!hasProfile()){
+
+            showNotice(
+                "Save your profile first."
+            );
+
+            return;
+        }
+
+
+        cameraInput.click();
+
+    }
+);
+
+
+cameraInput.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            cameraInput.files[0];
+
+        choosePostFile(
+            file
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PHONE UPLOAD
+===================================================== */
+
+uploadBtn.addEventListener(
+    "click",
+    () => {
+
+        if(!hasProfile()){
+
+            showNotice(
+                "Save your profile first."
+            );
+
+            return;
+        }
+
+
+        uploadInput.click();
+
+    }
+);
+
+
+uploadInput.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            uploadInput.files[0];
+
+        choosePostFile(
+            file
+        );
+
+    }
+);
+
+
+/* =====================================================
+   REMOVE PREVIEW
+===================================================== */
+
+removePreview.addEventListener(
+    "click",
+    () => {
+
+        cameraInput.value =
+            "";
+
+        uploadInput.value =
+            "";
+
+        postPreview.style.display =
+            "none";
+
+        postPreviewImage.src =
+            "";
+
+        postBtn.textContent =
+            "📸 Post";
+
+    }
+);
+
+
+/* =====================================================
+   CREATE POST
+===================================================== */
+
+postBtn.addEventListener(
+    "click",
+    async () => {
+
+        if(!hasProfile()){
+
+            showNotice(
+                "Save your profile before posting."
+            );
+
+            return;
+        }
+
+
+        const file =
+            cameraInput.files[0] ||
+            uploadInput.files[0];
+
+
+        if(!file){
+
+            showNotice(
+                "Choose a picture first."
+            );
+
+            return;
+        }
+
+
+        if(
+            !file.type.startsWith(
+                "image/"
+            )
+        ){
+
+            showNotice(
+                "Only pictures are allowed."
+            );
+
+            return;
+        }
+
+
+        postBtn.disabled =
+            true;
+
+        postBtn.textContent =
+            "Uploading...";
+
+
+        try{
+
+            const imageUrl =
+                await uploadToCloudinary(
+                    file
+                );
+
+
+            const postRef =
+                push(
+                    ref(db,"communityPosts")
+                );
+
+
+            await set(
+                postRef,
+                {
+
+                    uid:
+                        currentProfile.name,
+
+                    name:
+                        currentProfile.name,
+
+                    photo:
+                        currentProfile.photo,
+
+                    image:
+                        imageUrl,
+
+                    time:
+                        Date.now(),
+
+                    likes:0,
+
+                    views:0
+
+                }
+            );
+
+
+            cameraInput.value =
+                "";
+
+            uploadInput.value =
+                "";
+
+            postPreview.style.display =
+                "none";
+
+            postPreviewImage.src =
+                "";
+
+            postBtn.textContent =
+                "📸 Post";
+
+
+            showNotice(
+                "Picture posted successfully."
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+            showNotice(
+                error.message
+            );
+
+        }
+
+
+        postBtn.disabled =
+            false;
+
+    }
+);
+
+
+/* =====================================================
+   POST LISTENER
+===================================================== */
+
+onChildAdded(
+    ref(db,"communityPosts"),
+    snapshot => {
+
+        createPost(
+            snapshot.key,
+            snapshot.val()
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CREATE POST UI
+===================================================== */
+
+function createPost(
+    postId,
+    data
+){
+
+    if(!data) return;
+
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+    card.className =
+        "post-card";
+
+    card.dataset.id =
+        postId;
+
+
+    /* USER */
+
+    const user =
+        document.createElement(
+            "div"
+        );
+
+    user.className =
+        "post-user";
+
+
+    const avatar =
+        document.createElement(
+            "img"
+        );
+
+    avatar.className =
+        "post-avatar";
+
+    avatar.src =
+        data.photo ||
+        "";
+
+
+    const info =
+        document.createElement(
+            "div"
+        );
+
+    info.className =
+        "post-user-info";
+
+
+    const name =
+        document.createElement(
+            "div"
+        );
+
+    name.className =
+        "post-name";
+
+    name.textContent =
+        data.name ||
+        "Listener";
+
+
+    const date =
+        document.createElement(
+            "div"
+        );
+
+    date.className =
+        "post-date";
+
+    date.textContent =
+        data.time
+            ? new Date(
+                data.time
+              ).toLocaleString()
+            : "";
+
+
+    info.appendChild(
+        name
+    );
+
+    info.appendChild(
+        date
     );
 
 
-if (
-    listenerId &&
-    notificationButton &&
-    notificationPanel
-) {
+    user.appendChild(
+        avatar
+    );
+
+    user.appendChild(
+        info
+    );
 
 
-    notificationButton.addEventListener(
+    /* IMAGE */
+
+    const image =
+        document.createElement(
+            "img"
+        );
+
+    image.className =
+        "post-image";
+
+    image.src =
+        data.image;
+
+    image.alt =
+        "Community post";
+
+
+    /* ACTIONS */
+
+    const actions =
+        document.createElement(
+            "div"
+        );
+
+    actions.className =
+        "post-actions";
+
+
+    const follow =
+        document.createElement(
+            "button"
+        );
+
+    follow.className =
+        "post-action";
+
+    follow.textContent =
+        "👤 Follow me";
+
+
+    const like =
+        document.createElement(
+            "button"
+        );
+
+    like.className =
+        "post-action";
+
+    like.textContent =
+        "❤️ " +
+        (data.likes || 0);
+
+
+    const comment =
+        document.createElement(
+            "button"
+        );
+
+    comment.className =
+        "post-action";
+
+    comment.textContent =
+        "💬 Comment";
+
+
+    const views =
+        document.createElement(
+            "span"
+        );
+
+    views.className =
+        "post-views";
+
+    views.textContent =
+        "👁️ " +
+        (data.views || 0);
+
+
+    const notify =
+        document.createElement(
+            "button"
+        );
+
+    notify.className =
+        "post-action";
+
+    notify.textContent =
+        "🔔";
+
+
+    actions.appendChild(
+        follow
+    );
+
+    actions.appendChild(
+        like
+    );
+
+    actions.appendChild(
+        comment
+    );
+
+    actions.appendChild(
+        views
+    );
+
+    actions.appendChild(
+        notify
+    );
+
+
+    /* COMMENTS */
+
+    const comments =
+        document.createElement(
+            "div"
+        );
+
+    comments.className =
+        "comments";
+
+
+    const commentBox =
+        document.createElement(
+            "div"
+        );
+
+    commentBox.className =
+        "comment-box";
+
+
+    const commentInput =
+        document.createElement(
+            "input"
+        );
+
+    commentInput.className =
+        "comment-input";
+
+    commentInput.placeholder =
+        "Write a comment...";
+
+
+    const commentSend =
+        document.createElement(
+            "button"
+        );
+
+    commentSend.className =
+        "comment-send";
+
+    commentSend.textContent =
+        "Send";
+
+
+    commentBox.appendChild(
+        commentInput
+    );
+
+    commentBox.appendChild(
+        commentSend
+    );
+
+
+    comments.appendChild(
+        commentBox
+    );
+
+
+    /* COMMENT BUTTON */
+
+    comment.addEventListener(
         "click",
         () => {
 
-            notificationPanel.classList.toggle(
+            comments.style.display =
+                comments.style.display ===
+                "block"
+                    ? "none"
+                    : "block";
+
+        }
+    );
+
+
+    /* LIKE */
+
+    let liked = false;
+
+    like.addEventListener(
+        "click",
+        async () => {
+
+            if(liked){
+
+                return;
+            }
+
+
+            liked = true;
+
+            like.classList.add(
+                "active"
+            );
+
+
+            const likeRef =
+                ref(
+                    db,
+                    "communityPosts/" +
+                    postId +
+                    "/likes"
+                );
+
+
+            await runTransaction(
+                likeRef,
+                value => {
+
+                    return (
+                        (value || 0) +
+                        1
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* FOLLOW */
+
+    follow.addEventListener(
+        "click",
+        async () => {
+
+            if(!hasProfile()){
+
+                showNotice(
+                    "Save your profile first."
+                );
+
+                return;
+            }
+
+
+            if(
+                currentProfile.name ===
+                data.name
+            ){
+
+                showNotice(
+                    "You cannot follow yourself."
+                );
+
+                return;
+            }
+
+
+            const safeName =
+                currentProfile.name
+                    .replace(/[.#$[\]/]/g,"_");
+
+
+            const safeTarget =
+                data.name
+                    .replace(/[.#$[\]/]/g,"_");
+
+
+            await set(
+                ref(
+                    db,
+                    "followers/" +
+                    safeTarget +
+                    "/" +
+                    safeName
+                ),
+                true
+            );
+
+
+            follow.textContent =
+                "✓ Following";
+
+            follow.classList.add(
                 "active"
             );
 
@@ -1527,188 +2302,317 @@ if (
     );
 
 
-    onValue(
+    /* NOTIFICATION */
 
-        ref(
-            db,
-            "notifications/" +
-            listenerId
-        ),
+    notify.addEventListener(
+        "click",
+        () => {
 
-        (snapshot) => {
+            notify.classList.toggle(
+                "active"
+            );
 
+            showNotice(
+                notify.classList.contains(
+                    "active"
+                )
+                    ? "Notifications turned on."
+                    : "Notifications turned off."
+            );
 
-            const data =
-                snapshot.val() || {};
-
-
-            const items =
-                Object.entries(data)
-                    .filter(
-                        ([key,value]) =>
-                            value
-                    )
-                    .sort(
-                        (a,b) =>
-                            (b[1].time || 0) -
-                            (a[1].time || 0)
-                    );
+        }
+    );
 
 
-            const unread =
-                items.filter(
-                    ([key,value]) =>
-                        value.read === false
-                ).length;
+    /* COMMENTS SEND */
 
+    commentSend.addEventListener(
+        "click",
+        async () => {
 
-            badge.textContent =
-                unread;
+            if(!hasProfile()){
 
-
-            badge.style.display =
-                unread > 0
-                ? "flex"
-                : "none";
-
-
-            if (
-                items.length === 0
-            ) {
-
-                notificationPanel.innerHTML = `
-
-                    <div
-                    class="notificationItem">
-
-                    🔔 No notifications yet.
-
-                    </div>
-
-                `;
+                showNotice(
+                    "Save your profile first."
+                );
 
                 return;
-
             }
 
 
-            notificationPanel.innerHTML =
-                items.map(
-                    ([key,item]) => {
+            const text =
+                commentInput.value.trim();
 
 
-                        let text =
-                            "New activity";
+            if(!text){
+
+                return;
+            }
 
 
-                        if (
-                            item.type ===
-                            "follow"
-                        ) {
+            await push(
+                ref(
+                    db,
+                    "communityPosts/" +
+                    postId +
+                    "/comments"
+                ),
+                {
 
-                            text =
-                            `👤 ${
-                                item.fromName
-                                || "Someone"
-                            } followed you`;
+                    name:
+                        currentProfile.name,
 
-                        }
+                    photo:
+                        currentProfile.photo,
 
+                    text:text,
 
-                        if (
-                            item.type ===
-                            "like"
-                        ) {
+                    time:
+                        Date.now()
 
-                            text =
-                            `❤️ ${
-                                item.fromName
-                                || "Someone"
-                            } liked your post`;
-
-                        }
+                }
+            );
 
 
-                        if (
-                            item.type ===
-                            "comment"
-                        ) {
+            commentInput.value =
+                "";
 
-                            text =
-                            `💬 ${
-                                item.fromName
-                                || "Someone"
-                            } commented on your post`;
-
-                        }
+        }
+    );
 
 
-                        return `
+    /* COMMENTS LIVE */
 
-                            <div
-                            class="notificationItem"
-                            data-key="${key}">
+    onValue(
+        ref(
+            db,
+            "communityPosts/" +
+            postId +
+            "/comments"
+        ),
+        snapshot => {
 
-                            ${text}
-
-                            <small>
-
-                            ${
-                                item.read
-                                ? "Read"
-                                : "New"
-
-                            }
-
-                            </small>
-
-                            </div>
-
-                        `;
-
-                    }
-                ).join("");
+            comments
+                .querySelectorAll(
+                    ".comment-item"
+                )
+                .forEach(
+                    item =>
+                        item.remove()
+                );
 
 
-            /* MARK NOTIFICATIONS AS READ */
+            snapshot.forEach(
+                child => {
 
-            items.forEach(
-                ([key,item]) => {
+                    const c =
+                        child.val();
 
-                    if (
-                        item.read === false
-                    ) {
 
-                        update(
-
-                            ref(
-                                db,
-                                "notifications/" +
-                                listenerId +
-                                "/" +
-                                key
-                            ),
-
-                            {
-                                read:true
-                            }
-
+                    const item =
+                        document.createElement(
+                            "div"
                         );
 
-                    }
+                    item.className =
+                        "comment-item";
+
+
+                    const cName =
+                        document.createElement(
+                            "div"
+                        );
+
+                    cName.className =
+                        "comment-name";
+
+                    cName.textContent =
+                        c.name ||
+                        "Listener";
+
+
+                    const cText =
+                        document.createElement(
+                            "div"
+                        );
+
+                    cText.className =
+                        "comment-text";
+
+                    cText.textContent =
+                        c.text ||
+                        "";
+
+
+                    item.appendChild(
+                        cName
+                    );
+
+                    item.appendChild(
+                        cText
+                    );
+
+
+                    comments.insertBefore(
+                        item,
+                        commentBox
+                    );
 
                 }
             );
 
         }
+    );
 
+
+    /* VIEW COUNT */
+
+    let viewed =
+        sessionStorage.getItem(
+            "viewed_" + postId
+        );
+
+
+    if(!viewed){
+
+        viewed = true;
+
+        sessionStorage.setItem(
+            "viewed_" + postId,
+            "1"
+        );
+
+
+        const viewsRef =
+            ref(
+                db,
+                "communityPosts/" +
+                postId +
+                "/views"
+            );
+
+
+        runTransaction(
+            viewsRef,
+            value => {
+
+                return (
+                    (value || 0) +
+                    1
+                );
+
+            }
+        );
+
+    }
+
+
+    /* LIVE VIEW NUMBER */
+
+    onValue(
+        ref(
+            db,
+            "communityPosts/" +
+            postId +
+            "/views"
+        ),
+        snapshot => {
+
+            views.textContent =
+                "👁️ " +
+                (snapshot.val() || 0);
+
+        }
+    );
+
+
+    /* LIVE LIKE NUMBER */
+
+    onValue(
+        ref(
+            db,
+            "communityPosts/" +
+            postId +
+            "/likes"
+        ),
+        snapshot => {
+
+            like.textContent =
+                "❤️ " +
+                (snapshot.val() || 0);
+
+        }
+    );
+
+
+    /* FINAL CARD */
+
+    card.appendChild(
+        user
+    );
+
+    card.appendChild(
+        image
+    );
+
+    card.appendChild(
+        actions
+    );
+
+    card.appendChild(
+        comments
+    );
+
+
+    posts.appendChild(
+        card
     );
 
 }
 
+
+/* =====================================================
+   TOP NOTIFICATION
+===================================================== */
+
+notificationTop.addEventListener(
+    "click",
+    () => {
+
+        showNotice(
+            "🔔 Community notifications are available here."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PROFILE REQUIRED STATE
+===================================================== */
+
+setInterval(
+    () => {
+
+        profileRequired.style.display =
+            hasProfile()
+                ? "none"
+                : "block";
+
+    },
+    1000
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+console.log(
+    "Kulzzy Radio Community Chat loaded."
+);
+
 </script>
 
-
 </body>
-
 </html>
