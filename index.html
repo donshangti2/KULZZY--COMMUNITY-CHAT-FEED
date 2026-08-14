@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Kulzzy Radio Community Chat</title>
 
 <style>
+
 *{
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
@@ -16,8 +20,8 @@ html,body{
     padding:0;
     width:100%;
     min-height:100%;
-    background:#031824;
-    color:#fff;
+    background:#001b2b;
+    color:white;
     font-family:Arial,Helvetica,sans-serif;
 }
 
@@ -25,914 +29,729 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
-   MAIN
-========================= */
-
-.app{
-    width:100%;
-    max-width:760px;
-    margin:0 auto;
-    background:#031824;
-    min-height:100vh;
-}
-
-/* =========================
-   TOP TITLE
-========================= */
-
-.top-title{
-    padding:24px 20px 18px;
-    border-bottom:1px solid rgba(255,215,0,.25);
-}
-
-.top-title h1{
-    margin:0;
-    color:#ffd400;
-    font-size:30px;
-    font-weight:800;
-}
-
-.top-title p{
-    margin:7px 0 0;
-    color:#fff;
-    font-size:15px;
-}
-
-/* =========================
+/* ==============================
    PROFILE
-========================= */
+============================== */
 
-.profile-section{
-    padding:20px;
-    border-bottom:1px solid rgba(255,215,0,.22);
+.profile-area{
+    width:100%;
+    padding:18px 15px 12px;
+    background:#00263a;
+    border-bottom:1px solid #07506d;
 }
 
-.profile-title{
-    color:#ffd400;
-    font-size:24px;
-    font-weight:800;
-    margin-bottom:18px;
-}
-
-.profile-editor{
+.profile-row{
     display:flex;
     align-items:center;
-    gap:18px;
+    gap:14px;
 }
 
-.profile-preview{
-    width:82px;
-    height:82px;
-    min-width:82px;
+.profile-picture-wrap{
+    width:78px;
+    height:78px;
+    min-width:78px;
     border-radius:50%;
-    object-fit:cover;
-    border:3px solid #ffd400;
-    background:#09293a;
+    border:3px solid #ffd000;
+    overflow:hidden;
+    background:#073449;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.profile-fields{
+.profile-picture{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.profile-placeholder{
+    font-size:38px;
+    color:#ffd000;
+}
+
+.profile-info{
     flex:1;
+    min-width:0;
+}
+
+.name-display{
+    font-size:21px;
+    font-weight:bold;
+    color:#ffd000;
+    margin-bottom:8px;
+    word-break:break-word;
+}
+
+.profile-stats{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    font-size:14px;
+}
+
+.followers-count{
+    color:#fff;
+}
+
+.notification-count{
+    color:#ffd000;
+}
+
+.profile-edit{
+    margin-top:15px;
+    display:none;
+}
+
+.profile-edit.show{
+    display:block;
 }
 
 .name-input{
     width:100%;
-    border:1px solid #174b65;
+    height:48px;
+    border:0;
     outline:none;
+    border-radius:14px;
+    padding:0 15px;
+    font-size:17px;
     background:#fff;
     color:#111;
-    border-radius:13px;
-    padding:13px 15px;
-    font-size:17px;
 }
 
 .profile-file{
     width:100%;
     margin-top:10px;
-    background:#084466;
-    color:#fff;
-    padding:10px;
-    border-radius:11px;
-    font-size:14px;
+    padding:12px;
+    border-radius:12px;
+    background:#00466b;
+    color:white;
 }
 
 .save-profile{
-    margin-top:11px;
     width:100%;
-    border:0;
+    margin-top:10px;
+    height:45px;
+    border:2px solid #ffd000;
     border-radius:12px;
-    padding:12px;
-    background:#ffd400;
-    color:#07151d;
-    font-size:16px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.profile-saved{
-    display:none;
-    align-items:center;
-    gap:14px;
-}
-
-.profile-saved img{
-    width:68px;
-    height:68px;
-    min-width:68px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid #ffd400;
-}
-
-.profile-saved-name{
-    color:#fff;
-    font-size:20px;
-    font-weight:700;
-}
-
-.edit-profile{
-    margin-top:7px;
-    border:0;
-    background:none;
-    color:#ffd400;
-    padding:0;
-    cursor:pointer;
-    font-size:14px;
-}
-
-/* =========================
-   COMMUNITY HEADER
-========================= */
-
-.community-header{
-    padding:15px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    background:#092a3a;
-    border-bottom:1px solid rgba(255,215,0,.25);
-}
-
-.community-name{
-    font-size:22px;
-    font-weight:700;
-    color:#fff;
-}
-
-.community-name span{
-    color:#ffd400;
-}
-
-.header-actions{
-    display:flex;
-    gap:8px;
-}
-
-.header-btn{
-    border:0;
-    background:#ffd400;
-    color:#06141d;
-    border-radius:50%;
-    width:44px;
-    height:44px;
-    font-size:21px;
-    cursor:pointer;
-    position:relative;
-}
-
-.notification-badge{
-    display:none;
-    position:absolute;
-    top:-4px;
-    right:-3px;
-    min-width:18px;
-    height:18px;
-    border-radius:20px;
-    background:#ff334f;
-    color:#fff;
-    font-size:11px;
+    background:#ffd000;
+    color:#00263a;
+    font-size:17px;
     font-weight:bold;
-    align-items:center;
-    justify-content:center;
 }
 
-/* =========================
-   COMMUNITY INTRO
-========================= */
+/* ==============================
+   COMMUNITY FEED
+============================== */
 
-.community-intro{
-    margin:0;
-    padding:18px 16px;
+.community{
+    width:100%;
+    padding:10px 10px 150px;
+}
+
+.community-info{
+    background:#082633;
+    border:1px solid #104b61;
+    border-radius:14px;
+    padding:16px;
     text-align:center;
-    color:#fff;
-    background:#071b25;
-    border-bottom:1px solid #12445e;
-    font-size:16px;
-    line-height:1.55;
+    color:#dce7eb;
+    font-size:17px;
+    line-height:1.5;
+    margin-bottom:12px;
 }
 
-/* =========================
+/* ==============================
    POSTS
-========================= */
+============================== */
 
-.posts{
-    padding:12px 10px 130px;
-}
-
-.post{
-    background:#09232e;
-    border:1px solid #17465c;
-    border-radius:17px;
-    margin-bottom:14px;
+.post-card{
+    width:100%;
+    background:#002b3d;
+    border:1px solid #07506a;
+    border-radius:16px;
     overflow:hidden;
+    margin-bottom:14px;
 }
 
-.post-top{
+.post-header{
     display:flex;
     align-items:center;
-    gap:11px;
-    padding:13px 13px 10px;
+    padding:12px;
+    gap:10px;
 }
 
-.post-avatar{
-    width:48px;
-    height:48px;
-    min-width:48px;
+.post-profile{
+    width:52px;
+    height:52px;
+    min-width:52px;
     border-radius:50%;
     object-fit:cover;
-    border:2px solid #ffd400;
-    background:#123849;
+    border:2px solid #ffd000;
+    background:#073449;
 }
 
 .post-user{
-    min-width:0;
     flex:1;
+    min-width:0;
 }
 
 .post-name{
-    color:#ffd400;
-    font-size:16px;
-    font-weight:800;
+    color:#ffd000;
+    font-weight:bold;
+    font-size:17px;
     word-break:break-word;
 }
 
 .post-time{
-    margin-top:3px;
-    color:#91a8b2;
+    color:#9fb2bb;
     font-size:12px;
+    margin-top:3px;
 }
 
 .follow-btn{
-    border:1px solid #ffd400;
+    border:1px solid #ffd000;
     background:transparent;
-    color:#ffd400;
+    color:#ffd000;
     border-radius:20px;
-    padding:7px 11px;
-    font-weight:700;
-    cursor:pointer;
+    padding:8px 13px;
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
 }
 
 .follow-btn.following{
-    background:#ffd400;
-    color:#07151d;
+    background:#ffd000;
+    color:#002b3d;
 }
 
 .post-image{
-    display:block;
     width:100%;
-    max-height:560px;
-    object-fit:contain;
-    background:#03131b;
+    max-height:520px;
+    object-fit:cover;
+    display:block;
+    background:#001722;
 }
 
 .post-actions{
     display:flex;
     align-items:center;
-    gap:6px;
-    padding:9px 11px;
-    border-top:1px solid #123d50;
+    min-height:52px;
+    padding:7px 12px;
+    border-top:1px solid #084a61;
+    border-bottom:1px solid #084a61;
+    gap:18px;
 }
 
 .action-btn{
     border:0;
     background:transparent;
-    color:#fff;
-    padding:7px 8px;
-    border-radius:9px;
-    cursor:pointer;
-    font-size:14px;
+    color:white;
+    font-size:15px;
+    padding:8px 2px;
 }
 
-.action-btn:hover{
-    background:#103b4e;
+.like-btn.liked{
+    color:#ff405d;
 }
 
-.action-btn.liked{
-    color:#ffd400;
-}
-
-.post-views{
+.views{
     margin-left:auto;
-    color:#8ea4ae;
-    font-size:13px;
+    color:#d7e2e6;
 }
 
-.comments{
-    border-top:1px solid #123d50;
-    padding:8px 11px;
+.post-text{
+    padding:12px 14px 15px;
+    font-size:17px;
+    line-height:1.45;
+    word-wrap:break-word;
 }
 
-.comment{
-    background:#061a24;
-    border-radius:10px;
-    padding:8px 10px;
-    margin:6px 0;
+.comment-area{
+    display:none;
+    padding:8px 12px 12px;
 }
 
-.comment-name{
-    color:#ffd400;
-    font-size:13px;
-    font-weight:800;
+.comment-area.show{
+    display:block;
 }
 
-.comment-text{
-    color:#fff;
-    margin-top:3px;
-    font-size:14px;
-    line-height:1.4;
-}
-
-.comment-form{
+.comment-input-row{
     display:flex;
-    gap:7px;
-    margin-top:8px;
+    gap:8px;
 }
 
 .comment-input{
     flex:1;
     min-width:0;
-    border:1px solid #1b536c;
-    background:#fff;
-    color:#111;
-    border-radius:10px;
-    padding:9px 10px;
+    border:1px solid #23627a;
+    background:#061e29;
+    color:white;
+    border-radius:20px;
+    padding:10px 14px;
     outline:none;
+    font-size:15px;
 }
 
 .comment-send{
     border:0;
-    background:#ffd400;
-    color:#07151d;
+    border-radius:20px;
+    background:#ffd000;
+    color:#002b3d;
+    padding:0 15px;
+    font-weight:bold;
+}
+
+.comments-list{
+    margin-top:8px;
+}
+
+.comment{
+    padding:8px 10px;
+    background:#061f2a;
     border-radius:10px;
-    padding:0 13px;
-    font-weight:800;
+    margin-top:6px;
+    font-size:14px;
 }
 
-/* =========================
-   EMPTY STATE
-========================= */
-
-.empty{
-    text-align:center;
-    color:#92a8b2;
-    padding:45px 20px;
+.comment strong{
+    color:#ffd000;
 }
 
-/* =========================
-   BOTTOM COMPOSER
-========================= */
+/* ==============================
+   CHAT
+============================== */
 
-.composer-wrap{
-    position:fixed;
-    left:50%;
-    bottom:0;
-    transform:translateX(-50%);
+.chat-list{
     width:100%;
-    max-width:760px;
-    background:#061c27;
-    border-top:1px solid #1b4d62;
-    padding:10px;
-    z-index:1000;
 }
+
+.chat-message{
+    max-width:82%;
+    width:max-content;
+    min-width:80px;
+    background:#142f3a;
+    border-radius:5px 14px 14px 14px;
+    padding:9px 13px;
+    margin:7px 5px;
+    word-wrap:break-word;
+    overflow-wrap:anywhere;
+}
+
+.chat-name{
+    color:#00c9a7;
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:4px;
+}
+
+.chat-text{
+    color:white;
+    font-size:17px;
+    line-height:1.4;
+}
+
+.chat-time{
+    color:#9db0b8;
+    font-size:10px;
+    margin-top:4px;
+    text-align:right;
+}
+
+/* ==============================
+   BOTTOM COMPOSER
+============================== */
 
 .composer{
-    display:flex;
-    align-items:flex-end;
-    gap:7px;
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:1000;
+    background:#002b3d;
+    border-top:1px solid #0b607c;
+    padding:10px 10px calc(10px + env(safe-area-inset-bottom));
 }
 
-.composer-btn{
-    width:47px;
-    height:47px;
-    min-width:47px;
+.composer-row{
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    width:100%;
+}
+
+.composer-button{
+    width:52px;
+    height:52px;
+    min-width:52px;
     border:0;
     border-radius:50%;
-    background:#ffd400;
-    color:#07151d;
-    font-size:20px;
-    cursor:pointer;
+    background:#ffd000;
+    color:#002b3d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
 }
 
 .message-box{
     flex:1;
     min-width:0;
-    min-height:47px;
-    max-height:145px;
+    max-height:130px;
+    min-height:52px;
     resize:none;
     overflow-y:auto;
-    border:1px solid #285b70;
-    border-radius:24px;
-    background:#fff;
-    color:#111;
-    padding:13px 16px;
-    font-size:16px;
-    line-height:1.4;
-    outline:none;
-}
-
-.send-btn{
-    width:47px;
-    height:47px;
-    min-width:47px;
     border:0;
-    border-radius:50%;
-    background:#ffd400;
-    color:#07151d;
-    font-size:21px;
-    cursor:pointer;
-    font-weight:800;
+    outline:none;
+    border-radius:28px;
+    background:white;
+    color:#111;
+    padding:14px 18px;
+    font-size:17px;
+    line-height:1.35;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-.send-btn:disabled{
-    opacity:.45;
+.message-box::placeholder{
+    color:#777;
 }
 
-.post-mode{
-    margin-top:7px;
+.hidden-file{
+    display:none;
+}
+
+/* ==============================
+   PROFILE REQUIRED
+============================== */
+
+.required-message{
+    position:fixed;
+    left:50%;
+    bottom:85px;
+    transform:translateX(-50%);
+    width:calc(100% - 30px);
+    max-width:500px;
+    background:#ffd000;
+    color:#002b3d;
+    padding:12px 15px;
+    border-radius:12px;
     text-align:center;
-    color:#91a8b2;
-    font-size:12px;
+    font-weight:bold;
+    z-index:1100;
+    display:none;
 }
 
-.hidden{
-    display:none!important;
+.required-message.show{
+    display:block;
 }
 
-/* =========================
+/* ==============================
    MODAL
-========================= */
+============================== */
 
-.modal{
+.profile-modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.72);
+    background:rgba(0,0,0,.78);
+    z-index:2000;
     display:none;
     align-items:center;
     justify-content:center;
-    padding:18px;
-    z-index:2000;
+    padding:20px;
 }
 
-.modal.show{
+.profile-modal.show{
     display:flex;
 }
 
-.modal-box{
+.profile-box{
     width:100%;
-    max-width:500px;
-    max-height:90vh;
-    overflow-y:auto;
-    background:#092b3b;
-    border:1px solid #315c70;
+    max-width:430px;
+    background:#002b3d;
+    border:2px solid #ffd000;
     border-radius:18px;
     padding:20px;
 }
 
-.modal-title{
-    color:#ffd400;
-    font-size:21px;
-    font-weight:800;
-    margin-bottom:15px;
+.profile-box h3{
+    margin:0 0 15px;
+    color:#ffd000;
+    text-align:center;
 }
 
-.modal-input{
+.close-profile{
     width:100%;
-    padding:12px;
-    border:1px solid #1b536c;
-    border-radius:11px;
-    background:#fff;
-    color:#111;
-    font-size:16px;
-    outline:none;
+    margin-top:10px;
+    height:42px;
+    border:1px solid #ffd000;
+    border-radius:10px;
+    background:transparent;
+    color:#ffd000;
+    font-weight:bold;
 }
 
-.modal-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:14px;
-}
-
-.modal-buttons button{
-    flex:1;
-    border:0;
-    padding:12px;
-    border-radius:11px;
-    font-weight:800;
-    cursor:pointer;
-}
-
-.cancel-btn{
-    background:#173c4d;
-    color:#fff;
-}
-
-.confirm-btn{
-    background:#ffd400;
-    color:#07151d;
-}
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-.notification-item{
-    padding:12px;
-    border-bottom:1px solid #17465b;
-    color:#fff;
-}
-
-.notification-item strong{
-    color:#ffd400;
-}
-
-.notification-time{
-    color:#829ba6;
-    font-size:11px;
-    margin-top:4px;
-}
-
-/* =========================
+/* ==============================
    TOAST
-========================= */
+============================== */
 
 .toast{
     position:fixed;
     left:50%;
-    bottom:92px;
-    transform:translateX(-50%) translateY(20px);
-    background:#ffd400;
-    color:#07151d;
-    padding:12px 18px;
-    border-radius:25px;
-    font-weight:800;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
+    bottom:85px;
+    transform:translateX(-50%);
+    background:#ffd000;
+    color:#002b3d;
+    padding:11px 17px;
+    border-radius:12px;
+    font-weight:bold;
     z-index:3000;
+    display:none;
     max-width:90%;
     text-align:center;
 }
 
 .toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+    display:block;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+@media(max-width:500px){
 
-@media(max-width:480px){
-
-    .top-title h1{
-        font-size:26px;
-    }
-
-    .profile-editor{
-        align-items:flex-start;
-    }
-
-    .profile-preview{
+    .profile-picture-wrap{
         width:70px;
         height:70px;
         min-width:70px;
     }
 
-    .community-name{
+    .name-display{
         font-size:19px;
     }
 
     .follow-btn{
-        padding:6px 9px;
-        font-size:12px;
+        padding:7px 10px;
     }
 
-    .post-avatar{
-        width:44px;
-        height:44px;
-        min-width:44px;
+    .post-image{
+        max-height:430px;
     }
 
-    .posts{
-        padding-left:7px;
-        padding-right:7px;
+    .composer-button{
+        width:50px;
+        height:50px;
+        min-width:50px;
     }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<div class="app">
+<!-- ==============================
+     PROFILE
+============================== -->
 
-    <!-- =========================
-         TITLE
-    ========================== -->
+<section class="profile-area">
 
-    <div class="top-title">
-        <h1>🎉 Celebrate, Sell & Network</h1>
-        <p>Connect, celebrate and share your moments with the Kulzzy Radio community.</p>
-    </div>
+    <div class="profile-row">
 
+        <div class="profile-picture-wrap">
 
-    <!-- =========================
-         PROFILE
-    ========================== -->
+            <img
+                id="myProfilePicture"
+                class="profile-picture"
+                src=""
+                alt=""
+                style="display:none;"
+            >
 
-    <section class="profile-section">
+            <span
+                id="profilePlaceholder"
+                class="profile-placeholder">
+                👤
+            </span>
 
-        <div class="profile-title">👤 Your Profile</div>
+        </div>
 
-        <div id="profileEditor">
+        <div class="profile-info">
 
-            <div class="profile-editor">
-
-                <img
-                    id="profilePreview"
-                    class="profile-preview"
-                    src=""
-                    alt="Profile">
-
-                <div class="profile-fields">
-
-                    <input
-                        id="nameInput"
-                        class="name-input"
-                        type="text"
-                        maxlength="40"
-                        placeholder="Write your name">
-
-                    <input
-                        id="profileFile"
-                        class="profile-file"
-                        type="file"
-                        accept="image/*">
-
-                    <button
-                        id="saveProfile"
-                        class="save-profile">
-                        💾 Save Profile
-                    </button>
-
-                </div>
-
+            <div
+                id="myName"
+                class="name-display">
+                Set your profile
             </div>
 
-        </div>
+            <div class="profile-stats">
 
-
-        <div id="savedProfile" class="profile-saved">
-
-            <img id="savedProfileImage" src="" alt="Profile">
-
-            <div>
-                <div id="savedProfileName" class="profile-saved-name"></div>
-
-                <button
-                    id="editProfile"
-                    class="edit-profile">
-                    Edit Profile
-                </button>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         COMMUNITY HEADER
-    ========================== -->
-
-    <div class="community-header">
-
-        <div class="community-name">
-            💬 <span>Community Chat</span>
-        </div>
-
-        <div class="header-actions">
-
-            <button
-                id="notificationBtn"
-                class="header-btn"
-                title="Notifications">
-
-                🔔
-
-                <span
-                    id="notificationBadge"
-                    class="notification-badge">
-                    0
+                <span>
+                    👥
+                    <span id="myFollowers">0</span>
+                    Followers
                 </span>
 
-            </button>
+                <span class="notification-count">
+                    🔔
+                    <span id="myNotifications">0</span>
+                </span>
+
+            </div>
 
         </div>
 
     </div>
 
+</section>
 
-    <!-- =========================
-         INTRO
-    ========================== -->
 
-    <div class="community-intro">
+<!-- ==============================
+     COMMUNITY
+============================== -->
+
+<main class="community">
+
+    <div class="community-info">
+
         Kulzzy Radio Live Community.<br>
         Start chatting with listeners around the world.
+
     </div>
 
+    <div id="posts"></div>
 
-    <!-- =========================
-         POSTS
-    ========================== -->
+    <div id="chatList" class="chat-list"></div>
 
-    <main id="posts" class="posts">
-
-        <div id="emptyState" class="empty">
-            No posts yet. Be the first to share a picture.
-        </div>
-
-    </main>
-
-</div>
+</main>
 
 
-<!-- =========================
-     HIDDEN FILE INPUTS
-========================= -->
+<!-- ==============================
+     BOTTOM COMPOSER
+============================== -->
 
-<input
-    id="postUpload"
-    type="file"
-    accept="image/*"
-    class="hidden">
+<div class="composer">
 
-<input
-    id="cameraInput"
-    type="file"
-    accept="image/*"
-    capture="environment"
-    class="hidden">
-
-
-<!-- =========================
-     MESSAGE COMPOSER
-========================= -->
-
-<div class="composer-wrap">
-
-    <div class="composer">
+    <div class="composer-row">
 
         <!-- CAMERA -->
 
         <button
             id="cameraBtn"
-            class="composer-btn"
-            title="Take picture">
+            class="composer-button"
+            type="button"
+            title="Camera">
             📷
         </button>
-
 
         <!-- MESSAGE -->
 
         <textarea
-            id="messageBox"
+            id="message"
             class="message-box"
             rows="1"
-            maxlength="1000"
             placeholder="Type a message..."
-            autocomplete="off"></textarea>
-
+            maxlength="2000"></textarea>
 
         <!-- UPLOAD -->
 
         <button
             id="uploadBtn"
-            class="composer-btn"
+            class="composer-button"
+            type="button"
             title="Upload picture">
             🖼️
         </button>
-
 
         <!-- SEND -->
 
         <button
             id="sendBtn"
-            class="send-btn"
-            title="Send message">
+            class="composer-button"
+            type="button"
+            title="Send">
             ➤
         </button>
 
     </div>
 
-    <div class="post-mode">
-        📷 Camera &nbsp; • &nbsp; 🖼️ Upload &nbsp; • &nbsp; ➤ Send
-    </div>
-
 </div>
 
 
-<!-- =========================
-     COMMENT MODAL
-========================= -->
+<input
+    id="cameraInput"
+    class="hidden-file"
+    type="file"
+    accept="image/*"
+    capture="environment"
+>
 
-<div id="commentModal" class="modal">
+<input
+    id="uploadInput"
+    class="hidden-file"
+    type="file"
+    accept="image/*"
+>
 
-    <div class="modal-box">
 
-        <div class="modal-title">
-            💬 Add Comment
-        </div>
+<!-- ==============================
+     PROFILE MODAL
+============================== -->
+
+<div id="profileModal" class="profile-modal">
+
+    <div class="profile-box">
+
+        <h3>Set Your Profile</h3>
 
         <input
-            id="commentInput"
-            class="modal-input"
-            maxlength="300"
-            placeholder="Write your comment...">
+            id="profileNameInput"
+            class="name-input"
+            type="text"
+            maxlength="40"
+            placeholder="Write your name"
+        >
 
-        <div class="modal-buttons">
+        <input
+            id="profilePictureInput"
+            class="profile-file"
+            type="file"
+            accept="image/*"
+        >
 
-            <button
-                id="cancelComment"
-                class="cancel-btn">
-                Cancel
-            </button>
+        <button
+            id="saveProfileBtn"
+            class="save-profile"
+            type="button">
+            SAVE PROFILE
+        </button>
 
-            <button
-                id="sendComment"
-                class="confirm-btn">
-                Send
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     NOTIFICATION MODAL
-========================= -->
-
-<div id="notificationModal" class="modal">
-
-    <div class="modal-box">
-
-        <div class="modal-title">
-            🔔 Notifications
-        </div>
-
-        <div id="notificationList">
-            <div class="empty">
-                No notifications yet.
-            </div>
-        </div>
-
-        <div class="modal-buttons">
-
-            <button
-                id="closeNotifications"
-                class="confirm-btn">
-                Close
-            </button>
-
-        </div>
+        <button
+            id="closeProfileBtn"
+            class="close-profile"
+            type="button">
+            CANCEL
+        </button>
 
     </div>
 
 </div>
 
+
+<div
+    id="requiredMessage"
+    class="required-message">
+    Please save your profile picture and name before sending a message.
+</div>
 
 <div id="toast" class="toast"></div>
 
 
-<!-- =========================
-     FIREBASE + APPLICATION
-========================= -->
-
 <script type="module">
+
+/* ============================================================
+   FIREBASE
+============================================================ */
 
 import {
     initializeApp
@@ -943,17 +762,14 @@ import {
     ref,
     push,
     set,
-    get,
     update,
+    get,
     onValue,
     onChildAdded,
-    onChildChanged
+    onChildChanged,
+    runTransaction
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-
-/* =========================================================
-   FIREBASE
-========================================================= */
 
 const firebaseConfig = {
 
@@ -977,124 +793,115 @@ const firebaseConfig = {
 
     appId:
         "1:510100635134:web:9d3b2e983eb6e9a385d4af"
+
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const db =
-    getDatabase(app);
+const db = getDatabase(app);
 
 
-/* =========================================================
+/* ============================================================
    CLOUDINARY
-========================================================= */
+============================================================ */
 
 const CLOUDINARY_CLOUD_NAME =
     "s4j0x7dk";
+
+/*
+ IMPORTANT:
+ Put your actual Cloudinary UNSIGNED upload preset here.
+
+ If your preset is named "Community Chat",
+ keep the value below as:
+
+ "Community Chat"
+
+ If Cloudinary uses another preset name,
+ change only this value.
+*/
 
 const CLOUDINARY_UPLOAD_PRESET =
     "Community Chat";
 
 
-/* =========================================================
+/* ============================================================
    ELEMENTS
-========================================================= */
+============================================================ */
 
-const profileEditor =
-    document.getElementById("profileEditor");
+const myName =
+    document.getElementById("myName");
 
-const savedProfile =
-    document.getElementById("savedProfile");
+const myProfilePicture =
+    document.getElementById("myProfilePicture");
 
-const profilePreview =
-    document.getElementById("profilePreview");
+const profilePlaceholder =
+    document.getElementById("profilePlaceholder");
 
-const savedProfileImage =
-    document.getElementById("savedProfileImage");
+const myFollowers =
+    document.getElementById("myFollowers");
 
-const savedProfileName =
-    document.getElementById("savedProfileName");
+const myNotifications =
+    document.getElementById("myNotifications");
 
-const nameInput =
-    document.getElementById("nameInput");
-
-const profileFile =
-    document.getElementById("profileFile");
-
-const saveProfile =
-    document.getElementById("saveProfile");
-
-const editProfile =
-    document.getElementById("editProfile");
-
-const postsElement =
+const posts =
     document.getElementById("posts");
 
-const emptyState =
-    document.getElementById("emptyState");
+const chatList =
+    document.getElementById("chatList");
 
 const messageBox =
-    document.getElementById("messageBox");
+    document.getElementById("message");
 
 const sendBtn =
     document.getElementById("sendBtn");
 
+const uploadBtn =
+    document.getElementById("uploadBtn");
+
 const cameraBtn =
     document.getElementById("cameraBtn");
 
-const uploadBtn =
-    document.getElementById("uploadBtn");
+const uploadInput =
+    document.getElementById("uploadInput");
 
 const cameraInput =
     document.getElementById("cameraInput");
 
-const postUpload =
-    document.getElementById("postUpload");
+const profileModal =
+    document.getElementById("profileModal");
 
-const notificationBtn =
-    document.getElementById("notificationBtn");
+const profileNameInput =
+    document.getElementById("profileNameInput");
 
-const notificationBadge =
-    document.getElementById("notificationBadge");
+const profilePictureInput =
+    document.getElementById("profilePictureInput");
 
-const notificationModal =
-    document.getElementById("notificationModal");
+const saveProfileBtn =
+    document.getElementById("saveProfileBtn");
 
-const notificationList =
-    document.getElementById("notificationList");
+const closeProfileBtn =
+    document.getElementById("closeProfileBtn");
 
-const closeNotifications =
-    document.getElementById("closeNotifications");
-
-const commentModal =
-    document.getElementById("commentModal");
-
-const commentInput =
-    document.getElementById("commentInput");
-
-const cancelComment =
-    document.getElementById("cancelComment");
-
-const sendComment =
-    document.getElementById("sendComment");
+const requiredMessage =
+    document.getElementById("requiredMessage");
 
 const toast =
     document.getElementById("toast");
 
 
-/* =========================================================
-   USER ID
-========================================================= */
+/* ============================================================
+   LISTENER ID
+============================================================ */
 
-let userId =
-    localStorage.getItem("krCommunityUserId");
+let listenerId =
+    localStorage.getItem("kulzzyListenerId");
 
-if (!userId) {
+if (!listenerId) {
 
-    userId =
-        "user_" +
+    listenerId =
+        "listener_" +
         Date.now() +
         "_" +
         Math.random()
@@ -1102,26 +909,41 @@ if (!userId) {
             .substring(2,9);
 
     localStorage.setItem(
-        "krCommunityUserId",
-        userId
+        "kulzzyListenerId",
+        listenerId
     );
+
 }
 
 
-/* =========================================================
-   PROFILE DATA
-========================================================= */
+/* ============================================================
+   LOCAL PROFILE
+============================================================ */
 
 let profile =
     JSON.parse(
-        localStorage.getItem("krCommunityProfile") ||
+        localStorage.getItem("kulzzyCommunityProfile") ||
         "null"
     );
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
+function hasProfile(){
+
+    return !!(
+        profile &&
+        profile.name &&
+        profile.name.trim() &&
+        profile.photo
+    );
+
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer;
 
 function showToast(text){
 
@@ -1129,98 +951,132 @@ function showToast(text){
 
     toast.classList.add("show");
 
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },3000);
+
+}
+
+
+/* ============================================================
+   PROFILE DISPLAY
+============================================================ */
+
+function displayProfile(){
+
+    if (!hasProfile()){
+
+        myName.textContent =
+            "Set your profile";
+
+        myProfilePicture.style.display =
+            "none";
+
+        profilePlaceholder.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    myName.textContent =
+        profile.name;
+
+    myProfilePicture.src =
+        profile.photo;
+
+    myProfilePicture.style.display =
+        "block";
+
+    profilePlaceholder.style.display =
+        "none";
+
+
+    loadFollowerCount(
+        listenerId
+    );
+
+}
+
+
+displayProfile();
+
+
+/* ============================================================
+   OPEN PROFILE
+============================================================ */
+
+function openProfile(){
+
+    profileNameInput.value =
+        profile?.name || "";
+
+    profileModal.classList.add("show");
+
+}
+
+
+/*
+ If there is no profile, require one
+ before chat can be used.
+*/
+
+if (!hasProfile()){
+
     setTimeout(() => {
 
-        toast.classList.remove("show");
+        openProfile();
 
-    }, 2800);
+    },700);
+
 }
 
 
-function escapeHTML(value){
-
-    return String(value || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-function formatTime(timestamp){
-
-    if (!timestamp) return "";
-
-    return new Date(timestamp)
-        .toLocaleString([],{
-            day:"numeric",
-            month:"short",
-            hour:"numeric",
-            minute:"2-digit"
-        });
-}
-
-
-function requireProfile(){
-
-    if (!profile ||
-        !profile.name ||
-        !profile.photo){
-
-        showToast(
-            "Please save your name and profile picture first."
-        );
-
-        return false;
-    }
-
-    return true;
-}
-
-
-/* =========================================================
-   PROFILE PREVIEW
-========================================================= */
-
-profileFile.addEventListener(
-    "change",
-    () => {
-
-        const file =
-            profileFile.files[0];
-
-        if (!file) return;
-
-        if (!file.type.startsWith("image/")){
-
-            showToast("Please select an image.");
-
-            profileFile.value = "";
-
-            return;
-        }
-
-        const reader =
-            new FileReader();
-
-        reader.onload = e => {
-
-            profilePreview.src =
-                e.target.result;
-
-        };
-
-        reader.readAsDataURL(file);
-    }
+myName.addEventListener(
+    "click",
+    openProfile
 );
 
 
-/* =========================================================
+/* ============================================================
+   CLOSE PROFILE
+============================================================ */
+
+closeProfileBtn.onclick = () => {
+
+    profileModal.classList.remove(
+        "show"
+    );
+
+};
+
+
+/* ============================================================
    CLOUDINARY UPLOAD
-========================================================= */
+============================================================ */
 
 async function uploadToCloudinary(file){
+
+    if (!file)
+        throw new Error(
+            "No picture selected."
+        );
+
+
+    if (!file.type.startsWith("image/")){
+
+        throw new Error(
+            "Only pictures are allowed."
+        );
+
+    }
+
 
     const formData =
         new FormData();
@@ -1235,246 +1091,285 @@ async function uploadToCloudinary(file){
         CLOUDINARY_UPLOAD_PRESET
     );
 
+
     const response =
         await fetch(
-            "https://api.cloudinary.com/v1_1/" +
-            CLOUDINARY_CLOUD_NAME +
-            "/image/upload",
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
             {
                 method:"POST",
                 body:formData
             }
         );
 
-    if (!response.ok){
-
-        throw new Error(
-            "Cloudinary upload failed."
-        );
-    }
 
     const data =
         await response.json();
 
-    return data.secure_url;
-}
 
+    if (!response.ok){
 
-/* =========================================================
-   SAVE PROFILE
-========================================================= */
-
-saveProfile.addEventListener(
-    "click",
-    async () => {
-
-        const name =
-            nameInput.value.trim();
-
-        const file =
-            profileFile.files[0];
-
-        if (!name){
-
-            showToast(
-                "Please write your name."
-            );
-
-            return;
-        }
-
-        if (!file && !(profile && profile.photo)){
-
-            showToast(
-                "Please upload a profile picture."
-            );
-
-            return;
-        }
-
-        saveProfile.disabled = true;
-
-        saveProfile.textContent =
-            "Saving...";
-
-        try {
-
-            let photo =
-                profile?.photo || "";
-
-            if (file){
-
-                photo =
-                    await uploadToCloudinary(
-                        file
-                    );
-            }
-
-            profile = {
-
-                uid:userId,
-
-                name:name,
-
-                photo:photo,
-
-                updatedAt:Date.now()
-
-            };
-
-            localStorage.setItem(
-                "krCommunityProfile",
-                JSON.stringify(profile)
-            );
-
-            await set(
-                ref(
-                    db,
-                    "profiles/" + userId
-                ),
-                profile
-            );
-
-            displaySavedProfile();
-
-            showToast(
-                "Profile saved successfully."
-            );
-
-        }catch(error){
-
-            console.error(error);
-
-            showToast(
-                "Profile could not be saved. Check Cloudinary settings."
-            );
-
-        }finally{
-
-            saveProfile.disabled = false;
-
-            saveProfile.textContent =
-                "💾 Save Profile";
-        }
-    }
-);
-
-
-/* =========================================================
-   DISPLAY PROFILE
-========================================================= */
-
-function displaySavedProfile(){
-
-    if (!profile ||
-        !profile.name ||
-        !profile.photo){
-
-        profileEditor.style.display =
-            "block";
-
-        savedProfile.style.display =
-            "none";
-
-        return;
-    }
-
-    profileEditor.style.display =
-        "none";
-
-    savedProfile.style.display =
-        "flex";
-
-    savedProfileImage.src =
-        profile.photo;
-
-    savedProfileName.textContent =
-        profile.name;
-
-    profilePreview.src =
-        profile.photo;
-
-    nameInput.value =
-        profile.name;
-}
-
-
-editProfile.addEventListener(
-    "click",
-    () => {
-
-        profileEditor.style.display =
-            "block";
-
-        savedProfile.style.display =
-            "none";
-    }
-);
-
-
-/* =========================================================
-   MESSAGE BOX
-========================================================= */
-
-function resizeMessageBox(){
-
-    messageBox.style.height =
-        "auto";
-
-    const height =
-        Math.min(
-            messageBox.scrollHeight,
-            145
+        throw new Error(
+            data?.error?.message ||
+            "Cloudinary upload failed."
         );
 
-    messageBox.style.height =
-        height + "px";
+    }
+
+
+    return data.secure_url;
+
 }
 
 
-messageBox.addEventListener(
-    "input",
-    resizeMessageBox
-);
+/* ============================================================
+   SAVE PROFILE
+============================================================ */
+
+saveProfileBtn.onclick =
+async () => {
+
+    const name =
+        profileNameInput.value.trim();
+
+    const file =
+        profilePictureInput.files[0];
 
 
-/* =========================================================
-   SEND CHAT MESSAGE
-========================================================= */
+    if (!name){
 
-async function sendMessage(){
+        showToast(
+            "Please write your name."
+        );
 
-    if (!requireProfile()) return;
+        return;
+
+    }
+
+
+    /*
+      If an existing picture is already saved,
+      the user does not have to upload again.
+    */
+
+    if (!file && !profile?.photo){
+
+        showToast(
+            "Please upload your profile picture."
+        );
+
+        return;
+
+    }
+
+
+    saveProfileBtn.disabled =
+        true;
+
+    saveProfileBtn.textContent =
+        "SAVING...";
+
+
+    try{
+
+        let photo =
+            profile?.photo || "";
+
+
+        if (file){
+
+            photo =
+                await uploadToCloudinary(
+                    file
+                );
+
+        }
+
+
+        profile = {
+
+            id:
+                listenerId,
+
+            name:
+                name,
+
+            photo:
+                photo,
+
+            updatedAt:
+                Date.now()
+
+        };
+
+
+        localStorage.setItem(
+            "kulzzyCommunityProfile",
+            JSON.stringify(profile)
+        );
+
+
+        await set(
+            ref(
+                db,
+                "profiles/" +
+                listenerId
+            ),
+            profile
+        );
+
+
+        displayProfile();
+
+
+        profileModal.classList.remove(
+            "show"
+        );
+
+
+        showToast(
+            "Profile saved successfully."
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Could not save profile."
+        );
+
+    }
+
+
+    saveProfileBtn.disabled =
+        false;
+
+    saveProfileBtn.textContent =
+        "SAVE PROFILE";
+
+};
+
+
+/* ============================================================
+   PROFILE REQUIRED
+============================================================ */
+
+function requireProfile(){
+
+    if (hasProfile())
+        return true;
+
+
+    requiredMessage.classList.add(
+        "show"
+    );
+
+
+    setTimeout(() => {
+
+        requiredMessage.classList.remove(
+            "show"
+        );
+
+    },3500);
+
+
+    openProfile();
+
+    return false;
+
+}
+
+
+/* ============================================================
+   ESCAPE HTML
+============================================================ */
+
+function escapeHTML(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ============================================================
+   TIME
+============================================================ */
+
+function formatTime(timestamp){
+
+    if (!timestamp)
+        return "";
+
+    return new Date(timestamp)
+        .toLocaleTimeString(
+            [],
+            {
+                hour:"numeric",
+                minute:"2-digit"
+            }
+        );
+
+}
+
+
+/* ============================================================
+   SEND TEXT MESSAGE
+============================================================ */
+
+sendBtn.onclick =
+async () => {
+
+    if (!requireProfile())
+        return;
+
 
     const text =
         messageBox.value.trim();
 
-    if (!text) return;
 
-    sendBtn.disabled = true;
+    if (!text)
+        return;
 
-    try {
+
+    sendBtn.disabled =
+        true;
+
+
+    try{
 
         await push(
             ref(db,"chat"),
             {
 
-                uid:userId,
+                uid:
+                    listenerId,
 
-                name:profile.name,
+                name:
+                    profile.name,
 
-                photo:profile.photo,
+                text:
+                    text,
 
-                text:text,
-
-                time:Date.now()
+                time:
+                    Date.now()
 
             }
         );
 
-        messageBox.value = "";
+
+        messageBox.value =
+            "";
 
         resizeMessageBox();
+
 
     }catch(error){
 
@@ -1484,18 +1379,18 @@ async function sendMessage(){
             "Message could not be sent."
         );
 
-    }finally{
-
-        sendBtn.disabled = false;
     }
-}
 
 
-sendBtn.addEventListener(
-    "click",
-    sendMessage
-);
+    sendBtn.disabled =
+        false;
 
+};
+
+
+/* ============================================================
+   ENTER TO SEND
+============================================================ */
 
 messageBox.addEventListener(
     "keydown",
@@ -1508,461 +1403,178 @@ messageBox.addEventListener(
 
             event.preventDefault();
 
-            sendMessage();
+            sendBtn.click();
+
         }
-    }
-);
-
-
-/* =========================================================
-   CAMERA
-========================================================= */
-
-cameraBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!requireProfile()) return;
-
-        cameraInput.click();
 
     }
 );
 
 
-/* =========================================================
-   UPLOAD BUTTON
-========================================================= */
+/* ============================================================
+   AUTO GROW MESSAGE BOX
+============================================================ */
 
-uploadBtn.addEventListener(
-    "click",
-    () => {
+function resizeMessageBox(){
 
-        if (!requireProfile()) return;
+    messageBox.style.height =
+        "auto";
 
-        postUpload.click();
+    messageBox.style.height =
+        Math.min(
+            messageBox.scrollHeight,
+            130
+        ) + "px";
 
-    }
+}
+
+
+messageBox.addEventListener(
+    "input",
+    resizeMessageBox
 );
 
 
-/* =========================================================
-   CAMERA FILE
-========================================================= */
+/* ============================================================
+   DISPLAY CHAT
+============================================================ */
 
-cameraInput.addEventListener(
-    "change",
-    () => {
+onChildAdded(
+    ref(db,"chat"),
+    snapshot => {
 
-        const file =
-            cameraInput.files[0];
+        const data =
+            snapshot.val();
 
-        if (!file) return;
-
-        createImagePost(file);
-
-        cameraInput.value = "";
-    }
-);
+        if (!data)
+            return;
 
 
-/* =========================================================
-   PHONE UPLOAD
-========================================================= */
+        const message =
+            document.createElement("div");
 
-postUpload.addEventListener(
-    "change",
-    () => {
-
-        const file =
-            postUpload.files[0];
-
-        if (!file) return;
-
-        createImagePost(file);
-
-        postUpload.value = "";
-    }
-);
+        message.className =
+            "chat-message";
 
 
-/* =========================================================
-   CREATE IMAGE POST
-========================================================= */
+        message.innerHTML = `
 
-async function createImagePost(file){
+            <div class="chat-name">
+                ${escapeHTML(data.name)}
+            </div>
 
-    if (!requireProfile()) return;
+            <div class="chat-text">
+                ${escapeHTML(data.text)}
+            </div>
 
-    if (!file.type.startsWith("image/")){
+            <div class="chat-time">
+                ${formatTime(data.time)}
+            </div>
 
-        showToast(
-            "Only pictures are allowed."
+        `;
+
+
+        chatList.appendChild(
+            message
         );
 
-        return;
+
+        window.scrollTo(
+            0,
+            document.body.scrollHeight
+        );
+
     }
+);
 
-    showToast(
-        "Uploading picture..."
-    );
+  /* ============================================================
+   PROFILE FOLLOWER COUNT
+============================================================ */
 
-    try {
+async function loadFollowerCount(uid){
 
-        const imageUrl =
-            await uploadToCloudinary(
-                file
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "followers/" +
+                    uid
+                )
             );
 
-        await push(
-            ref(db,"posts"),
-            {
 
-                uid:userId,
+        let count =
+            0;
 
-                name:profile.name,
 
-                photo:profile.photo,
+        if (snapshot.exists()){
 
-                image:imageUrl,
+            count =
+                Object.keys(
+                    snapshot.val()
+                ).length;
 
-                time:Date.now(),
+        }
 
-                likes:{},
 
-                views:0
-
-            }
-        );
-
-        showToast(
-            "Picture posted successfully."
-        );
+        myFollowers.textContent =
+            count;
 
     }catch(error){
 
         console.error(error);
 
-        showToast(
-            "Picture upload failed."
-        );
     }
+
 }
 
 
-/* =========================================================
-   POSTS LISTENER
-========================================================= */
+/* ============================================================
+   FOLLOW / UNFOLLOW
+============================================================ */
 
-const postsRef =
-    ref(db,"posts");
+async function toggleFollow(
+    targetUid,
+    button,
+    countElement
+){
 
-onValue(
-    postsRef,
-    snapshot => {
+    if (!requireProfile())
+        return;
 
-        postsElement
-            .querySelectorAll(".post")
-            .forEach(el => el.remove());
-
-        const data =
-            snapshot.val();
-
-        if (!data){
-
-            emptyState.style.display =
-                "block";
-
-            return;
-        }
-
-        emptyState.style.display =
-            "none";
-
-        const posts =
-            Object.entries(data)
-                .map(
-                    ([id,post]) => ({
-                        id,
-                        ...post
-                    })
-                )
-                .sort(
-                    (a,b) =>
-                        (b.time || 0) -
-                        (a.time || 0)
-                );
-
-        posts.forEach(
-            post => {
-
-                renderPost(post);
-
-            }
-        );
-    }
-);
-
-
-/* =========================================================
-   RENDER POST
-========================================================= */
-
-async function renderPost(post){
-
-    const article =
-        document.createElement("article");
-
-    article.className =
-        "post";
-
-    article.dataset.id =
-        post.id;
-
-    const likes =
-        post.likes || {};
-
-    const likeCount =
-        Object.keys(likes).length;
-
-    const liked =
-        !!likes[userId];
-
-    const views =
-        Number(post.views || 0);
-
-    article.innerHTML = `
-
-        <div class="post-top">
-
-            <img
-                class="post-avatar"
-                src="${escapeHTML(post.photo)}"
-                alt="">
-
-            <div class="post-user">
-
-                <div class="post-name">
-                    ${escapeHTML(post.name)}
-                </div>
-
-                <div class="post-time">
-                    ${formatTime(post.time)}
-                </div>
-
-            </div>
-
-            ${
-                post.uid !== userId
-                ?
-                `
-                <button
-                    class="follow-btn"
-                    data-follow="${escapeHTML(post.uid)}">
-                    Follow Me
-                </button>
-                `
-                :
-                ""
-            }
-
-        </div>
-
-
-        <img
-            class="post-image"
-            src="${escapeHTML(post.image)}"
-            alt="Community post"
-            loading="lazy">
-
-
-        <div class="post-actions">
-
-            <button
-                class="action-btn ${
-                    liked ? "liked" : ""
-                }"
-                data-like="${post.id}">
-                ❤️ ${likeCount}
-            </button>
-
-
-            <button
-                class="action-btn"
-                data-comment="${post.id}">
-                💬 Comment
-            </button>
-
-
-            <div class="post-views">
-                👁️ ${views}
-            </div>
-
-        </div>
-
-
-        <div
-            class="comments"
-            id="comments-${post.id}">
-
-        </div>
-
-    `;
-
-
-    postsElement.appendChild(
-        article
-    );
-
-
-    loadComments(post.id);
-
-
-    /* ======================
-       VIEW COUNT
-    ====================== */
 
     if (
-        post.uid !== userId
+        targetUid === listenerId
     ){
 
-        const viewedKey =
-            "viewed_" + post.id;
-
-        if (
-            !sessionStorage.getItem(
-                viewedKey
-            )
-        ){
-
-            sessionStorage.setItem(
-                viewedKey,
-                "1"
-            );
-
-            update(
-                ref(
-                    db,
-                    "posts/" + post.id
-                ),
-                {
-                    views:views + 1
-                }
-            );
-        }
-    }
-}
-
-
-/* =========================================================
-   LIKE
-========================================================= */
-
-postsElement.addEventListener(
-    "click",
-    async event => {
-
-        const likeButton =
-            event.target.closest(
-                "[data-like]"
-            );
-
-        if (!likeButton) return;
-
-        if (!requireProfile()) return;
-
-        const postId =
-            likeButton.dataset.like;
-
-        const postRef =
-            ref(
-                db,
-                "posts/" + postId
-            );
-
-        const snapshot =
-            await get(postRef);
-
-        if (!snapshot.exists()) return;
-
-        const post =
-            snapshot.val();
-
-        const likes =
-            post.likes || {};
-
-        if (likes[userId]){
-
-            delete likes[userId];
-
-        }else{
-
-            likes[userId] =
-                true;
-
-            if (
-                post.uid &&
-                post.uid !== userId
-            ){
-
-                await createNotification(
-                    post.uid,
-                    profile.name +
-                    " liked your picture."
-                );
-            }
-        }
-
-        await update(
-            postRef,
-            {
-                likes:likes
-            }
+        showToast(
+            "You cannot follow yourself."
         );
+
+        return;
+
     }
-);
 
 
-/* =========================================================
-   FOLLOW
-========================================================= */
+    const followRef =
+        ref(
+            db,
+            "followers/" +
+            targetUid +
+            "/" +
+            listenerId
+        );
 
-postsElement.addEventListener(
-    "click",
-    async event => {
 
-        const followButton =
-            event.target.closest(
-                "[data-follow]"
-            );
-
-        if (!followButton) return;
-
-        if (!requireProfile()) return;
-
-        const targetUid =
-            followButton.dataset.follow;
-
-        if (targetUid === userId){
-
-            showToast(
-                "You cannot follow yourself."
-            );
-
-            return;
-        }
-
-        const followRef =
-            ref(
-                db,
-                "follows/" +
-                targetUid +
-                "/" +
-                userId
-            );
+    try{
 
         const snapshot =
-            await get(followRef);
+            await get(
+                followRef
+            );
+
 
         if (snapshot.exists()){
 
@@ -1971,10 +1583,10 @@ postsElement.addEventListener(
                 null
             );
 
-            followButton.textContent =
+            button.textContent =
                 "Follow Me";
 
-            followButton.classList.remove(
+            button.classList.remove(
                 "following"
             );
 
@@ -1984,506 +1596,1265 @@ postsElement.addEventListener(
                 followRef,
                 {
 
-                    name:profile.name,
+                    name:
+                        profile.name,
 
-                    photo:profile.photo,
-
-                    time:Date.now()
+                    time:
+                        Date.now()
 
                 }
             );
 
-            followButton.textContent =
+
+            button.textContent =
                 "Following";
 
-            followButton.classList.add(
+            button.classList.add(
                 "following"
             );
 
-            await createNotification(
-                targetUid,
-                profile.name +
-                " started following you."
-            );
-        }
-    }
-);
 
-
-/* =========================================================
-   COMMENTS
-========================================================= */
-
-let activeCommentPost =
-    null;
-
-
-postsElement.addEventListener(
-    "click",
-    event => {
-
-        const button =
-            event.target.closest(
-                "[data-comment]"
-            );
-
-        if (!button) return;
-
-        if (!requireProfile()) return;
-
-        activeCommentPost =
-            button.dataset.comment;
-
-        commentInput.value =
-            "";
-
-        commentModal.classList.add(
-            "show"
-        );
-
-        setTimeout(
-            () => commentInput.focus(),
-            100
-        );
-    }
-);
-
-
-cancelComment.addEventListener(
-    "click",
-    () => {
-
-        commentModal.classList.remove(
-            "show"
-        );
-
-        activeCommentPost =
-            null;
-    }
-);
-
-
-sendComment.addEventListener(
-    "click",
-    async () => {
-
-        if (!requireProfile()) return;
-
-        const text =
-            commentInput.value.trim();
-
-        if (!text) return;
-
-        if (!activeCommentPost) return;
-
-        try {
-
-            const postSnapshot =
-                await get(
-                    ref(
-                        db,
-                        "posts/" +
-                        activeCommentPost
-                    )
-                );
+            /*
+              Notification for the person
+              being followed.
+            */
 
             await push(
                 ref(
                     db,
-                    "comments/" +
-                    activeCommentPost
+                    "notifications/" +
+                    targetUid
                 ),
                 {
 
-                    uid:userId,
+                    type:
+                        "follow",
 
-                    name:profile.name,
+                    fromUid:
+                        listenerId,
 
-                    photo:profile.photo,
+                    fromName:
+                        profile.name,
 
-                    text:text,
+                    time:
+                        Date.now(),
 
-                    time:Date.now()
+                    read:
+                        false
 
                 }
             );
+
+        }
+
+
+        loadPostFollowerCount(
+            targetUid,
+            countElement
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Follow action failed."
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   FOLLOWER COUNT FOR POSTS
+============================================================ */
+
+async function loadPostFollowerCount(
+    uid,
+    element
+){
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "followers/" +
+                    uid
+                )
+            );
+
+
+        const count =
+            snapshot.exists()
+            ?
+            Object.keys(
+                snapshot.val()
+            ).length
+            :
+            0;
+
+
+        element.textContent =
+            count;
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   CHECK IF FOLLOWING
+============================================================ */
+
+async function checkFollowing(
+    targetUid,
+    button
+){
+
+    if (!hasProfile())
+        return;
+
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "followers/" +
+                    targetUid +
+                    "/" +
+                    listenerId
+                )
+            );
+
+
+        if (snapshot.exists()){
+
+            button.textContent =
+                "Following";
+
+            button.classList.add(
+                "following"
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   LIKE POST
+============================================================ */
+
+async function toggleLike(
+    postId,
+    button,
+    countElement,
+    post
+){
+
+    if (!requireProfile())
+        return;
+
+
+    const likeRef =
+        ref(
+            db,
+            "postLikes/" +
+            postId +
+            "/" +
+            listenerId
+        );
+
+
+    try{
+
+        const snapshot =
+            await get(
+                likeRef
+            );
+
+
+        if (snapshot.exists()){
+
+            await set(
+                likeRef,
+                null
+            );
+
+            button.classList.remove(
+                "liked"
+            );
+
+        }else{
+
+            await set(
+                likeRef,
+                {
+
+                    name:
+                        profile.name,
+
+                    time:
+                        Date.now()
+
+                }
+            );
+
+
+            button.classList.add(
+                "liked"
+            );
+
 
             if (
-                postSnapshot.exists()
+                post.uid &&
+                post.uid !== listenerId
             ){
 
-                const post =
-                    postSnapshot.val();
+                await push(
+                    ref(
+                        db,
+                        "notifications/" +
+                        post.uid
+                    ),
+                    {
 
-                if (
-                    post.uid &&
-                    post.uid !== userId
-                ){
+                        type:
+                            "like",
 
-                    await createNotification(
-                        post.uid,
-                        profile.name +
-                        " commented on your picture."
-                    );
-                }
+                        postId:
+                            postId,
+
+                        fromUid:
+                            listenerId,
+
+                        fromName:
+                            profile.name,
+
+                        time:
+                            Date.now(),
+
+                        read:
+                            false
+
+                    }
+                );
+
             }
 
-            commentInput.value = "";
-
-            commentModal.classList.remove(
-                "show"
-            );
-
-            activeCommentPost =
-                null;
-
-        }catch(error){
-
-            console.error(error);
-
-            showToast(
-                "Comment could not be sent."
-            );
         }
+
+
+        loadLikeCount(
+            postId,
+            countElement
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   LIKE COUNT
+============================================================ */
+
+async function loadLikeCount(
+    postId,
+    element
+){
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "postLikes/" +
+                    postId
+                )
+            );
+
+
+        const count =
+            snapshot.exists()
+            ?
+            Object.keys(
+                snapshot.val()
+            ).length
+            :
+            0;
+
+
+        element.textContent =
+            count;
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   COMMENTS
+============================================================ */
+
+async function addComment(
+    postId,
+    input,
+    commentsList
+){
+
+    if (!requireProfile())
+        return;
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text)
+        return;
+
+
+    try{
+
+        await push(
+            ref(
+                db,
+                "postComments/" +
+                postId
+            ),
+            {
+
+                uid:
+                    listenerId,
+
+                name:
+                    profile.name,
+
+                text:
+                    text,
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+
+        input.value =
+            "";
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   RENDER COMMENT
+============================================================ */
+
+function renderComment(
+    commentsList,
+    data
+){
+
+    const comment =
+        document.createElement("div");
+
+    comment.className =
+        "comment";
+
+
+    comment.innerHTML = `
+
+        <strong>
+            ${escapeHTML(data.name)}
+        </strong>
+
+        <br>
+
+        ${escapeHTML(data.text)}
+
+    `;
+
+
+    commentsList.appendChild(
+        comment
+    );
+
+}
+
+
+/* ============================================================
+   POST VIEW COUNT
+============================================================ */
+
+async function registerPostView(
+    postId,
+    postElement
+){
+
+    if (!hasProfile())
+        return;
+
+
+    const sessionKey =
+        "viewed_" +
+        postId;
+
+
+    if (
+        sessionStorage.getItem(
+            sessionKey
+        )
+    ){
+
+        return;
+
+    }
+
+
+    sessionStorage.setItem(
+        sessionKey,
+        "1"
+    );
+
+
+    const viewRef =
+        ref(
+            db,
+            "postViews/" +
+            postId +
+            "/" +
+            listenerId
+        );
+
+
+    try{
+
+        const result =
+            await runTransaction(
+                viewRef,
+                current => {
+
+                    if (
+                        current !== null
+                    ){
+
+                        return current;
+
+                    }
+
+                    return {
+
+                        uid:
+                            listenerId,
+
+                        name:
+                            profile.name,
+
+                        time:
+                            Date.now()
+
+                    };
+
+                }
+            );
+
+
+        if (result.committed){
+
+            const viewCount =
+                postElement.querySelector(
+                    ".view-count"
+                );
+
+
+            if (viewCount){
+
+                const snapshot =
+                    await get(
+                        ref(
+                            db,
+                            "postViews/" +
+                            postId
+                        )
+                    );
+
+
+                const count =
+                    snapshot.exists()
+                    ?
+                    Object.keys(
+                        snapshot.val()
+                    ).length
+                    :
+                    0;
+
+
+                viewCount.textContent =
+                    count;
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ============================================================
+   CREATE POST
+============================================================ */
+
+async function createPicturePost(
+    file
+){
+
+    if (!requireProfile())
+        return;
+
+
+    if (!file)
+        return;
+
+
+    if (!file.type.startsWith("image/")){
+
+        showToast(
+            "Only pictures are allowed."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        showToast(
+            "Uploading picture..."
+        );
+
+
+        const imageUrl =
+            await uploadToCloudinary(
+                file
+            );
+
+
+        await push(
+            ref(db,"communityPosts"),
+            {
+
+                uid:
+                    listenerId,
+
+                name:
+                    profile.name,
+
+                profilePhoto:
+                    profile.photo,
+
+                image:
+                    imageUrl,
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+
+        showToast(
+            "Picture posted."
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Picture upload failed."
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   UPLOAD BUTTON
+============================================================ */
+
+uploadBtn.onclick = () => {
+
+    if (!requireProfile())
+        return;
+
+    uploadInput.click();
+
+};
+
+
+uploadInput.onchange = () => {
+
+    const file =
+        uploadInput.files[0];
+
+    if (file){
+
+        createPicturePost(
+            file
+        );
+
+    }
+
+    uploadInput.value =
+        "";
+
+};
+
+
+/* ============================================================
+   CAMERA BUTTON
+============================================================ */
+
+cameraBtn.onclick = () => {
+
+    if (!requireProfile())
+        return;
+
+    cameraInput.click();
+
+};
+
+
+cameraInput.onchange = () => {
+
+    const file =
+        cameraInput.files[0];
+
+    if (file){
+
+        createPicturePost(
+            file
+        );
+
+    }
+
+    cameraInput.value =
+        "";
+
+};
+
+
+/* ============================================================
+   RENDER POSTS
+============================================================ */
+
+onChildAdded(
+    ref(db,"communityPosts"),
+    snapshot => {
+
+        const post =
+            snapshot.val();
+
+        if (!post)
+            return;
+
+
+        const postId =
+            snapshot.key;
+
+
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "post-card";
+
+
+        card.innerHTML = `
+
+            <div class="post-header">
+
+                <img
+                    class="post-profile"
+                    src="${escapeHTML(post.profilePhoto || "")}"
+                    alt=""
+                >
+
+                <div class="post-user">
+
+                    <div class="post-name">
+                        ${escapeHTML(post.name)}
+                    </div>
+
+                    <div class="post-time">
+                        ${formatTime(post.time)}
+                    </div>
+
+                </div>
+
+                <button
+                    class="follow-btn"
+                    type="button">
+                    Follow Me
+                </button>
+
+            </div>
+
+
+            <img
+                class="post-image"
+                src="${escapeHTML(post.image)}"
+                alt="Community post"
+                loading="lazy"
+            >
+
+
+            <div class="post-actions">
+
+                <button
+                    class="action-btn like-btn"
+                    type="button">
+
+                    ❤️
+                    <span class="like-count">0</span>
+
+                </button>
+
+
+                <button
+                    class="action-btn comment-btn"
+                    type="button">
+
+                    💬
+                    Comment
+
+                </button>
+
+
+                <div class="views">
+
+                    👁️
+                    <span class="view-count">0</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="post-text"></div>
+
+
+            <div class="comment-area">
+
+                <div class="comment-input-row">
+
+                    <input
+                        class="comment-input"
+                        type="text"
+                        maxlength="500"
+                        placeholder="Write a comment..."
+                    >
+
+                    <button
+                        class="comment-send"
+                        type="button">
+                        Send
+                    </button>
+
+                </div>
+
+
+                <div class="comments-list"></div>
+
+            </div>
+
+        `;
+
+
+        posts.prepend(
+            card
+        );
+
+
+        const followBtn =
+            card.querySelector(
+                ".follow-btn"
+            );
+
+
+        const likeBtn =
+            card.querySelector(
+                ".like-btn"
+            );
+
+
+        const likeCount =
+            card.querySelector(
+                ".like-count"
+            );
+
+
+        const commentBtn =
+            card.querySelector(
+                ".comment-btn"
+            );
+
+
+        const commentArea =
+            card.querySelector(
+                ".comment-area"
+            );
+
+
+        const commentInput =
+            card.querySelector(
+                ".comment-input"
+            );
+
+
+        const commentSend =
+            card.querySelector(
+                ".comment-send"
+            );
+
+
+        const commentsList =
+            card.querySelector(
+                ".comments-list"
+            );
+
+
+        const viewCount =
+            card.querySelector(
+                ".view-count"
+            );
+
+
+        const followersNumber =
+            document.createElement(
+                "span"
+            );
+
+
+        followersNumber.style.display =
+            "none";
+
+
+        followBtn.addEventListener(
+            "click",
+            () => {
+
+                toggleFollow(
+                    post.uid,
+                    followBtn,
+                    followersNumber
+                );
+
+            }
+        );
+
+
+        checkFollowing(
+            post.uid,
+            followBtn
+        );
+
+
+        loadPostFollowerCount(
+            post.uid,
+            followersNumber
+        );
+
+
+        likeBtn.addEventListener(
+            "click",
+            () => {
+
+                toggleLike(
+                    postId,
+                    likeBtn,
+                    likeCount,
+                    post
+                );
+
+            }
+        );
+
+
+        loadLikeCount(
+            postId,
+            likeCount
+        );
+
+
+        commentBtn.addEventListener(
+            "click",
+            () => {
+
+                commentArea.classList.toggle(
+                    "show"
+                );
+
+            }
+        );
+
+
+        commentSend.addEventListener(
+            "click",
+            () => {
+
+                addComment(
+                    postId,
+                    commentInput,
+                    commentsList
+                );
+
+            }
+        );
+
+
+        commentInput.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter"
+                ){
+
+                    event.preventDefault();
+
+                    commentSend.click();
+
+                }
+
+            }
+        );
+
+
+        onChildAdded(
+            ref(
+                db,
+                "postComments/" +
+                postId
+            ),
+            commentSnapshot => {
+
+                const comment =
+                    commentSnapshot.val();
+
+                if (comment){
+
+                    renderComment(
+                        commentsList,
+                        comment
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+          View is registered when
+          the post enters the screen.
+        */
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ){
+
+                                registerPostView(
+                                    postId,
+                                    card
+                                );
+
+                                observer.disconnect();
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold:0.45
+                }
+            );
+
+
+        observer.observe(
+            card
+        );
+
     }
 );
 
 
-/* =========================================================
-   LOAD COMMENTS
-========================================================= */
-
-function loadComments(postId){
-
-    const commentsRef =
-        ref(
-            db,
-            "comments/" + postId
-        );
-
-    onValue(
-        commentsRef,
-        snapshot => {
-
-            const container =
-                document.getElementById(
-                    "comments-" + postId
-                );
-
-            if (!container) return;
-
-            container.innerHTML = "";
-
-            const data =
-                snapshot.val();
-
-            if (!data) return;
-
-            Object.values(data)
-                .sort(
-                    (a,b) =>
-                        (a.time || 0) -
-                        (b.time || 0)
-                )
-                .forEach(
-                    comment => {
-
-                        const item =
-                            document.createElement(
-                                "div"
-                            );
-
-                        item.className =
-                            "comment";
-
-                        item.innerHTML = `
-
-                            <div class="comment-name">
-                                ${escapeHTML(comment.name)}
-                            </div>
-
-                            <div class="comment-text">
-                                ${escapeHTML(comment.text)}
-                            </div>
-
-                        `;
-
-                        container.appendChild(
-                            item
-                        );
-                    }
-                );
-
-        }
-    );
-}
-
-
-/* =========================================================
+/* ============================================================
    NOTIFICATIONS
-========================================================= */
+============================================================ */
 
-async function createNotification(
-    targetUid,
-    text
-){
+function listenNotifications(){
 
-    if (!targetUid) return;
+    if (!hasProfile())
+        return;
 
-    await push(
-        ref(
-            db,
-            "notifications/" +
-            targetUid
-        ),
-        {
-
-            text:text,
-
-            time:Date.now(),
-
-            read:false
-
-        }
-    );
-}
-
-
-function loadNotifications(){
-
-    if (!profile) return;
 
     const notificationRef =
         ref(
             db,
             "notifications/" +
-            userId
+            listenerId
         );
+
 
     onValue(
         notificationRef,
         snapshot => {
 
-            const data =
-                snapshot.val();
-
-            notificationList.innerHTML =
-                "";
-
-            if (!data){
-
-                notificationList.innerHTML = `
-                    <div class="empty">
-                        No notifications yet.
-                    </div>
-                `;
-
-                notificationBadge.style.display =
-                    "none";
-
-                return;
-            }
-
-            let unread =
+            let count =
                 0;
 
-            const notifications =
-                Object.values(data)
-                    .sort(
-                        (a,b) =>
-                            (b.time || 0) -
-                            (a.time || 0)
-                    );
 
-            notifications.forEach(
-                notification => {
+            if (snapshot.exists()){
 
-                    if (
-                        !notification.read
-                    ){
+                snapshot.forEach(
+                    child => {
 
-                        unread++;
-                    }
+                        const item =
+                            child.val();
 
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
+                        if (
+                            item &&
+                            item.read === false
+                        ){
 
-                    item.className =
-                        "notification-item";
+                            count++;
 
-                    item.innerHTML = `
-
-                        <strong>🔔 Community</strong>
-
-                        <div>
-                            ${escapeHTML(
-                                notification.text
-                            )}
-                        </div>
-
-                        <div class="notification-time">
-                            ${formatTime(
-                                notification.time
-                            )}
-                        </div>
-
-                    `;
-
-                    notificationList.appendChild(
-                        item
-                    );
-                }
-            );
-
-            if (unread > 0){
-
-                notificationBadge.style.display =
-                    "flex";
-
-                notificationBadge.textContent =
-                    unread > 99 ? "99+" : unread;
-
-            }else{
-
-                notificationBadge.style.display =
-                    "none";
-            }
-
-        }
-    );
-}
-
-
-/* =========================================================
-   NOTIFICATION BUTTON
-========================================================= */
-
-notificationBtn.addEventListener(
-    "click",
-    async () => {
-
-        if (!requireProfile()) return;
-
-        notificationModal.classList.add(
-            "show"
-        );
-
-        const notificationRef =
-            ref(
-                db,
-                "notifications/" +
-                userId
-            );
-
-        const snapshot =
-            await get(
-                notificationRef
-            );
-
-        if (snapshot.exists()){
-
-            const data =
-                snapshot.val();
-
-            const updates = {};
-
-            Object.keys(data)
-                .forEach(
-                    key => {
-
-                        updates[
-                            key + "/read"
-                        ] = true;
+                        }
 
                     }
                 );
 
-            await update(
-                notificationRef,
-                updates
-            );
+            }
+
+
+            myNotifications.textContent =
+                count;
+
         }
-    }
-);
+    );
 
-
-closeNotifications.addEventListener(
-    "click",
-    () => {
-
-        notificationModal.classList.remove(
-            "show"
-        );
-    }
-);
-
-
-/* =========================================================
-   INITIAL PROFILE
-========================================================= */
-
-if (profile){
-
-    displaySavedProfile();
-
-}else{
-
-    profileEditor.style.display =
-        "block";
-
-    savedProfile.style.display =
-        "none";
 }
 
 
-/* =========================================================
-   INITIAL NOTIFICATIONS
-========================================================= */
-
-loadNotifications();
+listenNotifications();
 
 
-/* =========================================================
-   CLOSE MODALS WHEN CLICKING BACKGROUND
-========================================================= */
+/* ============================================================
+   SAVE PROFILE IF USER ALREADY HAS ONE
+============================================================ */
 
-commentModal.addEventListener(
-    "click",
+if (hasProfile()){
+
+    set(
+        ref(
+            db,
+            "profiles/" +
+            listenerId
+        ),
+        profile
+    ).catch(
+        error => console.error(error)
+    );
+
+}
+
+
+/* ============================================================
+   CLICK NOTIFICATION COUNT
+============================================================ */
+
+myNotifications.parentElement.onclick =
+async () => {
+
+    if (!hasProfile())
+        return;
+
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "notifications/" +
+                    listenerId
+                )
+            );
+
+
+        if (!snapshot.exists()){
+
+            showToast(
+                "No new notifications."
+            );
+
+            return;
+
+        }
+
+
+        const updates = {};
+
+
+        snapshot.forEach(
+            child => {
+
+                updates[
+                    child.key +
+                    "/read"
+                ] = true;
+
+            }
+        );
+
+
+        await update(
+            ref(
+                db,
+                "notifications/" +
+                listenerId
+            ),
+            updates
+        );
+
+
+        showToast(
+            "Notifications marked as read."
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+};
+
+
+/* ============================================================
+   PREVENT ACCIDENTAL VIDEO / AUDIO FILES
+============================================================ */
+
+uploadInput.addEventListener(
+    "change",
     event => {
 
+        const file =
+            event.target.files[0];
+
         if (
-            event.target === commentModal
+            file &&
+            !file.type.startsWith(
+                "image/"
+            )
         ){
 
-            commentModal.classList.remove(
-                "show"
+            event.target.value =
+                "";
+
+            showToast(
+                "Only pictures are allowed."
             );
+
         }
+
     }
 );
 
 
-notificationModal.addEventListener(
-    "click",
+cameraInput.addEventListener(
+    "change",
     event => {
 
+        const file =
+            event.target.files[0];
+
         if (
-            event.target === notificationModal
+            file &&
+            !file.type.startsWith(
+                "image/"
+            )
         ){
 
-            notificationModal.classList.remove(
-                "show"
+            event.target.value =
+                "";
+
+            showToast(
+                "Only pictures are allowed."
             );
+
         }
+
     }
 );
 
 
-/* =========================================================
-   READY
-========================================================= */
+/* ============================================================
+   FINISHED
+============================================================ */
 
 console.log(
     "Kulzzy Radio Community Chat loaded successfully."
@@ -2493,3 +2864,4 @@ console.log(
 
 </body>
 </html>
+                          
