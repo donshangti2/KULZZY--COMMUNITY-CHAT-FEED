@@ -1,0 +1,2677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0,user-scalable=no">
+
+<title>Kulzzy Radio Community Chat</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:#001b2b;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+.app{
+    width:100%;
+    max-width:760px;
+    margin:0 auto;
+    min-height:100vh;
+    background:#001b2b;
+    padding-bottom:145px;
+}
+
+/* =========================================
+   COMMUNITY INTRO
+========================================= */
+
+.intro{
+    margin:0 18px 20px;
+    padding:24px 18px;
+    background:#063044;
+    border:1px solid #075a78;
+    border-radius:0 0 25px 25px;
+    text-align:center;
+    color:#e9f2f6;
+    font-size:16px;
+    line-height:1.45;
+}
+
+.intro strong{
+    color:#ffd000;
+}
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile-area{
+    margin:0 18px 18px;
+    padding:18px;
+    background:#062d3e;
+    border:1px solid #075a78;
+    border-radius:24px;
+}
+
+
+.cover-box{
+    margin-bottom:14px;
+    background:#041f2c;
+    border:1px solid #075a78;
+    border-radius:18px;
+    padding:10px;
+}
+.cover-preview{
+    display:none;
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:14px;
+    background:#092331;
+}
+.cover-preview.show{display:block}
+.cover-upload-btn{
+    display:block;
+    text-align:center;
+    padding:11px;
+    border:1px solid #ffd000;
+    border-radius:14px;
+    color:#ffd000;
+    font-weight:bold;
+    cursor:pointer;
+}
+.cover-upload-btn.has-cover{
+    margin-top:8px;
+}
+.profile-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.profile-picture{
+    width:76px;
+    height:76px;
+    min-width:76px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #ffd000;
+    background:#092331;
+}
+
+.profile-details{
+    flex:1;
+    min-width:0;
+}
+
+.name-input{
+    width:100%;
+    height:48px;
+    border:none;
+    outline:none;
+    border-radius:15px;
+    padding:0 14px;
+    font-size:19px;
+    background:#fff;
+    color:#111;
+}
+
+.profile-controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:10px;
+}
+
+.profile-file{
+    flex:1;
+    min-width:0;
+    color:#fff;
+    font-size:13px;
+}
+
+.save-profile{
+    border:2px solid #ffd000;
+    background:#ffd000;
+    color:#001b2b;
+    border-radius:14px;
+    padding:10px 15px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* =========================================
+   POST FEED
+========================================= */
+
+.feed{
+    width:100%;
+    padding:0 12px;
+}
+
+.post{
+    background:#062d3e;
+    border:1px solid #075a78;
+    border-radius:24px;
+    overflow:hidden;
+    margin:0 0 20px;
+}
+
+.post-header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+}
+
+.post-avatar{
+    width:54px;
+    height:54px;
+    min-width:54px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #ffd000;
+    background:#092331;
+}
+
+.post-user{
+    flex:1;
+    min-width:0;
+}
+
+.post-name{
+    color:#ffd000;
+    font-size:18px;
+    font-weight:bold;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.post-time{
+    color:#9db0ba;
+    font-size:13px;
+    margin-top:3px;
+}
+
+.follow-btn{
+    border:1px solid #ffd000;
+    color:#ffd000;
+    background:transparent;
+    border-radius:20px;
+    padding:8px 14px;
+    font-size:14px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.follow-btn.following{
+    background:#ffd000;
+    color:#001b2b;
+}
+
+/* =========================================
+   POST IMAGE
+========================================= */
+
+.post-image-wrap{
+    width:100%;
+    background:#00131e;
+    cursor:pointer;
+    position:relative;
+}
+
+.post-image{
+    width:100%;
+    height:auto;
+    max-height:720px;
+    display:block;
+    object-fit:contain;
+}
+
+/* =========================================
+   POST ACTIONS
+========================================= */
+
+.post-actions{
+    display:flex;
+    align-items:center;
+    padding:10px 14px;
+    gap:8px;
+    border-top:1px solid #075a78;
+}
+
+.action-btn{
+    border:none;
+    background:#073b50;
+    color:#fff;
+    border-radius:12px;
+    padding:8px 12px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.action-btn.liked{
+    color:#ff3b3b;
+}
+
+.click-count{
+    margin-left:auto;
+    color:#d7e2e7;
+    font-size:15px;
+}
+
+/* =========================================
+   POST COMMENTS
+========================================= */
+
+.comments{
+    padding:0 14px 12px;
+}
+
+.comment{
+    background:#082431;
+    border-radius:12px;
+    padding:8px 10px;
+    margin-top:7px;
+}
+
+.comment-name{
+    color:#ffd000;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.comment-text{
+    color:#fff;
+    margin-top:3px;
+    font-size:14px;
+}
+
+.comment-box{
+    display:flex;
+    gap:7px;
+    margin-top:8px;
+}
+
+.comment-input{
+    flex:1;
+    min-width:0;
+    height:40px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    padding:0 12px;
+    background:#fff;
+    color:#111;
+}
+
+.comment-send{
+    border:none;
+    border-radius:12px;
+    background:#ffd000;
+    color:#001b2b;
+    font-weight:bold;
+    padding:0 13px;
+}
+
+/* =========================================
+   EMPTY FEED
+========================================= */
+
+.empty{
+    text-align:center;
+    padding:40px 15px;
+    color:#8fa7b2;
+}
+
+/* =========================================
+   NOTIFICATION
+========================================= */
+
+.notification-panel{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:min(340px,calc(100% - 30px));
+    background:#062d3e;
+    border:1px solid #ffd000;
+    border-radius:18px;
+    z-index:5000;
+    box-shadow:0 10px 40px rgba(0,0,0,.45);
+    display:none;
+    overflow:hidden;
+}
+
+.notification-panel.show{
+    display:block;
+}
+
+.notification-title{
+    padding:14px;
+    background:#001b2b;
+    color:#ffd000;
+    font-weight:bold;
+    border-bottom:1px solid #075a78;
+}
+
+.notification-list{
+    max-height:300px;
+    overflow:auto;
+}
+
+.notification-item{
+    padding:12px;
+    border-bottom:1px solid #075a78;
+    font-size:14px;
+}
+
+/* =========================================
+   BOTTOM COMPOSER
+========================================= */
+
+
+.pending-post{
+    display:none;
+    margin:0 0 10px;
+    padding:10px;
+    background:#041f2c;
+    border:1px solid #075a78;
+    border-radius:18px;
+}
+.pending-post.show{display:block}
+.pending-post img{
+    display:block;
+    width:100%;
+    max-height:260px;
+    object-fit:contain;
+    border-radius:14px;
+    background:#00131e;
+}
+.pending-post-actions{
+    display:flex;
+    gap:8px;
+    margin-top:8px;
+}
+.pending-post-actions button{
+    flex:1;
+    border:0;
+    border-radius:12px;
+    padding:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+#pendingPostBtn{background:#ffd000;color:#001b2b}
+#pendingCancelBtn{background:#073b50;color:#fff}
+.composer{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:760px;
+    background:#062d3e;
+    border-top:1px solid #075a78;
+    padding:10px 12px 12px;
+    z-index:3000;
+}
+
+.composer-row{
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+}
+
+.composer-btn{
+    width:56px;
+    height:56px;
+    min-width:56px;
+    border:none;
+    border-radius:50%;
+    background:#ffd000;
+    color:#001b2b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.message-box{
+    flex:1;
+    min-width:0;
+    max-height:130px;
+    min-height:56px;
+    resize:none;
+    overflow-y:auto;
+    border:none;
+    outline:none;
+    border-radius:28px;
+    padding:16px 18px;
+    font-size:18px;
+    line-height:1.35;
+    background:#fff;
+    color:#111;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+.hidden-input{
+    display:none;
+}
+
+/* =========================================
+   IMAGE VIEWER
+========================================= */
+
+.image-viewer{
+    position:fixed;
+    inset:0;
+    background:rgba(0,8,14,.94);
+    z-index:9000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:25px 15px;
+}
+
+.image-viewer.show{
+    display:flex;
+}
+
+.viewer-content{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.viewer-image{
+    max-width:96%;
+    max-height:90%;
+    object-fit:contain;
+    border-radius:10px;
+    box-shadow:0 10px 50px rgba(0,0,0,.6);
+}
+
+.viewer-close{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:#ffd000;
+    color:#001b2b;
+    font-size:30px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.viewer-click-count{
+    position:absolute;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#062d3e;
+    border:1px solid #ffd000;
+    color:#ffd000;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:14px;
+}
+
+/* =========================================
+   TOAST
+========================================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:95px;
+    transform:translateX(-50%);
+    background:#ffd000;
+    color:#001b2b;
+    padding:11px 17px;
+    border-radius:20px;
+    font-weight:bold;
+    z-index:10000;
+    display:none;
+}
+
+.toast.show{
+    display:block;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:500px){
+
+    .intro{
+        margin-left:18px;
+        margin-right:18px;
+        font-size:18px;
+    }
+
+    .profile-area{
+        margin-left:18px;
+        margin-right:18px;
+    }
+
+    .profile-picture{
+        width:68px;
+        height:68px;
+        min-width:68px;
+    }
+
+    .name-input{
+        font-size:17px;
+    }
+
+    .save-profile{
+        padding:9px 12px;
+    }
+
+    .post-header{
+        padding:12px;
+    }
+
+    .post-avatar{
+        width:52px;
+        height:52px;
+        min-width:52px;
+    }
+
+    .post-name{
+        font-size:17px;
+    }
+
+    .follow-btn{
+        padding:7px 11px;
+        font-size:13px;
+    }
+
+    .composer-btn{
+        width:52px;
+        height:52px;
+        min-width:52px;
+    }
+
+    .message-box{
+        font-size:17px;
+        min-height:52px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- INTRO -->
+
+    <div class="intro">
+        CELEBRATE, SELL &amp; NETWORK with listeners around the world.
+    </div>
+
+    <!-- PROFILE -->
+
+    <section class="profile-area">
+
+        
+<div class="cover-box" id="coverBox">
+    <img id="coverPreview" class="cover-preview" src="" alt="Cover">
+    <label class="cover-upload-btn">
+        🖼️ Upload Cover Picture
+        <input id="coverFile" type="file" accept="image/*" hidden>
+    </label>
+</div>
+
+<div class="profile-row">
+
+            <img
+                id="profilePicture"
+                class="profile-picture"
+                src=""
+                alt="Profile">
+
+            <div class="profile-details">
+
+                <input
+                    id="nameInput"
+                    class="name-input"
+                    type="text"
+                    maxlength="40"
+                    placeholder="Your name">
+
+                <div class="profile-controls">
+
+                    <input
+                        id="profileFile"
+                        class="profile-file"
+                        type="file"
+                        accept="image/*">
+
+                    <button
+                        id="saveProfile"
+                        class="save-profile">
+                        Save
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FEED -->
+
+    <main id="feed" class="feed">
+
+        <div class="empty" id="emptyFeed">
+            No community posts yet.
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- BOTTOM COMPOSER -->
+
+<div class="composer">
+
+    
+<div id="pendingPost" class="pending-post">
+    <img id="pendingPostImage" src="" alt="Picture preview">
+    <div class="pending-post-actions">
+        <button id="pendingPostBtn" type="button">Post Picture</button>
+        <button id="pendingCancelBtn" type="button">Cancel</button>
+    </div>
+</div>
+
+<div class="composer-row">
+
+        <!-- CAMERA -->
+
+        <button
+            id="cameraBtn"
+            class="composer-btn"
+            title="Camera">
+            📷
+        </button>
+
+        <input
+            id="cameraInput"
+            class="hidden-input"
+            type="file"
+            accept="image/*"
+            capture="environment">
+
+
+        <!-- MESSAGE -->
+
+        <textarea
+            id="messageBox"
+            class="message-box"
+            rows="1"
+            maxlength="1000"
+            placeholder="Type a message..."></textarea>
+
+
+        <!-- UPLOAD -->
+
+        <button
+            id="uploadBtn"
+            class="composer-btn"
+            title="Upload picture">
+            🖼️
+        </button>
+
+        <input
+            id="uploadInput"
+            class="hidden-input"
+            type="file"
+            accept="image/*">
+
+
+        <!-- SEND -->
+
+        <button
+            id="sendBtn"
+            class="composer-btn"
+            title="Send">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- NOTIFICATIONS -->
+
+<div
+    id="notificationPanel"
+    class="notification-panel">
+
+    <div class="notification-title">
+        🔔 Notifications
+    </div>
+
+    <div
+        id="notificationList"
+        class="notification-list">
+    </div>
+
+</div>
+
+
+<!-- IMAGE VIEWER -->
+
+<div
+    id="imageViewer"
+    class="image-viewer">
+
+    <div class="viewer-content">
+
+        <button
+            id="viewerClose"
+            class="viewer-close">
+            ×
+        </button>
+
+        <img
+            id="viewerImage"
+            class="viewer-image"
+            src=""
+            alt="Community post">
+
+        <div
+            id="viewerClickCount"
+            class="viewer-click-count">
+            👆 0
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<script type="module">
+
+/* =========================================
+   FIREBASE
+========================================= */
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    push,
+    set,
+    get,
+    update,
+    onValue,
+    runTransaction
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyBH85NGWsSAK5cubbPdnmunwYZFZpj_CB0",
+
+    authDomain:
+        "kulzzy-radio-chat.firebaseapp.com",
+
+    databaseURL:
+        "https://kulzzy-radio-chat-default-rtdb.europe-west1.firebasedatabase.app",
+
+    projectId:
+        "kulzzy-radio-chat",
+
+    storageBucket:
+        "kulzzy-radio-chat.firebasestorage.app",
+
+    messagingSenderId:
+        "510100635134",
+
+    appId:
+        "1:510100635134:web:9d3b2e983eb6e9a385d4af"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getDatabase(app);
+
+
+/* =========================================
+   CLOUDINARY
+========================================= */
+
+const CLOUDINARY_CLOUD_NAME =
+    "s4j0x7dk";
+
+const CLOUDINARY_UPLOAD_PRESET =
+    "Community Chat";
+
+
+/* =========================================
+   USER ID
+========================================= */
+
+let userId =
+    localStorage.getItem("kulzzyCommunityUserId");
+
+if(!userId){
+
+    userId =
+        "user_" +
+        Date.now() +
+        "_" +
+        Math.random()
+        .toString(36)
+        .substring(2,10);
+
+    localStorage.setItem(
+        "kulzzyCommunityUserId",
+        userId
+    );
+}
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const feed =
+    document.getElementById("feed");
+
+const emptyFeed =
+    document.getElementById("emptyFeed");
+
+const profilePicture =
+    document.getElementById("profilePicture");
+
+const coverFile =
+    document.getElementById("coverFile");
+
+const coverPreview =
+    document.getElementById("coverPreview");
+
+const coverBox =
+    document.getElementById("coverBox");
+
+const pendingPost =
+    document.getElementById("pendingPost");
+
+const pendingPostImage =
+    document.getElementById("pendingPostImage");
+
+const pendingPostBtn =
+    document.getElementById("pendingPostBtn");
+
+const pendingCancelBtn =
+    document.getElementById("pendingCancelBtn");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+const profileFile =
+    document.getElementById("profileFile");
+
+const saveProfile =
+    document.getElementById("saveProfile");
+
+const messageBox =
+    document.getElementById("messageBox");
+
+const sendBtn =
+    document.getElementById("sendBtn");
+
+const uploadBtn =
+    document.getElementById("uploadBtn");
+
+const uploadInput =
+    document.getElementById("uploadInput");
+
+const cameraBtn =
+    document.getElementById("cameraBtn");
+
+const cameraInput =
+    document.getElementById("cameraInput");
+
+const imageViewer =
+    document.getElementById("imageViewer");
+
+const viewerImage =
+    document.getElementById("viewerImage");
+
+const viewerClose =
+    document.getElementById("viewerClose");
+
+const viewerClickCount =
+    document.getElementById("viewerClickCount");
+
+const toast =
+    document.getElementById("toast");
+
+
+/* =========================================
+   DEFAULT PROFILE IMAGE
+========================================= */
+
+const DEFAULT_PROFILE =
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="200"
+             height="200"
+             viewBox="0 0 200 200">
+            <rect width="200"
+                  height="200"
+                  fill="#092331"/>
+            <circle cx="100"
+                    cy="75"
+                    r="38"
+                    fill="#ffd000"/>
+            <path d="M35 180
+                     C45 125 155 125 165 180"
+                  fill="#ffd000"/>
+        </svg>
+    `);
+
+profilePicture.src = DEFAULT_PROFILE;
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+let toastTimer;
+
+function showToast(text){
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        },2500);
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+let savedProfile =
+    JSON.parse(
+        localStorage.getItem(
+            "kulzzyCommunityProfile"
+        ) || "null"
+    );
+
+
+if(savedProfile){
+
+    nameInput.value =
+        savedProfile.name || "";
+
+    if(savedProfile.photo){
+
+        profilePicture.src =
+            savedProfile.photo;
+    }
+}
+
+
+async function uploadToCloudinary(file){
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "file",
+        file
+    );
+
+    formData.append(
+        "upload_preset",
+        CLOUDINARY_UPLOAD_PRESET
+    );
+
+    const response =
+        await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+                method:"POST",
+                body:formData
+            }
+        );
+
+    const data =
+        await response.json();
+
+    if(!response.ok || !data.secure_url){
+
+        throw new Error(
+            data.error?.message ||
+            "Cloudinary upload failed."
+        );
+    }
+
+    return data.secure_url;
+}
+
+
+/* =========================================
+   COVER PICTURE
+========================================= */
+
+let pendingCoverFile = null;
+
+if(coverFile){
+
+    coverFile.addEventListener(
+        "change",
+        async () => {
+
+            const file =
+                coverFile.files[0];
+
+            if(!file){
+                return;
+            }
+
+            if(!file.type.startsWith("image/")){
+
+                showToast(
+                    "Only pictures are allowed."
+                );
+
+                coverFile.value = "";
+                return;
+            }
+
+            pendingCoverFile = file;
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                () => {
+
+                    coverPreview.src =
+                        reader.result;
+
+                    coverPreview.classList.add(
+                        "show"
+                    );
+
+                };
+
+            reader.readAsDataURL(file);
+
+            try{
+
+                showToast(
+                    "Uploading cover picture..."
+                );
+
+                const coverUrl =
+                    await uploadToCloudinary(
+                        file
+                    );
+
+                const currentProfile =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "kulzzyCommunityProfile"
+                        ) || "null"
+                    ) || {};
+
+                currentProfile.cover =
+                    coverUrl;
+
+                localStorage.setItem(
+                    "kulzzyCommunityProfile",
+                    JSON.stringify(
+                        currentProfile
+                    )
+                );
+
+                await update(
+                    ref(
+                        db,
+                        "profiles/" + userId
+                    ),
+                    {
+                        cover:coverUrl,
+                        updatedAt:Date.now()
+                    }
+                );
+
+                coverPreview.src =
+                    coverUrl;
+
+                coverPreview.classList.add(
+                    "show"
+                );
+
+                /* Hide upload box after successful upload. */
+                coverBox.style.display =
+                    "none";
+
+                pendingCoverFile = null;
+
+                coverFile.value = "";
+
+                showToast(
+                    "Cover picture saved."
+                );
+
+            }catch(error){
+
+                console.error(error);
+
+                pendingCoverFile = null;
+
+                coverPreview.classList.remove(
+                    "show"
+                );
+
+                coverPreview.src = "";
+
+                showToast(
+                    error.message ||
+                    "Unable to upload cover picture."
+                );
+            }
+        }
+    );
+}
+
+
+
+
+saveProfile.onclick =
+    async () => {
+
+        const name =
+            nameInput.value.trim();
+
+        const file =
+            profileFile.files[0];
+
+        if(!name){
+
+            showToast(
+                "Please write your name."
+            );
+
+            return;
+        }
+
+        if(!file && !savedProfile?.photo){
+
+            showToast(
+                "Please upload your profile picture."
+            );
+
+            return;
+        }
+
+        saveProfile.disabled =
+            true;
+
+        saveProfile.textContent =
+            "Saving...";
+
+        try{
+
+            let photo =
+                savedProfile?.photo || "";
+
+            if(file){
+
+                photo =
+                    await uploadToCloudinary(
+                        file
+                    );
+            }
+
+            const profile = {
+
+                name:name,
+
+                photo:photo,
+
+                updatedAt:Date.now()
+
+            };
+
+            localStorage.setItem(
+                "kulzzyCommunityProfile",
+                JSON.stringify(profile)
+            );
+
+            savedProfile =
+                profile;
+
+            profilePicture.src =
+                photo;
+
+            profileFile.value =
+                "";
+
+            await set(
+                ref(
+                    db,
+                    "profiles/" + userId
+                ),
+                profile
+            );
+
+            showToast(
+                "Profile saved."
+            );
+
+        }catch(error){
+
+            console.error(error);
+
+            showToast(
+                error.message ||
+                "Unable to save profile."
+            );
+
+        }finally{
+
+            saveProfile.disabled =
+                false;
+
+            saveProfile.textContent =
+                "Save";
+        }
+    };
+
+
+/* =========================================
+   PROFILE CHECK
+========================================= */
+
+function hasCompleteProfile(){
+
+    const name =
+        nameInput.value.trim();
+
+    const photo =
+        savedProfile?.photo ||
+        profilePicture.src;
+
+    return Boolean(
+        name &&
+        photo &&
+        photo !== DEFAULT_PROFILE
+    );
+}
+
+
+/* =========================================
+   MESSAGE BOX AUTO GROW
+========================================= */
+
+function resizeMessageBox(){
+
+    messageBox.style.height =
+        "auto";
+
+    const height =
+        Math.min(
+            messageBox.scrollHeight,
+            130
+        );
+
+    messageBox.style.height =
+        height + "px";
+}
+
+
+messageBox.addEventListener(
+    "input",
+    resizeMessageBox
+);
+
+
+/* =========================================
+   CAMERA
+========================================= */
+
+cameraBtn.onclick =
+    () => {
+
+        cameraInput.click();
+
+    };
+
+
+/* =========================================
+   UPLOAD BUTTON
+========================================= */
+
+uploadBtn.onclick =
+    () => {
+
+        uploadInput.click();
+
+    };
+
+
+/* =========================================
+   CHAT
+========================================= */
+
+async function sendMessage(){
+
+    if(!hasCompleteProfile()){
+
+        showToast(
+            "Save your name and profile picture first."
+        );
+
+        return;
+    }
+
+    const text =
+        messageBox.value.trim();
+
+    if(!text){
+
+        return;
+    }
+
+    const profile =
+        savedProfile;
+
+    const messageRef =
+        push(
+            ref(db,"chat")
+        );
+
+    await set(
+        messageRef,
+        {
+
+            name:
+                profile.name,
+
+            text:
+                text,
+
+            photo:
+                profile.photo,
+
+            uid:
+                userId,
+
+            time:
+                Date.now()
+
+        }
+    );
+
+    messageBox.value =
+        "";
+
+    resizeMessageBox();
+}
+
+
+sendBtn.onclick =
+    sendMessage;
+
+
+messageBox.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Enter" &&
+            !event.shiftKey
+        ){
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   IMAGE POST
+========================================= */
+
+let pendingPostFile = null;
+
+async function createPost(file){
+
+    if(!hasCompleteProfile()){
+
+        showToast(
+            "Save your name and profile picture first."
+        );
+
+        return;
+    }
+
+    if(!file){
+
+        return;
+    }
+
+    if(!file.type.startsWith("image/")){
+
+        showToast(
+            "Only pictures are allowed."
+        );
+
+        return;
+    }
+
+    pendingPostFile =
+        file;
+
+    const reader =
+        new FileReader();
+
+    reader.onload =
+        () => {
+
+            pendingPostImage.src =
+                reader.result;
+
+            pendingPost.classList.add(
+                "show"
+            );
+
+        };
+
+    reader.readAsDataURL(file);
+
+    showToast(
+        "Picture ready. Check it before posting."
+    );
+}
+
+async function publishPendingPost(){
+
+    if(!pendingPostFile){
+
+        return;
+    }
+
+    pendingPostBtn.disabled =
+        true;
+
+    pendingPostBtn.textContent =
+        "Posting...";
+
+    try{
+
+        const imageUrl =
+            await uploadToCloudinary(
+                pendingPostFile
+            );
+
+        const profile =
+            savedProfile;
+
+        const postRef =
+            push(
+                ref(
+                    db,
+                    "communityPosts"
+                )
+            );
+
+        await set(
+            postRef,
+            {
+
+                uid:
+                    userId,
+
+                name:
+                    profile.name,
+
+                avatar:
+                    profile.photo,
+
+                image:
+                    imageUrl,
+
+                likes:
+                    0,
+
+                clicks:
+                    0,
+
+                followers:
+                    0,
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+        await push(
+            ref(
+                db,
+                "notifications"
+            ),
+            {
+
+                type:
+                    "post",
+
+                uid:
+                    userId,
+
+                name:
+                    profile.name,
+
+                text:
+                    profile.name +
+                    " posted a picture.",
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+        pendingPostFile =
+            null;
+
+        pendingPostImage.src =
+            "";
+
+        pendingPost.classList.remove(
+            "show"
+        );
+
+        showToast(
+            "Picture posted."
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        showToast(
+            error.message ||
+            "Unable to post picture."
+        );
+
+    }finally{
+
+        pendingPostBtn.disabled =
+            false;
+
+        pendingPostBtn.textContent =
+            "Post Picture";
+    }
+}
+
+pendingPostBtn.onclick =
+    publishPendingPost;
+
+pendingCancelBtn.onclick =
+    () => {
+
+        pendingPostFile =
+            null;
+
+        pendingPostImage.src =
+            "";
+
+        pendingPost.classList.remove(
+            "show"
+        );
+
+    };
+
+/* =========================================
+   UPLOAD FROM PHONE
+========================================= */
+
+uploadInput.addEventListener(
+    "change",
+    async () => {
+
+        const file =
+            uploadInput.files[0];
+
+        if(file){
+
+            await createPost(file);
+
+        }
+
+        uploadInput.value =
+            "";
+
+    }
+);
+
+
+/* =========================================
+   CAMERA PHOTO
+========================================= */
+
+cameraInput.addEventListener(
+    "change",
+    async () => {
+
+        const file =
+            cameraInput.files[0];
+
+        if(file){
+
+            await createPost(file);
+
+        }
+
+        cameraInput.value =
+            "";
+
+    }
+);
+
+
+/* =========================================
+   FORMAT TIME
+========================================= */
+
+function formatTime(timestamp){
+
+    if(!timestamp){
+
+        return "";
+    }
+
+    const date =
+        new Date(timestamp);
+
+    return date.toLocaleString(
+        [],
+        {
+            month:"short",
+            day:"numeric",
+            hour:"numeric",
+            minute:"2-digit"
+        }
+    );
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value){
+
+    return String(value || "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+/* =========================================
+   FOLLOW
+========================================= */
+
+async function toggleFollow(
+    postId,
+    ownerUid,
+    button
+){
+
+    if(ownerUid === userId){
+
+        showToast(
+            "You cannot follow yourself."
+        );
+
+        return;
+    }
+
+    const followRef =
+        ref(
+            db,
+            `followers/${ownerUid}/${userId}`
+        );
+
+    const snapshot =
+        await get(
+            followRef
+        );
+
+    if(snapshot.exists()){
+
+        await set(
+            followRef,
+            null
+        );
+
+        button.textContent =
+            "Follow Me";
+
+        button.classList.remove(
+            "following"
+        );
+
+    }else{
+
+        await set(
+            followRef,
+            {
+
+                uid:
+                    userId,
+
+                name:
+                    savedProfile?.name ||
+                    "Listener",
+
+                time:
+                    Date.now()
+
+            }
+        );
+
+        button.textContent =
+            "Following";
+
+        button.classList.add(
+            "following"
+        );
+
+        await push(
+            ref(
+                db,
+                "notifications"
+            ),
+            {
+
+                type:
+                    "follow",
+
+                uid:
+                    ownerUid,
+
+                fromUid:
+                    userId,
+
+                name:
+                    savedProfile?.name ||
+                    "Listener",
+
+                text:
+                    (savedProfile?.name ||
+                    "Someone") +
+                    " followed you.",
+
+                time:
+                    Date.now()
+
+            }
+        );
+    }
+}
+
+
+/* =========================================
+   CHECK FOLLOW
+========================================= */
+
+async function updateFollowButton(
+    ownerUid,
+    button
+){
+
+    if(ownerUid === userId){
+
+        button.style.display =
+            "none";
+
+        return;
+    }
+
+    const snap =
+        await get(
+            ref(
+                db,
+                `followers/${ownerUid}/${userId}`
+            )
+        );
+
+    if(snap.exists()){
+
+        button.textContent =
+            "Following";
+
+        button.classList.add(
+            "following"
+        );
+    }
+}
+
+
+/* =========================================
+   LIKE
+========================================= */
+
+async function toggleLike(
+    postId,
+    button,
+    countElement
+){
+
+    const likeRef =
+        ref(
+            db,
+            `postLikes/${postId}/${userId}`
+        );
+
+    const snapshot =
+        await get(
+            likeRef
+        );
+
+    const likesRef =
+        ref(
+            db,
+            `communityPosts/${postId}/likes`
+        );
+
+    if(snapshot.exists()){
+
+        await set(
+            likeRef,
+            null
+        );
+
+        await runTransaction(
+            likesRef,
+            current =>
+                Math.max(
+                    0,
+                    Number(current || 0) - 1
+                )
+        );
+
+        button.classList.remove(
+            "liked"
+        );
+
+    }else{
+
+        await set(
+            likeRef,
+            true
+        );
+
+        await runTransaction(
+            likesRef,
+            current =>
+                Number(current || 0) + 1
+        );
+
+        button.classList.add(
+            "liked"
+        );
+    }
+
+    const updated =
+        await get(
+            likesRef
+        );
+
+    countElement.textContent =
+        updated.val() || 0;
+}
+
+
+/* =========================================
+   CLICK COUNT
+========================================= */
+
+async function registerPostClick(
+    postId,
+    imageUrl
+){
+
+    const localKey =
+        "kulzzy_clicked_" +
+        postId;
+
+    const alreadyClicked =
+        localStorage.getItem(
+            localKey
+        );
+
+    /*
+     * Open viewer even if this
+     * device has already counted
+     * the click.
+     */
+
+    viewerImage.src =
+        imageUrl;
+
+    imageViewer.classList.add(
+        "show"
+    );
+
+    if(alreadyClicked){
+
+        const snap =
+            await get(
+                ref(
+                    db,
+                    `communityPosts/${postId}/clicks`
+                )
+            );
+
+        viewerClickCount.textContent =
+            "👆 " +
+            (snap.val() || 0);
+
+        return;
+    }
+
+    localStorage.setItem(
+        localKey,
+        "1"
+    );
+
+    const clicksRef =
+        ref(
+            db,
+            `communityPosts/${postId}/clicks`
+        );
+
+    await runTransaction(
+        clicksRef,
+        current =>
+            Number(current || 0) + 1
+    );
+
+    const snap =
+        await get(
+            clicksRef
+        );
+
+    viewerClickCount.textContent =
+        "👆 " +
+        (snap.val() || 0);
+}
+
+
+/* =========================================
+   CLOSE VIEWER
+========================================= */
+
+viewerClose.onclick =
+    () => {
+
+        imageViewer.classList.remove(
+            "show"
+        );
+
+        viewerImage.src =
+            "";
+
+    };
+
+
+imageViewer.addEventListener(
+    "click",
+    event => {
+
+        if(
+            event.target === imageViewer
+        ){
+
+            imageViewer.classList.remove(
+                "show"
+            );
+
+            viewerImage.src =
+                "";
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   COMMENTS
+========================================= */
+
+async function addComment(
+    postId,
+    input
+){
+
+    if(!hasCompleteProfile()){
+
+        showToast(
+            "Save your profile first."
+        );
+
+        return;
+    }
+
+    const text =
+        input.value.trim();
+
+    if(!text){
+
+        return;
+    }
+
+    await push(
+        ref(
+            db,
+            `comments/${postId}`
+        ),
+        {
+
+            uid:
+                userId,
+
+            name:
+                savedProfile.name,
+
+            text:
+                text,
+
+            time:
+                Date.now()
+
+        }
+    );
+
+    input.value =
+        "";
+}
+
+
+/* =========================================
+   LOAD COMMENTS
+========================================= */
+
+function listenComments(
+    postId,
+    container
+){
+
+    onValue(
+        ref(
+            db,
+            `comments/${postId}`
+        ),
+        snapshot => {
+
+            container.innerHTML =
+                "";
+
+            if(!snapshot.exists()){
+
+                return;
+            }
+
+            snapshot.forEach(
+                child => {
+
+                    const data =
+                        child.val();
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+                    div.className =
+                        "comment";
+
+                    div.innerHTML = `
+
+                        <div class="comment-name">
+                            ${escapeHtml(
+                                data.name
+                            )}
+                        </div>
+
+                        <div class="comment-text">
+                            ${escapeHtml(
+                                data.text
+                            )}
+                        </div>
+
+                    `;
+
+                    container.appendChild(
+                        div
+                    );
+                }
+            );
+
+        }
+    );
+}
+
+
+/* =========================================
+   RENDER POSTS
+========================================= */
+
+function renderPosts(snapshot){
+
+    feed.innerHTML =
+        "";
+
+    if(!snapshot.exists()){
+
+        feed.appendChild(
+            emptyFeed
+        );
+
+        return;
+    }
+
+    const posts = [];
+
+    snapshot.forEach(
+        child => {
+
+            posts.push({
+
+                id:
+                    child.key,
+
+                ...child.val()
+
+            });
+
+        }
+    );
+
+    posts.sort(
+        (a,b) =>
+            (b.time || 0) -
+            (a.time || 0)
+    );
+
+
+    posts.forEach(
+        post => {
+
+            const article =
+                document.createElement(
+                    "article"
+                );
+
+            article.className =
+                "post";
+
+            const avatar =
+                post.avatar ||
+                DEFAULT_PROFILE;
+
+            article.innerHTML = `
+
+                <div class="post-header">
+
+                    <img
+                        class="post-avatar"
+                        src="${escapeHtml(
+                            avatar
+                        )}"
+                        alt="Profile">
+
+                    <div class="post-user">
+
+                        <div class="post-name">
+                            ${escapeHtml(
+                                post.name ||
+                                "Listener"
+                            )}
+                        </div>
+
+                        <div class="post-time">
+                            ${formatTime(
+                                post.time
+                            )}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="follow-btn">
+                        Follow Me
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="post-image-wrap">
+
+                    <img
+                        class="post-image"
+                        src="${escapeHtml(
+                            post.image
+                        )}"
+                        alt="Community post">
+
+                </div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        class="action-btn like-btn">
+                        ❤️
+                        <span class="like-count">
+                            ${post.likes || 0}
+                        </span>
+                    </button>
+
+                    <button
+                        class="action-btn comment-toggle">
+                        💬 Comment
+                    </button>
+
+                    <div
+                        class="click-count">
+                        👆
+                        <span class="post-click-count">
+                            ${post.clicks || 0}
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="comments">
+
+                    <div
+                        class="comment-list">
+                    </div>
+
+                    <div
+                        class="comment-box">
+
+                        <input
+                            class="comment-input"
+                            type="text"
+                            maxlength="300"
+                            placeholder="Comment...">
+
+                        <button
+                            class="comment-send">
+                            Send
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            /* =================================
+               FOLLOW
+            ================================= */
+
+            const followButton =
+                article.querySelector(
+                    ".follow-btn"
+                );
+
+            followButton.onclick =
+                () => {
+
+                    toggleFollow(
+                        post.id,
+                        post.uid,
+                        followButton
+                    );
+
+                };
+
+            updateFollowButton(
+                post.uid,
+                followButton
+            );
+
+
+            /* =================================
+               IMAGE CLICK
+            ================================= */
+
+            const postImage =
+                article.querySelector(
+                    ".post-image"
+                );
+
+            postImage.onclick =
+                () => {
+
+                    registerPostClick(
+                        post.id,
+                        post.image
+                    );
+
+                };
+
+
+            /* =================================
+               LIKE
+            ================================= */
+
+            const likeButton =
+                article.querySelector(
+                    ".like-btn"
+                );
+
+            const likeCount =
+                article.querySelector(
+                    ".like-count"
+                );
+
+            likeButton.onclick =
+                () => {
+
+                    toggleLike(
+                        post.id,
+                        likeButton,
+                        likeCount
+                    );
+
+                };
+
+
+            /* =================================
+               COMMENT
+            ================================= */
+
+            const commentInput =
+                article.querySelector(
+                    ".comment-input"
+                );
+
+            const commentSend =
+                article.querySelector(
+                    ".comment-send"
+                );
+
+            commentSend.onclick =
+                () => {
+
+                    addComment(
+                        post.id,
+                        commentInput
+                    );
+
+                };
+
+            commentInput.addEventListener(
+                "keydown",
+                event => {
+
+                    if(
+                        event.key === "Enter"
+                    ){
+
+                        event.preventDefault();
+
+                        addComment(
+                            post.id,
+                            commentInput
+                        );
+
+                    }
+
+                }
+            );
+
+
+            /* =================================
+               COMMENT LISTENER
+            ================================= */
+
+            const commentList =
+                article.querySelector(
+                    ".comment-list"
+                );
+
+            listenComments(
+                post.id,
+                commentList
+            );
+
+
+            feed.appendChild(
+                article
+            );
+
+        }
+    );
+}
+
+
+/* =========================================
+   REALTIME POSTS
+========================================= */
+
+onValue(
+    ref(
+        db,
+        "communityPosts"
+    ),
+    snapshot => {
+
+        renderPosts(
+            snapshot
+        );
+
+    }
+);
+
+
+/* =========================================
+   NOTIFICATIONS
+========================================= */
+
+const notificationPanel =
+    document.getElementById(
+        "notificationPanel"
+    );
+
+const notificationList =
+    document.getElementById(
+        "notificationList"
+    );
+
+
+onValue(
+    ref(
+        db,
+        "notifications"
+    ),
+    snapshot => {
+
+        notificationList.innerHTML =
+            "";
+
+        if(!snapshot.exists()){
+
+            notificationList.innerHTML =
+                "<div class='notification-item'>No notifications.</div>";
+
+            return;
+        }
+
+        const items = [];
+
+        snapshot.forEach(
+            child => {
+
+                items.push({
+                    id:child.key,
+                    ...child.val()
+                });
+
+            }
+        );
+
+        items.sort(
+            (a,b) =>
+                (b.time || 0) -
+                (a.time || 0)
+        );
+
+        items
+            .slice(0,30)
+            .forEach(
+                item => {
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+                    div.className =
+                        "notification-item";
+
+                    div.textContent =
+                        item.text ||
+                        "New activity.";
+
+                    notificationList.appendChild(
+                        div
+                    );
+
+                }
+            );
+
+    }
+);
+
+
+/* =========================================
+   NOTIFICATION BELL
+========================================= */
+
+/*
+ * The notification button can be connected
+ * to the existing notification UI later.
+ * For now the notification panel remains
+ * available without disturbing the composer.
+ */
+
+
+/* =========================================
+   PREVENT IMAGE DRAG
+========================================= */
+
+document.addEventListener(
+    "dragstart",
+    event => {
+
+        if(
+            event.target.tagName === "IMG"
+        ){
+
+            event.preventDefault();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   START
+========================================= */
+
+console.log(
+    "Kulzzy Radio Community Chat loaded."
+);
+
+</script>
+
+</body>
+</html>
