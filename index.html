@@ -1967,7 +1967,90 @@ saveBtn.onclick=
         }
 
     };
+    
+/* =========================
+   COVER PICTURE
+========================= */
 
+function displayCover(url){
+
+    if(url){
+
+        savedCover.src =
+            url +
+            (url.includes("?") ? "&" : "?") +
+            "coverVersion=" +
+            Date.now();
+
+        savedCover.style.display="block";
+
+        coverUploadArea.style.display="none";
+
+    }else{
+
+        savedCover.src="";
+
+        savedCover.style.display="none";
+
+        coverUploadArea.style.display="block";
+
+    }
+
+}
+
+
+async function loadCoverPicture(){
+
+    if(!userId){
+        return;
+    }
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "profiles/" + userId
+                )
+            );
+
+        if(snapshot.exists()){
+
+            const profile =
+                snapshot.val();
+
+            savedProfile =
+                savedProfile || {};
+
+            savedProfile.cover =
+                profile.cover || "";
+
+            localStorage.setItem(
+                "kulzzyCommunityProfile",
+                JSON.stringify(savedProfile)
+            );
+
+            displayCover(
+                savedProfile.cover
+            );
+
+        }else{
+
+            displayCover("");
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Cover picture loading error:",
+            error
+        );
+
+    }
+
+    }
 
 /* =========================
    COVER AUTO UPLOAD
@@ -2066,22 +2149,109 @@ coverFile.onchange=
             }
 
 
-            savedCover.src=
+/* =========================
+   COVER AUTO UPLOAD
+========================= */
+
+coverFile.onchange =
+    async()=>{
+
+        const file =
+            coverFile.files[0];
+
+        if(!file){
+            return;
+        }
+
+        if(!file.type.startsWith("image/")){
+
+            showToast(
+                "Only pictures are allowed."
+            );
+
+            coverFile.value="";
+            return;
+        }
+
+
+        /* Show selected picture immediately */
+
+        coverPreview.src =
+            URL.createObjectURL(file);
+
+        coverPreview.style.display =
+            "block";
+
+
+        showToast(
+            "Uploading cover picture..."
+        );
+
+
+        try{
+
+            const coverUrl =
+                await uploadToCloudinary(file);
+
+
+            savedProfile =
+                savedProfile || {
+                    name:"",
+                    photo:"",
+                    cover:""
+                };
+
+
+            savedProfile.cover =
                 coverUrl;
 
-            savedCover.style.display=
-                "block";
+            savedProfile.updatedAt =
+                Date.now();
 
 
-            coverUploadArea.style.display=
+            localStorage.setItem(
+                "kulzzyCommunityProfile",
+                JSON.stringify(
+                    savedProfile
+                )
+            );
+
+
+            if(userId){
+
+                await update(
+                    ref(
+                        db,
+                        "profiles/" + userId
+                    ),
+                    {
+                        cover:coverUrl,
+                        coverUpdatedAt:
+                            Date.now()
+                    }
+                );
+
+            }
+
+
+            /* Display saved cover */
+
+            displayCover(
+                coverUrl
+            );
+
+
+            /* Hide upload box */
+
+            coverUploadArea.style.display =
                 "none";
 
 
-            coverPreview.style.display=
+            coverPreview.style.display =
                 "none";
 
-            coverFile.value=
-                "";
+
+            coverFile.value="";
 
 
             showToast(
@@ -2092,14 +2262,16 @@ coverFile.onchange=
         }catch(error){
 
             console.error(
+                "Cover upload error:",
                 error
             );
 
-            coverPreview.style.display=
+
+            coverPreview.style.display =
                 "none";
 
-            coverFile.value=
-                "";
+            coverFile.value="";
+
 
             showToast(
                 error.message ||
