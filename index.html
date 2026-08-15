@@ -1727,7 +1727,129 @@ async function saveProfileToDatabase(
 
 }
 
+/* COVER PICTURE */
 
+function displayCoverPhoto(url){
+    if(url){
+        coverPicture.src=url + (url.includes("?")?"&":"?") + "coverVersion=" + Date.now();
+        coverPicture.style.display="block";
+        coverPlaceholder.style.display="none";
+
+        coverUploadBtn.style.display="none";
+        coverEditBtn.style.display="block";
+    }else{
+        coverPicture.src="";
+        coverPicture.style.display="none";
+        coverPlaceholder.style.display="flex";
+
+        coverUploadBtn.style.display="block";
+        coverEditBtn.style.display="none";
+    }
+}
+
+async function loadCoverPicture(){
+
+    if(!userId)return;
+
+    try{
+
+        const snap=await get(ref(db,"profiles/"+userId));
+
+        if(snap.exists()){
+
+            const profile=snap.val();
+
+            if(profile.cover){
+
+                displayCoverPhoto(profile.cover);
+
+            }else{
+
+                displayCoverPhoto("");
+
+            }
+        }
+
+    }catch(e){
+
+        console.error("Cover picture loading error:",e);
+
+    }
+}
+
+async function uploadCoverPicture(file){
+
+    if(!userId)return;
+
+    if(!file || !file.type.startsWith("image/")){
+        showToast("Please select a picture.");
+        return;
+    }
+
+    coverStatus.textContent="Uploading cover picture...";
+    coverUploadBtn.disabled=true;
+    coverEditBtn.disabled=true;
+
+    try{
+
+        const coverUrl=await uploadToCloudinary(file);
+
+        await update(ref(db,"profiles/"+userId),{
+            cover:coverUrl,
+            coverUpdatedAt:Date.now()
+        });
+
+        savedProfile=savedProfile||{};
+        savedProfile.cover=coverUrl;
+
+        localStorage.setItem(
+            "kulzzyCommunityProfile",
+            JSON.stringify(savedProfile)
+        );
+
+        displayCoverPhoto(coverUrl);
+
+        coverStatus.textContent="Cover picture saved.";
+
+        showToast("Cover picture uploaded successfully.");
+
+    }catch(e){
+
+        console.error("Cover upload error:",e);
+
+        coverStatus.textContent="";
+
+        showToast(
+            e.message||"Unable to upload cover picture."
+        );
+
+    }finally{
+
+        coverUploadBtn.disabled=false;
+        coverEditBtn.disabled=false;
+
+        coverInput.value="";
+    }
+}
+
+coverUploadBtn.onclick=()=>{
+    coverInput.click();
+};
+
+coverEditBtn.onclick=()=>{
+    coverInput.click();
+};
+
+coverInput.onchange=async e=>{
+
+    const file=e.target.files[0];
+
+    if(file){
+        await uploadCoverPicture(file);
+    }
+
+};
+    
 /* =========================
    PROFILE SAVE
 ========================= */
