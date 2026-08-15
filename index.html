@@ -412,10 +412,15 @@ body{
 
 .post-image{
     width:100%;
-    height:auto;
-    max-height:720px;
+    height:320px;
     display:block;
-    object-fit:contain;
+    object-fit:cover;
+    cursor:pointer;
+    transition:transform .2s ease;
+}
+
+.post-image:hover{
+    transform:scale(1.02);
 }
 
 .post-actions{
