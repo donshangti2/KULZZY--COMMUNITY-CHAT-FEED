@@ -1957,7 +1957,114 @@ coverFile.onchange =
             return;
         }
 
-        /* Show selected picture immediately */
+/* =========================
+   COVER PICTURE
+========================= */
+
+function displayCover(url){
+
+    if(url){
+
+        savedCover.src =
+            url +
+            (url.includes("?") ? "&" : "?") +
+            "coverVersion=" +
+            Date.now();
+
+        savedCover.style.display = "block";
+
+        coverUploadArea.style.display = "none";
+
+    }else{
+
+        savedCover.src = "";
+
+        savedCover.style.display = "none";
+
+        coverUploadArea.style.display = "block";
+    }
+}
+
+
+/* =========================
+   LOAD COVER PICTURE
+========================= */
+
+async function loadCoverPicture(){
+
+    if(!userId){
+        return;
+    }
+
+    try{
+
+        const snapshot =
+            await get(
+                ref(
+                    db,
+                    "profiles/" + userId
+                )
+            );
+
+        if(snapshot.exists()){
+
+            const profile =
+                snapshot.val();
+
+            savedProfile =
+                savedProfile || {};
+
+            savedProfile.cover =
+                profile.cover || "";
+
+            localStorage.setItem(
+                "kulzzyCommunityProfile",
+                JSON.stringify(savedProfile)
+            );
+
+            displayCover(
+                savedProfile.cover
+            );
+
+        }else{
+
+            displayCover("");
+        }
+
+    }catch(error){
+
+        console.error(
+            "Cover picture loading error:",
+            error
+        );
+    }
+}
+
+
+/* =========================
+   COVER AUTO UPLOAD
+========================= */
+
+coverFile.onchange =
+    async()=>{
+
+        const file =
+            coverFile.files[0];
+
+        if(!file){
+            return;
+        }
+
+        if(!file.type.startsWith("image/")){
+
+            showToast(
+                "Only pictures are allowed."
+            );
+
+            coverFile.value = "";
+
+            return;
+        }
 
         coverPreview.src =
             URL.createObjectURL(file);
@@ -1972,9 +2079,7 @@ coverFile.onchange =
         try{
 
             const coverUrl =
-                await uploadToCloudinary(
-                    file
-                );
+                await uploadToCloudinary(file);
 
             savedProfile =
                 savedProfile || {
@@ -1991,9 +2096,7 @@ coverFile.onchange =
 
             localStorage.setItem(
                 "kulzzyCommunityProfile",
-                JSON.stringify(
-                    savedProfile
-                )
+                JSON.stringify(savedProfile)
             );
 
             if(userId){
@@ -2005,25 +2108,14 @@ coverFile.onchange =
                     ),
                     {
                         cover:coverUrl,
-                        coverUpdatedAt:
-                            Date.now()
+                        coverUpdatedAt:Date.now()
                     }
                 );
-
             }
 
-            /* Display saved cover */
-
-            savedCover.src =
-                coverUrl +
-                (coverUrl.includes("?") ? "&" : "?") +
-                "coverVersion=" +
-                Date.now();
-
-            savedCover.style.display =
-                "block";
-
-            /* Hide upload box */
+            displayCover(
+                coverUrl
+            );
 
             coverUploadArea.style.display =
                 "none";
@@ -2031,8 +2123,7 @@ coverFile.onchange =
             coverPreview.style.display =
                 "none";
 
-            coverFile.value =
-                "";
+            coverFile.value = "";
 
             showToast(
                 "Cover picture saved."
@@ -2048,16 +2139,14 @@ coverFile.onchange =
             coverPreview.style.display =
                 "none";
 
-            coverFile.value =
-                "";
+            coverFile.value = "";
 
             showToast(
                 error.message ||
-                "Cover picture upload failed."
+                "Cover upload failed."
             );
         }
-    };
-
+    };        
 
 
 /* =========================
