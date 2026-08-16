@@ -1847,42 +1847,24 @@ saveBtn.onclick=
 
     };
     
+/" + userId
+                    ),
+                    {
+                        ...savedProfile,
+                        uid:userId
+                    }
+                );
+
+            }
+
+
 /* =========================
    COVER PICTURE
 ========================= */
 
-function displayCover(url){
-
-    if(url){
-
-        savedCover.src =
-            url +
-            (url.includes("?") ? "&" : "?") +
-            "coverVersion=" +
-            Date.now();
-
-        savedCover.style.display="block";
-
-        coverUploadArea.style.display="none";
-
-    }else{
-
-        savedCover.src="";
-
-        savedCover.style.display="none";
-
-        coverUploadArea.style.display="block";
-
-    }
-
-}
-
-
 async function loadCoverPicture(){
 
-    if(!userId){
-        return;
-    }
+    if(!userId) return;
 
     try{
 
@@ -1910,13 +1892,31 @@ async function loadCoverPicture(){
                 JSON.stringify(savedProfile)
             );
 
-            displayCover(
-                savedProfile.cover
-            );
+            if(savedProfile.cover){
 
-        }else{
+                savedCover.src =
+                    savedProfile.cover +
+                    (savedProfile.cover.includes("?") ? "&" : "?") +
+                    "coverVersion=" +
+                    Date.now();
 
-            displayCover("");
+                savedCover.style.display =
+                    "block";
+
+                coverUploadArea.style.display =
+                    "none";
+
+            }else{
+
+                savedCover.src =
+                    "";
+
+                savedCover.style.display =
+                    "none";
+
+                coverUploadArea.style.display =
+                    "block";
+            }
 
         }
 
@@ -1928,104 +1928,7 @@ async function loadCoverPicture(){
         );
 
     }
-
-    }
-
-/* =========================
-   COVER AUTO UPLOAD
-========================= */
-
-coverFile.onchange=
-    async()=>{
-
-        const file=
-            coverFile.files[0];
-
-        if(!file){
-
-            return;
-        }
-
-        if(
-            !file.type.startsWith(
-                "image/"
-            )
-        ){
-
-            showToast(
-                "Only pictures are allowed."
-            );
-
-            coverFile.value=
-                "";
-
-            return;
-        }
-
-
-        /* Show preview while uploading */
-
-        coverPreview.src=
-            URL.createObjectURL(
-                file
-            );
-
-        coverPreview.style.display=
-            "block";
-
-
-        showToast(
-            "Uploading cover picture..."
-        );
-
-
-        try{
-
-            const coverUrl=
-                await uploadToCloudinary(
-                    file
-                );
-
-
-            savedProfile=
-                savedProfile || {
-
-                    name:"",
-                    photo:"",
-                    cover:""
-
-                };
-
-
-            savedProfile.cover=
-                coverUrl;
-
-            savedProfile.updatedAt=
-                Date.now();
-
-
-            localStorage.setItem(
-                "kulzzyCommunityProfile",
-                JSON.stringify(
-                    savedProfile
-                )
-            );
-
-
-            if(userId){
-
-                await set(
-                    ref(
-                        db,
-                        "profiles/" + userId
-                    ),
-                    {
-                        ...savedProfile,
-                        uid:userId
-                    }
-                );
-
-            }
+}
 
 
 /* =========================
@@ -2033,10 +1936,10 @@ coverFile.onchange=
 ========================= */
 
 coverFile.onchange =
-    async()=>{
+    async event=>{
 
         const file =
-            coverFile.files[0];
+            event.target.files[0];
 
         if(!file){
             return;
@@ -2048,10 +1951,11 @@ coverFile.onchange =
                 "Only pictures are allowed."
             );
 
-            coverFile.value="";
+            coverFile.value =
+                "";
+
             return;
         }
-
 
         /* Show selected picture immediately */
 
@@ -2061,17 +1965,16 @@ coverFile.onchange =
         coverPreview.style.display =
             "block";
 
-
         showToast(
             "Uploading cover picture..."
         );
 
-
         try{
 
             const coverUrl =
-                await uploadToCloudinary(file);
-
+                await uploadToCloudinary(
+                    file
+                );
 
             savedProfile =
                 savedProfile || {
@@ -2080,13 +1983,11 @@ coverFile.onchange =
                     cover:""
                 };
 
-
             savedProfile.cover =
                 coverUrl;
 
             savedProfile.updatedAt =
                 Date.now();
-
 
             localStorage.setItem(
                 "kulzzyCommunityProfile",
@@ -2094,7 +1995,6 @@ coverFile.onchange =
                     savedProfile
                 )
             );
-
 
             if(userId){
 
@@ -2112,31 +2012,31 @@ coverFile.onchange =
 
             }
 
-
             /* Display saved cover */
 
-            displayCover(
-                coverUrl
-            );
+            savedCover.src =
+                coverUrl +
+                (coverUrl.includes("?") ? "&" : "?") +
+                "coverVersion=" +
+                Date.now();
 
+            savedCover.style.display =
+                "block";
 
             /* Hide upload box */
 
             coverUploadArea.style.display =
                 "none";
 
-
             coverPreview.style.display =
                 "none";
 
-
-            coverFile.value="";
-
+            coverFile.value =
+                "";
 
             showToast(
                 "Cover picture saved."
             );
-
 
         }catch(error){
 
@@ -2145,21 +2045,19 @@ coverFile.onchange =
                 error
             );
 
-
             coverPreview.style.display =
                 "none";
 
-            coverFile.value="";
-
+            coverFile.value =
+                "";
 
             showToast(
                 error.message ||
-                "Cover upload failed."
+                "Cover picture upload failed."
             );
-
         }
-
     };
+
 
 
 /* =========================
