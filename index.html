@@ -3441,6 +3441,10 @@ async function clickPost(
     url
 ){
 
+    document.body.classList.add(
+        "image-viewer-open"
+    );
+
     viewerImage.src=
         url;
 
@@ -3507,6 +3511,10 @@ viewerClose.onclick=
             "show"
         );
 
+        document.body.classList.remove(
+            "image-viewer-open"
+        );
+
         viewerImage.src=
             "";
 
@@ -3517,18 +3525,22 @@ imageViewer.onclick=
     event=>{
 
         if(
-            event.target ===
-            imageViewer
-        ){
+    event.target ===
+    imageViewer
+){
 
-            imageViewer.classList.remove(
-                "show"
-            );
+    imageViewer.classList.remove(
+        "show"
+    );
 
-            viewerImage.src=
-                "";
+    document.body.classList.remove(
+        "image-viewer-open"
+    );
 
-        }
+    viewerImage.src=
+        "";
+
+    }
 
     };
 
