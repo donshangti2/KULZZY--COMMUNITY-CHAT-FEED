@@ -1044,7 +1044,109 @@ body.image-viewer-open{
 .action-btn{white-space:nowrap}.action-btn.shared{color:#38bdf8}.action-btn.reposted{color:#ffd000}
 
 @media(max-width:500px){.user-search-wrap{margin-left:18px;margin-right:18px}.user-search-row{gap:6px}.user-search-btn{padding:0 11px}.post-gallery.one .gallery-item{height:250px}.post-gallery.two .gallery-item,.post-gallery.three .gallery-item,.post-gallery.more .gallery-item{height:170px}.post-preview-gallery img{height:145px}.social-profile-card{padding:13px}.social-stats{gap:5px}}
+/* =========================
+   KULZZY CHAT + FEED CONTROLS
+========================= */
 
+/* Chat message input */
+.community-chat-composer{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 12px;
+    border-top:1px solid rgba(7,90,120,.55);
+    background:#001b2b;
+}
+
+.community-chat-composer input{
+    flex:1;
+    min-width:0;
+    height:44px;
+    border:1px solid #075a78;
+    border-radius:12px;
+    padding:0 13px;
+    outline:none;
+    background:#062d3e;
+    color:#fff;
+    font-size:14px;
+}
+
+.community-chat-composer button{
+    height:44px;
+    padding:0 16px;
+    border:0;
+    border-radius:12px;
+    background:#ffd000;
+    color:#001b2b;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.community-chat-composer button:active{
+    transform:scale(.97);
+}
+
+/* Show 4 chat messages at a time */
+.community-chat-list.chat-limited
+.community-chat-message{
+    display:none;
+}
+
+.community-chat-list.chat-limited
+.community-chat-message.chat-visible{
+    display:flex;
+}
+
+/* READ MORE */
+.community-chat-more{
+    display:none;
+    width:100%;
+    border:0;
+    border-top:1px solid rgba(7,90,120,.45);
+    background:#001b2b;
+    color:#38bdf8;
+    padding:12px;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Feed controls */
+.community-feed-controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.community-feed-controls button{
+    border:0;
+    border-radius:10px;
+    padding:9px 12px;
+    background:#062d3e;
+    border:1px solid #075a78;
+    color:#ffd000;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.community-feed-controls button:active{
+    transform:scale(.97);
+}
+
+@media(max-width:500px){
+    .community-chat-composer{
+        padding:9px 10px;
+    }
+
+    .community-chat-composer button{
+        padding:0 13px;
+    }
+
+    .community-feed-controls button{
+        padding:8px 10px;
+        font-size:12px;
+      }
+    }
 </style>
 </head>
 
@@ -4064,6 +4166,151 @@ window.addEventListener(
     stopLiveCamera
 );
 
+    /* =========================
+   KULZZY CHAT / FEED PATCH
+========================= */
+
+(function(){
+
+    /* ---------- CHAT: 4 AT A TIME ---------- */
+
+    function setupCommunityChat(){
+
+        const list =
+            document.querySelector(".community-chat-list");
+
+        if(!list) return;
+
+        const messages =
+            Array.from(
+                list.querySelectorAll(".community-chat-message")
+            );
+
+        if(!messages.length) return;
+
+        let shown = 4;
+
+        list.classList.add("chat-limited");
+
+        function renderChat(){
+
+            messages.forEach(function(message,index){
+
+                if(index < shown){
+                    message.classList.add("chat-visible");
+                }else{
+                    message.classList.remove("chat-visible");
+                }
+
+            });
+
+            let more =
+                list.parentElement.querySelector(
+                    ".community-chat-more"
+                );
+
+            if(shown < messages.length){
+
+                if(!more){
+
+                    more =
+                        document.createElement("button");
+
+                    more.type="button";
+                    more.className=
+                        "community-chat-more";
+
+                    more.textContent=
+                        "READ MORE";
+
+                    list.parentElement.appendChild(
+                        more
+                    );
+
+                    more.addEventListener(
+                        "click",
+                        function(){
+
+                            shown += 4;
+
+                            renderChat();
+
+                        }
+                    );
+                }
+
+                more.style.display="block";
+
+            }else if(more){
+
+                more.style.display="none";
+
+            }
+
+        }
+
+        renderChat();
+
+        /*
+         * Re-run when Firebase adds new messages.
+         */
+        const observer =
+            new MutationObserver(function(){
+
+                const updated =
+                    Array.from(
+                        list.querySelectorAll(
+                            ".community-chat-message"
+                        )
+                    );
+
+                if(updated.length !== messages.length){
+
+                    messages.length=0;
+
+                    updated.forEach(function(item){
+                        messages.push(item);
+                    });
+
+                    renderChat();
+
+                }
+
+            });
+
+        observer.observe(list,{
+            childList:true,
+            subtree:true
+        });
+
+    }
+
+
+    /* ---------- INITIALIZE ---------- */
+
+    function initializeKulzzyPatch(){
+
+        setupCommunityChat();
+
+    }
+
+    if(
+        document.readyState ===
+        "loading"
+    ){
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeKulzzyPatch
+        );
+
+    }else{
+
+        initializeKulzzyPatch();
+
+    }
+
+})();
 </script>
 
 </body>
